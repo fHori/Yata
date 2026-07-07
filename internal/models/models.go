@@ -173,7 +173,7 @@ func DefaultSettings() Settings {
 		GroupNameStyle:        "styled",
 		UsernameStyle:         "plain",
 		ProfileAutoSync:       true,
-		ScrapeIntervalMinutes: 60,
+		ScrapeIntervalMinutes: 120,
 		MaxScrapesPerDay:      0,
 		QUIURL:                "http://localhost:7476",
 		QUIEnabledInstances:   []int{},

@@ -1269,7 +1269,7 @@ export function openSettingsPage(settings: AppSettings, _meta: unknown[], deps: 
       intervalInput.value = String(Math.max(60, Math.floor(1440 / (settings.max_scrapes_per_day ?? 1))));
       intervalInput.disabled = true;
     } else {
-      intervalInput.value = String(settings.scrape_interval_minutes ?? 60);
+      intervalInput.value = String(settings.scrape_interval_minutes ?? 120);
       intervalInput.disabled = false;
     }
   }
@@ -1526,7 +1526,7 @@ export async function saveSettings(deps: SettingsDeps) {
     backup_frequency:        ((document.getElementById('s-backup-frequency') as HTMLSelectElement | null)?.value ?? 'weekly'),
     backup_keep:             Math.min(99, Math.max(1, parseInt((document.getElementById('s-backup-keep') as HTMLInputElement | null)?.value ?? '5', 10) || 5)),
     auto_interval:           ((document.getElementById('s-auto-interval') as HTMLInputElement | null)?.checked ?? false),
-    scrape_interval_minutes: Math.max(60, parseInt((document.getElementById('s-scrape-interval') as HTMLInputElement | null)?.value ?? '60', 10) || 60),
+    scrape_interval_minutes: Math.max(60, parseInt((document.getElementById('s-scrape-interval') as HTMLInputElement | null)?.value ?? '120', 10) || 120),
     max_scrapes_per_day:     Math.max(0, parseInt((document.getElementById('s-max-scrapes') as HTMLInputElement | null)?.value ?? '0', 10) || 0),
   };
 

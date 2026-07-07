@@ -46,7 +46,7 @@ export let appSettings: AppSettings = {
   show_rate_hovers: true, show_unread_mail: true, show_unread_notifications: true,
   update_check_auto: false, duration_format: 'ym',
   profile_auto_sync: true, api_only_mode: false,
-  scrape_interval_minutes: 60, max_scrapes_per_day: 0, auto_interval: false,
+  scrape_interval_minutes: 120, max_scrapes_per_day: 0, auto_interval: false,
   qui_url: 'http://localhost:7476', qui_api_key: '',
   qui_enabled_instances: [], qui_bars_visible: true,
   backup_enabled: false, backup_frequency: 'weekly', backup_keep: 5,

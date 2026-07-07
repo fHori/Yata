@@ -14,7 +14,7 @@ Yata pulls your stats from each tracker's **API** (and, where the operator permi
 
 - **Private by design.** Runs entirely on your own machine/server. The only network requests it ever makes are to *your* trackers with *your* credentials, plus any integrations you explicitly configure (webhooks, qui, Prowlarr). No telemetry, no analytics, no phoning home.
 - **API first, always.** API data is authoritative. Profile scraping only fills stats the API doesn't provide, and both are merged into ONE stats view per tracker (with an optional per-stat origin dot so you can see where each number came from).
-- **Respect the trackers.** Scraping is rate-limited with a hard 60-minute floor that cannot be lowered. Tracker operators can request stricter limits — or forbid scraping entirely — in their definition file, and those requests always win. There's an API-only mode, and an opt-out list for sites that don't want to be supported at all.
+- **Respect the trackers.** Scraping is rate-limited with a hard 60-minute floor that cannot be lowered (default set as 120min). Tracker operators can request stricter limits — or forbid scraping entirely — in their definition file, and those requests always win. There's an API-only mode, and an opt-out list for sites that don't want to be supported at all.
 - **Trackers are data, not code.** Every tracker is a JSON file in `defs/trackers/`. Adding or fixing a tracker never touches the app; tracker staff can own their definition.
 
 ## Feature tour
@@ -56,7 +56,7 @@ The effective interval is the **maximum** of every layer — nothing can undercu
 | Layer | Set by | Notes |
 |---|---|---|
 | Hard floor | the app | 60 min — cannot be lowered by anyone |
-| Global setting | you (Settings → Scraping) | default 60 min |
+| Global setting | you (Settings → Scraping) | default 120 min |
 | Tracker type def | software def file | rarely used |
 | Tracker def | **tracker operator** | e.g. "≥ 120 min, max 6/day" |
 | Per-tracker setting | you (tracker edit) | can only make it stricter |
