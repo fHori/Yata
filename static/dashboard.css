@@ -833,6 +833,10 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator{filter:invert(.
 .ver-badge.ok{color:var(--green)}
 .ver-badge.out{color:var(--amber);font-weight:600}
 
+/* Inline text links that follow the theme accent instead of browser blue */
+.link-accent{color:var(--accent);text-decoration:none}
+.link-accent:hover{text-decoration:underline}
+
 .trk-td-actions{text-align:right}
 .trk-td-actions .btn{margin-left:6px}
 .trk-del-btn:hover{color:var(--red);border-color:var(--error-border-md)}
