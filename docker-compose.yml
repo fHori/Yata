@@ -1,0 +1,14 @@
+services:
+  yata:
+    build: .
+    # or, once published: image: ghcr.io/mysterygodzillarr/yata:latest
+    container_name: yata
+    ports:
+      - "8420:8420"        # change the left side to remap the host port
+    environment:
+      - YATA_PORT=8420
+    volumes:
+      - ./data:/data                       # config.json + yata.db
+      - ./defs:/app/defs                   # tracker definitions (editable live)
+      - ./static/themes:/app/static/themes # custom themes (optional)
+    restart: unless-stopped

@@ -1,0 +1,299 @@
+{
+  "schema_version": 1,
+  "key": "mam",
+  "name": "MyAnonamouse",
+  "abbr": "MAM",
+  "url": "https://www.myanonamouse.net",
+  "type": "custom",
+  "last_updated": "2026-07-03",
+  "approved_by": {
+    "name": "Support Staff",
+    "role": "Staff",
+    "date": "2026-05-15",
+    "note": "Staff said as long as you are only using the API as a user to get your own stats, it is fine. They do not want people scraping the site other users' stats."
+  },
+  "api_field_map": {
+    "seedbonus": "bonus_points"
+  },
+  "scrape": {
+    "disable_scraping": true
+  },
+  "api": {
+    "path": "/jsonLoad.php?snatch_summary",
+    "auth_method": "api_key_query",
+    "api_key_param": "mam_id",
+    "field_map": {
+      "classname": "group",
+      "inactHnr.count": "hit_and_runs",
+      "inactSat.count": "inactive_satisfied",
+      "leeching.count": "leeching",
+      "ratio": "ratio",
+      "reseed.count": "reseed_count",
+      "sSat.count": "seeding_satisfied",
+      "seedHnr.count": "seeding_hnr",
+      "seedUnsat.count": "seeding_unsatisfied",
+      "seedbonus": "seedbonus",
+      "username": "username",
+      "wedges": "fl_tokens"
+    },
+    "sum_fields": {
+      "seeding": [
+        "sSat.count",
+        "seedHnr.count",
+        "seedUnsat.count"
+      ]
+    },
+    "sum_bytes_fields": {
+      "seed_size": [
+        "sSat.size",
+        "seedHnr.size",
+        "seedUnsat.size"
+      ]
+    },
+    "byte_fields": {
+      "downloaded_bytes": "downloaded",
+      "uploaded_bytes": "uploaded"
+    },
+    "buffer_from_bytes": true,
+    "api_key_hint": "Preferences > Security > Create Session"
+  },
+  "invite_requirements": {
+    "min_class": "Power User",
+    "min_uploaded": "1 TB",
+    "min_ratio": 2.0,
+    "min_age": "6M",
+    "note": "MAM gates invite-forum access separately from user class: Power User plus all of the above. Some invite threads additionally require VIP (purchasable with bonus points). Always check MAM's official guidance."
+  },
+  "groups": [
+    {
+      "name": "Mouse",
+      "style": {
+        "color": "#FF43B5",
+        "icon": "fas fa-user"
+      },
+      "requirements": {
+        "description": "Automatic demotion IF your overall ratio drops to below 1.0. So keep on sharing and don't be greedy!"
+      }
+    },
+    {
+      "name": "User",
+      "style": {
+        "color": "#669999",
+        "icon": "fas fa-user"
+      },
+      "requirements": {
+        "description": "Any member above 1.0 ratio, who has not qualified for Power User yet"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-hourglass-half text-warning",
+          "label": "Unsatisfied Slots: 50"
+        }
+      ]
+    },
+    {
+      "name": "Power User",
+      "style": {
+        "color": "#D21E36",
+        "icon": "fas fa-user"
+      },
+      "requirements": {
+        "min_uploaded": "25 GiB",
+        "min_ratio": 2,
+        "min_age": "4W"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-hourglass-half text-warning",
+          "label": "Unsatisfied Slots: 100"
+        }
+      ]
+    },
+    {
+      "name": "VIP",
+      "style": {
+        "color": "#9C2FE0",
+        "icon": "fas fa-user"
+      },
+      "requirements": {
+        "description": "Can be bought with bonus points or donations. VIP members have their own forum and special VIP freeleech torrents. Note: You must first obtain Power User Status if purchasing with bonus points."
+      },
+      "perks": [
+        {
+          "icon": "fas fa-hourglass-half text-warning",
+          "label": "Unsatisfied Slots: 150"
+        }
+      ]
+    },
+    {
+      "name": "Elite VIP",
+      "style": {
+        "color": "#7C2FE0",
+        "icon": "fas fa-user"
+      },
+      "requirements": {
+        "description": "Special members that the staff feel contribute something extra to the site.....this can be anything from being usefully active in the IRC to being active on the site e.g posting in the forums, uploading torrents etc. (Anyone begging for VIP status will be automatically disqualified.)"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-hourglass-half text-warning",
+          "label": "Unsatisfied Slots: 200"
+        }
+      ]
+    },
+    {
+      "name": "Elite",
+      "style": {
+        "color": "#3366CC",
+        "icon": "fas fa-user"
+      },
+      "requirements": {
+        "description": "Same privileges as an Elite VIP and is considered an Elite Member of MyAnonaMouse.Net. Immune however to automatic demotion. There are also some special perks with this user class."
+      },
+      "perks": [
+        {
+          "icon": "fas fa-hourglass-half text-warning",
+          "label": "Unsatisfied Slots: 200"
+        }
+      ]
+    },
+    {
+      "name": "Supporter",
+      "style": {
+        "color": "#BABA25",
+        "icon": "fas fa-user"
+      },
+      "requirements": {
+        "description": "Continuous supporter of MyAnonaMouse.net."
+      },
+      "perks": [
+        {
+          "icon": "fas fa-hourglass-half text-warning",
+          "label": "Unsatisfied Slots: 200"
+        }
+      ]
+    },
+    {
+      "name": "Mouseketeer",
+      "style": {
+        "color": "#696969",
+        "icon": "fas fa-user"
+      },
+      "requirements": {
+        "description": "Retired staff member class."
+      },
+      "perks": [
+        {
+          "icon": "fas fa-hourglass-half text-warning",
+          "label": "Unsatisfied Slots: 200"
+        }
+      ]
+    },
+    {
+      "name": "Uploader",
+      "style": {
+        "color": "#663300",
+        "icon": "fas fa-user"
+      },
+      "requirements": {
+        "description": "Special class of members that consistently upload new content on a monthly basis. This class is chosen by Senior staff. They are immune to automatic demotion and have extra special perks. This class contributes the good stuff for us - so let's say a HUGE THANK YOU to them!!"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-hourglass-half text-warning",
+          "label": "Unsatisfied Slots: 200"
+        }
+      ]
+    },
+    {
+      "name": "Entry Level Staff",
+      "style": {
+        "color": "#FF0A23",
+        "icon": "fas fa-shield-halved"
+      },
+      "requirements": {
+        "description": "Trainee Staff learning the ropes."
+      }
+    },
+    {
+      "name": "Support Staff",
+      "style": {
+        "color": "#FF0099",
+        "icon": "fas fa-shield-halved"
+      },
+      "requirements": {
+        "description": "Assist members with identifying and solving various technical problems."
+      }
+    },
+    {
+      "name": "Forum Moderator",
+      "style": {
+        "color": "#FF7F50",
+        "icon": "fas fa-shield-halved"
+      },
+      "requirements": {
+        "description": "Responsible for checking that all posts are in line with the site rules and welcoming all new members in the Introduction thread."
+      }
+    },
+    {
+      "name": "Torrent Moderator",
+      "style": {
+        "color": "#E9967A",
+        "icon": "fas fa-shield-halved"
+      },
+      "requirements": {
+        "description": "Monitor and edit new uploads for rules violations, duplicates and general ease of access."
+      }
+    },
+    {
+      "name": "Moderator",
+      "style": {
+        "color": "#FFA500",
+        "icon": "fas fa-shield-halved"
+      },
+      "requirements": {
+        "description": "Can edit and delete any uploaded torrents. Can also moderate user comments and disable accounts."
+      }
+    },
+    {
+      "name": "Senior Moderator",
+      "style": {
+        "color": "#FF4500",
+        "icon": "fas fa-shield-halved"
+      },
+      "requirements": {
+        "description": "Has a greater range of responsibilities to help moderate the site."
+      }
+    },
+    {
+      "name": "Administrator",
+      "style": {
+        "color": "#30AA0F",
+        "icon": "fas fa-shield-halved"
+      },
+      "requirements": {
+        "description": "Has a wide range of responsibilities to ensure the smooth running of the site."
+      }
+    },
+    {
+      "name": "Senior Administrator",
+      "style": {
+        "color": "#006600",
+        "icon": "fas fa-shield-halved"
+      },
+      "requirements": {
+        "description": "Is between Sysops and Administrators."
+      }
+    },
+    {
+      "name": "Sysop",
+      "style": {
+        "color": "#336699",
+        "icon": "fas fa-server"
+      },
+      "requirements": {
+        "description": "Responsible for the broader aspects of site management."
+      }
+    }
+  ]
+}

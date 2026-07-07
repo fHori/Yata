@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "key": "test",
+  "name": "Test Tracker",
+  "abbr": "TST",
+  "url": "//test.local",
+  "last_updated": "2026-07-06",
+  "type": "test",
+  "approved_by": {
+    "name": "Yata",
+    "role": "bundled demo tracker (fictional — nothing to approve)",
+    "date": "2026-07-06"
+  },
+  "rules": {
+    "min_ratio": 0.4
+  },
+  "groups": [
+    {
+      "name": "User",
+      "style": {
+        "color": "#94a3b8",
+        "icon": "fas fa-user"
+      },
+      "requirements": {}
+    },
+    {
+      "name": "Member",
+      "style": {
+        "color": "#3b82f6",
+        "icon": "fas fa-user-check"
+      },
+      "requirements": {
+        "min_uploaded": "1 TiB",
+        "min_ratio": 0.6,
+        "min_age": "1M"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide",
+          "label": "DL Slots: 10"
+        }
+      ]
+    },
+    {
+      "name": "PowerUser",
+      "style": {
+        "color": "#a855f7",
+        "icon": "fas fa-bolt"
+      },
+      "requirements": {
+        "min_uploaded": "5 TiB",
+        "min_ratio": 1.0,
+        "min_seedtime": "1M",
+        "min_age": "6M"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide",
+          "label": "DL Slots: 25"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Ability to send invites"
+        }
+      ]
+    },
+    {
+      "name": "Elite",
+      "style": {
+        "color": "#f59e0b",
+        "icon": "fas fa-crown",
+        "sparkle": true
+      },
+      "requirements": {
+        "min_ratio": 2.0,
+        "min_seedtime": "2M",
+        "min_age": "1Y",
+        "any_of": [
+          { "min_seed_size": "8 TiB" },
+          { "min_uploaded": "20 TiB" }
+        ]
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide",
+          "label": "DL Slots: 50"
+        },
+        {
+          "icon": "fas fa-star",
+          "label": "Personal Freeleech on all torrents"
+        },
+        {
+          "icon": "fas fa-shield",
+          "label": "Immune to Hit & Run warnings"
+        }
+      ]
+    }
+  ]
+}

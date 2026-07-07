@@ -1,0 +1,106 @@
+/* Theme: My Theme Name */
+/* id: my-theme-id */
+/* swatches: #bg #surface #accent #highlight */
+
+/*
+ ┌─────────────────────────────────────────────────────────────────────┐
+ │  YATA THEME TEMPLATE                                             │
+ │  Copy to: static/themes/my-theme-id.css                            │
+ │  Then select it in Settings → Theme                                 │
+ └─────────────────────────────────────────────────────────────────────┘
+
+ REQUIRED HEADER COMMENTS (must appear in the first 20 lines):
+   Theme:    Display name shown in the Settings panel
+   id:       Unique key — lowercase, no spaces (matches filename)
+   swatches: Exactly 4 hex colours for the Settings preview swatch
+             Order: background, surface, accent, highlight
+
+ HOW THEMES WORK:
+   Only include variables you want to change. Everything else inherits
+   from :root in dashboard.css. You can override as many or as few
+   variables as you like — a minimal theme might only change 5–6.
+
+ THE DATA-THEME SELECTOR:
+   All overrides must be inside [data-theme="my-theme-id"] { }
+   Use the same id you declared above.
+*/
+
+[data-theme="my-theme-id"] {
+
+  /* ── Core backgrounds ───────────────────────────────────────────────── */
+  --bg:        #0d0f14;   /* Page/body background */
+  --surface:   #13161e;   /* Cards, modals, sidebars */
+  --surface2:  #191d28;   /* Card headers, table header row */
+  --surface3:  #1f2535;   /* Hover states, selected items */
+
+  /* ── Borders ────────────────────────────────────────────────────────── */
+  --border:    rgba(255, 255, 255, 0.07);   /* Subtle dividers */
+  --border2:   rgba(255, 255, 255, 0.13);   /* Stronger dividers */
+
+  /* ── Accent (primary interactive colour) ───────────────────────────── */
+  --accent:    #6d56eb;   /* Buttons, active states, links */
+  --accent-h:  #5a46d4;   /* Hover state of accent */
+
+  /* ── Accent semantic variants ───────────────────────────────────────── */
+  /* Used for backgrounds, borders, and glows around accented elements.  */
+  --accent-glow:       rgba(109, 86, 235, 0.20);
+  --accent-bg-sm:      rgba(109, 86, 235, 0.10);
+  --accent-bg-md:      rgba(109, 86, 235, 0.15);
+  --accent-border-sm:  rgba(109, 86, 235, 0.25);
+  --accent-border-md:  rgba(109, 86, 235, 0.35);
+  --accent-border:     rgba(109, 86, 235, 0.35);
+
+  /* ── Text ───────────────────────────────────────────────────────────── */
+  --text:  #e8eaf0;   /* Primary text */
+  --text2: #8892a4;   /* Secondary / muted text */
+  --text3: #4b5568;   /* Placeholder / very muted text */
+
+  /* ── Semantic colours ───────────────────────────────────────────────── */
+  /* Used for stat values, badges, and progress bars.                    */
+  --green:   #34d399;   /* Uploaded, good ratio, seeding counts */
+  --red:     #f87171;   /* Errors, hit & runs, warnings */
+  --amber:   #fbbf24;   /* Leeching, snatched, caution states */
+  --blue:    #60a5fa;   /* Buffer, seeding, info */
+  --teal:    #2dd4bf;   /* Seed size, FL tokens */
+  --purple:  #a78bfa;   /* Downloaded */
+  --orange:  #fb923c;   /* Bonus points */
+  --pink:    #f472b6;   /* Seed time */
+
+  /* ── Error semantic variants ────────────────────────────────────────── */
+  --error-bg:         rgba(248, 113, 113, 0.06);
+  --error-border:     rgba(248, 113, 113, 0.20);
+  --error-bg-md:      rgba(248, 113, 113, 0.12);
+  --error-bg-lg:      rgba(248, 113, 113, 0.18);
+  --error-border-md:  rgba(248, 113, 113, 0.28);
+  --error-border-lg:  rgba(248, 113, 113, 0.42);
+
+  /* ── Amber semantic variants ────────────────────────────────────────── */
+  --amber-bg:      rgba(251, 191, 36, 0.12);
+  --amber-border:  rgba(251, 191, 36, 0.32);
+
+  /* ── Blue semantic variants ─────────────────────────────────────────── */
+  --blue-bg:      rgba(96, 165, 250, 0.08);
+  --blue-border:  rgba(96, 165, 250, 0.22);
+
+  /* ── Topbar ─────────────────────────────────────────────────────────── */
+  --topbar-bg:  rgba(13, 15, 20, 0.96);   /* Semi-transparent sticky bar */
+
+  /* ── Shadows and overlays ───────────────────────────────────────────── */
+  --shadow:        0 4px 24px rgba(0, 0, 0, 0.45);   /* Card/modal shadow */
+  --overlay-bg:    rgba(0, 0, 0, 0.72);               /* Modal backdrop */
+  --overlay-bg-sm: rgba(0, 0, 0, 0.45);               /* Tooltip/popover backdrop */
+
+  /* ── Misc ───────────────────────────────────────────────────────────── */
+  --table-hover:     rgba(255, 255, 255, 0.025);  /* Table row hover tint */
+  --btn-primary-text: #ffffff;                    /* Text on accent-coloured buttons */
+  --toggle-thumb:     #ffffff;                    /* Toggle switch knob colour */
+
+  /* ── QUI bar colours ────────────────────────────────────────────────── */
+  /* These control the live qBittorrent stats bars.                      */
+  --qui-dl-color:          var(--purple);
+  --qui-ul-color:          var(--green);
+  --qui-free-color:        var(--text3);
+  --qui-ratio-icon-color:  var(--text3);
+  --qui-size-color:        var(--teal);
+
+}

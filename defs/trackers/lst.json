@@ -1,0 +1,403 @@
+{
+  "schema_version": 1,
+  "key": "lst",
+  "name": "LST",
+  "abbr": "LST",
+  "url": "https://lst.gg",
+  "type": "unit3d",
+  "last_updated": "2026-07-02",
+  "approved_by": {
+    "name": "",
+    "role": "",
+    "date": ""
+  },
+  "scrape": {
+    "event_title_class": "badge"
+  },
+  "rules": {
+    "min_ratio": 0.4
+  },
+  "groups": [
+    {
+      "name": "Leech",
+      "style": {
+        "color": "#96281B",
+        "icon": "fas fa-fish-bones"
+      },
+      "requirements": {}
+    },
+    {
+      "name": "Crab",
+      "style": {
+        "color": "#d6b0a1",
+        "icon": "fas fa-crab"
+      },
+      "requirements": {
+        "min_ratio": 0.4
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: 5"
+        }
+      ]
+    },
+    {
+      "name": "Goldfish",
+      "style": {
+        "color": "#f3b35c",
+        "icon": "fas fa-fish-fins"
+      },
+      "requirements": {
+        "min_ratio": 0.6,
+        "min_seedtime": "1W",
+        "min_seed_size": "100 GiB",
+        "min_age": "1M"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: 10"
+        }
+      ]
+    },
+    {
+      "name": "Lobster",
+      "style": {
+        "color": "#d97b6c",
+        "icon": "fas fa-lobster"
+      },
+      "requirements": {
+        "min_ratio": 0.7,
+        "min_seedtime": "2W",
+        "min_seed_size": "500 GiB",
+        "min_age": "2M"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: 15"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Ability to send invites"
+        }
+      ]
+    },
+    {
+      "name": "Sailboat",
+      "style": {
+        "color": "#3fbfc3",
+        "icon": "fas fa-sailboat",
+        "sparkle": true
+      },
+      "requirements": {
+        "min_ratio": 1,
+        "min_seedtime": "2M",
+        "min_seed_size": "10 TiB",
+        "min_age": "6M"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: 25"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Personal Freeleech on all torrents"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Ability to send invites"
+        },
+        {
+          "icon": "fas fa-image",
+          "label": "LostImg image host access"
+        },
+        {
+          "icon": "fas fa-comments",
+          "label": "Access to Invites forum"
+        }
+      ]
+    },
+    {
+      "name": "Ship",
+      "style": {
+        "color": "#2f9fb0",
+        "icon": "fas fa-ship",
+        "sparkle": true
+      },
+      "requirements": {
+        "min_ratio": 1.5,
+        "min_seedtime": "3M",
+        "min_seed_size": "20 TiB",
+        "min_age": "1Y"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: 50"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Personal Freeleech on all torrents"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Ability to send invites"
+        },
+        {
+          "icon": "fas fa-image",
+          "label": "LostImg image host access"
+        },
+        {
+          "icon": "fas fa-comments",
+          "label": "Access to Invites forum"
+        },
+        {
+          "icon": "fas fa-shield",
+          "label": "Immune to Hit & Run warnings"
+        }
+      ]
+    },
+    {
+      "name": "Cargo Ship",
+      "style": {
+        "color": "#1f7f8c",
+        "icon": "fas fa-ferry",
+        "sparkle": true
+      },
+      "requirements": {
+        "min_ratio": 2,
+        "min_seedtime": "6M",
+        "min_seed_size": "50 TiB",
+        "min_age": "2Y"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: 75"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Personal Freeleech on all torrents"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Ability to send invites"
+        },
+        {
+          "icon": "fas fa-image",
+          "label": "LostImg image host access"
+        },
+        {
+          "icon": "fas fa-comments",
+          "label": "Access to Invites forum"
+        },
+        {
+          "icon": "fas fa-shield",
+          "label": "Immune to Hit & Run warnings"
+        }
+      ]
+    },
+    {
+      "name": "Dolphin",
+      "style": {
+        "color": "#4fa3ff",
+        "icon": "fas fa-dolphin"
+      },
+      "requirements": {
+        "any_of": [
+          {
+            "min_uploaded": "10 TiB"
+          },
+          {
+            "min_seed_size": "2 TiB"
+          }
+        ],
+        "min_uploads": 5,
+        "min_ratio": 1,
+        "min_seedtime": "2W 6D",
+        "min_age": "3M"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: 20"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Personal Freeleech on all torrents"
+        },
+        {
+          "icon": "fas fa-forward-fast",
+          "label": "Skip moderation queue when uploading"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Ability to send invites"
+        },
+        {
+          "icon": "fas fa-image",
+          "label": "LostImg image host access"
+        }
+      ]
+    },
+    {
+      "name": "Whale",
+      "style": {
+        "color": "#4b6fff",
+        "icon": "fas fa-whale",
+        "sparkle": true
+      },
+      "requirements": {
+        "any_of": [
+          {
+            "min_uploaded": "25 TiB"
+          },
+          {
+            "min_seed_size": "6 TiB"
+          }
+        ],
+        "min_uploads": 5,
+        "min_ratio": 1,
+        "min_seedtime": "1M",
+        "min_age": "4M"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: 25"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Personal Freeleech on all torrents"
+        },
+        {
+          "icon": "fas fa-forward-fast",
+          "label": "Skip moderation queue when uploading"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Ability to send invites"
+        },
+        {
+          "icon": "fas fa-image",
+          "label": "LostImg image host access"
+        },
+        {
+          "icon": "fas fa-comments",
+          "label": "Access to Invites forum"
+        },
+        {
+          "icon": "fas fa-shield",
+          "label": "Immune to Hit & Run warnings"
+        }
+      ]
+    },
+    {
+      "name": "Leviathan",
+      "style": {
+        "color": "#3a3fff",
+        "icon": "fas fa-dragon",
+        "sparkle": true
+      },
+      "requirements": {
+        "any_of": [
+          {
+            "min_uploaded": "50 TiB"
+          },
+          {
+            "min_seed_size": "20 TiB"
+          }
+        ],
+        "min_uploads": 15,
+        "min_ratio": 1.5,
+        "min_seedtime": "3M",
+        "min_age": "1Y"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: 50"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Personal Freeleech on all torrents"
+        },
+        {
+          "icon": "fas fa-forward-fast",
+          "label": "Skip moderation queue when uploading"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Ability to send invites"
+        },
+        {
+          "icon": "fas fa-image",
+          "label": "LostImg image host access"
+        },
+        {
+          "icon": "fas fa-comments",
+          "label": "Access to Invites forum"
+        },
+        {
+          "icon": "fas fa-shield",
+          "label": "Immune to Hit & Run warnings"
+        }
+      ]
+    },
+    {
+      "name": "Cthulhu",
+      "style": {
+        "color": "#6b2cff",
+        "icon": "fas fa-squid",
+        "sparkle": true
+      },
+      "requirements": {
+        "any_of": [
+          {
+            "min_uploaded": "100 TiB"
+          },
+          {
+            "min_seed_size": "50 TiB"
+          }
+        ],
+        "min_uploads": 20,
+        "min_ratio": 2,
+        "min_seedtime": "6M",
+        "min_age": "2Y"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: 75"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Personal Freeleech on all torrents"
+        },
+        {
+          "icon": "fas fa-forward-fast",
+          "label": "Skip moderation queue when uploading"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Ability to send invites"
+        },
+        {
+          "icon": "fas fa-image",
+          "label": "LostImg image host access"
+        },
+        {
+          "icon": "fas fa-comments",
+          "label": "Access to Invites forum"
+        },
+        {
+          "icon": "fas fa-shield",
+          "label": "Immune to Hit & Run warnings"
+        }
+      ]
+    }
+  ]
+}

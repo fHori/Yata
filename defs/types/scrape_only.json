@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "key": "scrape_only",
+  "label": "Scrape-only",
+  "description": "Tracker without a usable stats API — every stat comes from HTML profile scraping with the user's session cookie. Requires the username (to locate the profile page from the site header) and a join date (these sites report none in a parseable form). Typical for TBDev-family software.",
+  "api": {
+    "kind": "none",
+    "required_fields": ["username", "join_date"]
+  }
+}

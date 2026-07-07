@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "key": "gazelle",
+  "label": "Gazelle",
+  "description": "Gazelle-based private tracker. API requires both an API key and a username. Profile pages use ID-based URLs (/user.php?id=N) — the ID is fetched from the API at scrape time. Session cookie required for profile scraping.",
+  "api": {
+    "kind": "gazelle",
+    "required_fields": ["username"]
+  },
+  "scrape": {
+    "profile_path": "/user.php?id={id}",
+    "labels": {
+      "tokens": "fl_tokens",
+      "torrents uploaded": "uploads_approved",
+      "adopted": "adoptions",
+      "adoptions": "adoptions",
+      "adoption": "adoptions",
+      "torrents adopted": "adoptions"
+    }
+  }
+}

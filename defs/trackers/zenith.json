@@ -1,0 +1,490 @@
+{
+  "schema_version": 1,
+  "key": "zenith",
+  "name": "Zenith",
+  "abbr": "ZNTH",
+  "url": "https://znth.cx",
+  "type": "unit3d",
+  "last_updated": "2026-07-07",
+  "approved_by": {
+    "name": "Zenith Staff",
+    "role": "Staff",
+    "date": "2026-07-07",
+    "note": "Staff are working to add the needed stats to their API so scraping can eventually be dropped; once the API covers the scraped fields — Zenith should move to API-only (disable_scraping)"
+  },
+  "groups": [
+    {
+      "name": "Leech",
+      "style": {
+        "color": "#96281B",
+        "icon": "far fa-locust"
+      },
+      "requirements": {},
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: ∞"
+        },
+        {
+          "icon": "fas fa-upload text-success",
+          "label": "Upload Torrents"
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "style": {
+        "color": "#7289DA",
+        "icon": "far fa-worm"
+      },
+      "requirements": {},
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 20"
+        },
+        {
+          "icon": "fas fa-upload text-success",
+          "label": "Upload Torrents"
+        },
+        {
+          "icon": "fas fa-percentage",
+          "label": "Refundable"
+        }
+      ]
+    },
+    {
+      "name": "Seeker",
+      "style": {
+        "color": "#3c78d8",
+        "icon": "far fa-rabbit"
+      },
+      "requirements": {
+        "min_ratio": 0.69,
+        "min_age": "2W",
+        "any_of": [
+          {
+            "min_uploaded": "2 TiB"
+          },
+          {
+            "min_seed_size": "2 TiB"
+          }
+        ]
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 30"
+        },
+        {
+          "icon": "fas fa-upload text-success",
+          "label": "Upload Torrents"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        },
+        {
+          "icon": "fas fa-percentage",
+          "label": "Refundable"
+        }
+      ]
+    },
+    {
+      "name": "Bulker",
+      "style": {
+        "color": "#1155cc",
+        "icon": "far fa-squirrel"
+      },
+      "requirements": {
+        "min_ratio": 0.69,
+        "min_age": "3W",
+        "min_seedtime": "1W",
+        "any_of": [
+          {
+            "min_uploaded": "5 TiB"
+          },
+          {
+            "min_seed_size": "4 TiB"
+          }
+        ]
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 35"
+        },
+        {
+          "icon": "fas fa-upload text-success",
+          "label": "Upload Torrents"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        },
+        {
+          "icon": "fas fa-percentage",
+          "label": "Refundable"
+        }
+      ]
+    },
+    {
+      "name": "Climber",
+      "style": {
+        "color": "#1c4587",
+        "icon": "far fa-ram"
+      },
+      "requirements": {
+        "min_ratio": 0.69,
+        "min_age": "3W",
+        "min_seedtime": "1W",
+        "min_uploads": 2,
+        "any_of": [
+          {
+            "min_uploaded": "10 TiB"
+          },
+          {
+            "min_seed_size": "8 TiB"
+          }
+        ]
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 35"
+        },
+        {
+          "icon": "fas fa-upload text-success",
+          "label": "Upload Torrents"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        },
+        {
+          "icon": "fas fa-percentage",
+          "label": "Refundable"
+        }
+      ]
+    },
+    {
+      "name": "Force",
+      "style": {
+        "color": "#1c4587",
+        "icon": "far fa-skull-cow"
+      },
+      "requirements": {
+        "min_ratio": 0.69,
+        "min_age": "1M",
+        "min_seedtime": "2W",
+        "min_uploads": 10,
+        "any_of": [
+          {
+            "min_uploaded": "15 TiB"
+          },
+          {
+            "min_seed_size": "15 TiB"
+          }
+        ]
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 45"
+        },
+        {
+          "icon": "fas fa-upload text-success",
+          "label": "Upload Torrents"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-percentage",
+          "label": "Refundable"
+        },
+        {
+          "icon": "fas fa-syringe",
+          "label": "Immune to automated HnR warnings"
+        }
+      ]
+    },
+    {
+      "name": "Hoarder",
+      "style": {
+        "color": "#1c4587",
+        "icon": "far fa-dragon",
+        "sparkle": true
+      },
+      "requirements": {
+        "min_ratio": 0.69,
+        "min_age": "1M",
+        "min_seedtime": "2W",
+        "any_of": [
+          {
+            "min_uploaded": "20 TiB"
+          },
+          {
+            "min_seed_size": "15 TiB"
+          }
+        ]
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 45"
+        },
+        {
+          "icon": "fas fa-upload text-success",
+          "label": "Upload Torrents"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-chevron-double-up torrent-icons__double-upload",
+          "label": "Double upload"
+        },
+        {
+          "icon": "fas fa-syringe",
+          "label": "Immune to automated HnR warnings"
+        }
+      ]
+    },
+    {
+      "name": "Uploader",
+      "style": {
+        "color": "#2ECC71",
+        "icon": "far fa-volcano"
+      },
+      "requirements": {},
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 45"
+        },
+        {
+          "icon": "fas fa-upload text-success",
+          "label": "Upload Torrents"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-chevron-double-up torrent-icons__double-upload",
+          "label": "Double upload"
+        },
+        {
+          "icon": "fas fa-percentage",
+          "label": "Refundable"
+        },
+        {
+          "icon": "fas fa-tasks",
+          "label": "Torrent moderation bypass"
+        }
+      ]
+    },
+    {
+      "name": "Internal",
+      "style": {
+        "color": "#BAAF92",
+        "icon": "fas fa-magic"
+      },
+      "requirements": {},
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 45"
+        },
+        {
+          "icon": "fas fa-upload text-success",
+          "label": "Upload Torrents"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-chevron-double-up torrent-icons__double-upload",
+          "label": "Double upload"
+        },
+        {
+          "icon": "fas fa-percentage",
+          "label": "Refundable"
+        },
+        {
+          "icon": "fas fa-syringe",
+          "label": "Immune to automated HnR warnings"
+        },
+        {
+          "icon": "fas fa-tasks",
+          "label": "Torrent moderation bypass"
+        }
+      ]
+    },
+    {
+      "name": "Prospector",
+      "style": {
+        "color": "purple",
+        "icon": "fas fa-pickaxe"
+      },
+      "requirements": {},
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 45"
+        },
+        {
+          "icon": "fas fa-upload text-success",
+          "label": "Upload Torrents"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-percentage",
+          "label": "Refundable"
+        },
+        {
+          "icon": "fas fa-tasks",
+          "label": "Torrent moderation bypass"
+        }
+      ]
+    },
+    {
+      "name": "Saint Bernard",
+      "style": {
+        "color": "green",
+        "icon": "far fa-dog",
+        "sparkle": true
+      },
+      "requirements": {},
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 45"
+        },
+        {
+          "icon": "fas fa-upload text-success",
+          "label": "Upload Torrents"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-percentage",
+          "label": "Refundable"
+        },
+        {
+          "icon": "fas fa-syringe",
+          "label": "Immune to automated HnR warnings"
+        },
+        {
+          "icon": "fas fa-tasks",
+          "label": "Torrent moderation bypass"
+        }
+      ]
+    },
+    {
+      "name": "Trustee",
+      "style": {
+        "color": "#BF55EC",
+        "icon": "fas fa-shield"
+      },
+      "requirements": {},
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: ∞"
+        },
+        {
+          "icon": "fas fa-upload text-success",
+          "label": "Upload Torrents"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-percentage",
+          "label": "Refundable"
+        },
+        {
+          "icon": "fas fa-syringe",
+          "label": "Immune to automated HnR warnings"
+        },
+        {
+          "icon": "fas fa-tasks",
+          "label": "Torrent moderation bypass"
+        }
+      ]
+    },
+    {
+      "name": "Torrent Moderator",
+      "style": {
+        "color": "#15B097",
+        "icon": "fas fa-badge-check"
+      },
+      "requirements": {},
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: ∞"
+        },
+        {
+          "icon": "fas fa-upload text-success",
+          "label": "Upload Torrents"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-syringe",
+          "label": "Immune to automated HnR warnings"
+        },
+        {
+          "icon": "fas fa-tasks",
+          "label": "Torrent moderation bypass"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,177 @@
+{
+  "healthy": {
+    "_scenario_label": "Healthy \u2014 high ratio, seeding well, no issues",
+    "stats": {
+      "username": "TestUser",
+      "group": "Elite",
+      "uploaded": "12.45 TiB",
+      "downloaded": "1.23 TiB",
+      "ratio": "10.28",
+      "buffer": "11.22 TiB",
+      "seeding": 842,
+      "leeching": 3,
+      "hit_and_runs": 0,
+      "seedbonus": "98432.50"
+    },
+    "profile": {
+      "join_date": "2021-03-15",
+      "seed_size": "9.52 TiB",
+      "avg_seed_time": "7776000",
+      "fl_tokens": "48",
+      "invites": "5",
+      "warnings": "0",
+      "uploads_approved": "14",
+      "requests_filled": "3",
+      "real_ratio": "10.28",
+      "active_event": null,
+      "active_event_ends_at": null
+    }
+  },
+  "low_ratio": {
+    "_scenario_label": "Low ratio \u2014 buffer warning, leeching heavy",
+    "stats": {
+      "username": "TestUser",
+      "group": "Member",
+      "uploaded": "450.00 GiB",
+      "downloaded": "2.10 TiB",
+      "ratio": "0.21",
+      "buffer": "0.00 B",
+      "seeding": 12,
+      "leeching": 18,
+      "hit_and_runs": 0,
+      "seedbonus": "1204.00"
+    },
+    "profile": {
+      "join_date": "2023-08-01",
+      "seed_size": "320.00 GiB",
+      "avg_seed_time": "259200",
+      "fl_tokens": "2",
+      "invites": "0",
+      "warnings": "0",
+      "uploads_approved": "1",
+      "requests_filled": "0",
+      "real_ratio": "0.21",
+      "active_event": null,
+      "active_event_ends_at": null
+    }
+  },
+  "hit_and_runs": {
+    "_scenario_label": "Hit & Runs \u2014 3 active H&Rs, row should highlight red",
+    "stats": {
+      "username": "TestUser",
+      "group": "Member",
+      "uploaded": "1.80 TiB",
+      "downloaded": "3.40 TiB",
+      "ratio": "0.53",
+      "buffer": "0.00 B",
+      "seeding": 34,
+      "leeching": 5,
+      "hit_and_runs": 3,
+      "seedbonus": "3820.00"
+    },
+    "profile": {
+      "join_date": "2022-11-20",
+      "seed_size": "1.20 TiB",
+      "avg_seed_time": "604800",
+      "fl_tokens": "0",
+      "invites": "0",
+      "warnings": "1",
+      "uploads_approved": "4",
+      "requests_filled": "1",
+      "real_ratio": "0.53",
+      "active_event": null,
+      "active_event_ends_at": null
+    }
+  },
+  "active_event": {
+    "_scenario_label": "Active event \u2014 freeleech banner with live countdown",
+    "stats": {
+      "username": "TestUser",
+      "group": "PowerUser",
+      "uploaded": "5.60 TiB",
+      "downloaded": "1.30 TiB",
+      "ratio": "4.31",
+      "buffer": "4.30 TiB",
+      "seeding": 210,
+      "leeching": 7,
+      "hit_and_runs": 0,
+      "seedbonus": "22100.75"
+    },
+    "profile": {
+      "join_date": "2022-04-10",
+      "seed_size": "4.80 TiB",
+      "avg_seed_time": "2592000",
+      "fl_tokens": "24",
+      "invites": "2",
+      "warnings": "0",
+      "uploads_approved": "9",
+      "requests_filled": "2",
+      "real_ratio": "4.31",
+      "active_event": "\ud83c\udf10 Global freeleech mode activated \ud83c\udf10",
+      "active_event_ends_at": 1772738619
+    }
+  },
+  "event_ending_soon": {
+    "_scenario_label": "Event ending in 90 seconds \u2014 countdown almost done",
+    "stats": {
+      "username": "TestUser",
+      "group": "PowerUser",
+      "uploaded": "5.60 TiB",
+      "downloaded": "1.30 TiB",
+      "ratio": "4.31",
+      "buffer": "4.30 TiB",
+      "seeding": 210,
+      "leeching": 7,
+      "hit_and_runs": 0,
+      "seedbonus": "22100.75"
+    },
+    "profile": {
+      "join_date": "2022-04-10",
+      "seed_size": "4.80 TiB",
+      "avg_seed_time": "2592000",
+      "fl_tokens": "24",
+      "invites": "2",
+      "warnings": "0",
+      "uploads_approved": "9",
+      "requests_filled": "2",
+      "real_ratio": "4.31",
+      "active_event": "\ud83c\udf10 Global freeleech mode activated \ud83c\udf10",
+      "active_event_ends_at": 1772652309
+    },
+    "targets": {
+	  "target_uploaded": "10 TiB",
+      "target_ratio": "2.00",
+      "target_days": "",
+      "target_seed_size": "5 TiB",
+      "target_avg_seed": ""
+    }
+  },
+  "new_user": {
+    "_scenario_label": "New user \u2014 minimal data, no targets met, no profile scrape",
+    "stats": {
+      "username": "TestUser",
+      "group": "User",
+      "uploaded": "10.00 GiB",
+      "downloaded": "45.00 GiB",
+      "ratio": "0.22",
+      "buffer": "0.00 B",
+      "seeding": 2,
+      "leeching": 1,
+      "hit_and_runs": 0,
+      "seedbonus": "120.00"
+    },
+    "profile": {
+      "join_date": "2025-12-01",
+      "seed_size": "8.20 GiB",
+      "avg_seed_time": "43200",
+      "fl_tokens": "1",
+      "invites": "0",
+      "warnings": "0",
+      "uploads_approved": "0",
+      "requests_filled": "0",
+      "real_ratio": "0.22",
+      "active_event": null,
+      "active_event_ends_at": null
+    }
+  }
+}

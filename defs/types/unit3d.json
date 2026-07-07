@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "key": "unit3d",
+  "label": "Unit3D",
+  "last_updated": "2026-07-06",
+  "description": "Standard Unit3D private tracker. Provides /api/user stats and scrapes the /users/{username} profile page for extended stats.",
+  "api": { "kind": "unit3d" },
+  "api_field_map": {
+    "seedbonus": "bonus_points"
+  },
+  "scrape": {
+    "profile_path": "/users/{username}",
+    "presence_flags": {
+      "unread_mail":          { "link_suffix": "/conversations", "marker": "svg" },
+      "unread_notifications": { "link_suffix": "/notifications", "marker": "svg" }
+    },
+    "labels": {
+      "account upload (total)": "uploaded",
+      "account download (total)": "downloaded",
+      "total seeding": "seeding",
+      "total leeching": "leeching",
+      "bon": "bonus_points",
+      "hit and run count (all time)": "hit_and_runs"
+    }
+  }
+}

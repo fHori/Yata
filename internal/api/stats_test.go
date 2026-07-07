@@ -1,0 +1,213 @@
+package api
+
+import (
+	"os"
+	"path/filepath"
+	"sync"
+	"testing"
+	"time"
+
+	"github.com/Yata-Dash/Yata-Dash/internal/config"
+	"github.com/Yata-Dash/Yata-Dash/internal/defs"
+	"github.com/Yata-Dash/Yata-Dash/internal/fetch"
+	"github.com/Yata-Dash/Yata-Dash/internal/models"
+	"github.com/Yata-Dash/Yata-Dash/internal/stats"
+	"github.com/Yata-Dash/Yata-Dash/internal/store"
+)
+
+func testDeps(t *testing.T) *Deps {
+	t.Helper()
+	dir := t.TempDir()
+	cfg, err := config.Open(filepath.Join(dir, "config.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	db, err := store.Open(filepath.Join(dir, "test.db"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Cleanup(func() { db.Close() })
+	reg, err := defs.Load("../../defs")
+	if err != nil {
+		t.Fatal(err)
+	}
+	return &Deps{
+		Cfg:   cfg,
+		DB:    db,
+		Reg:   reg,
+		Fetch: fetch.NewClient(reg, filepath.Join(dir, "missing.json")),
+		Stats: stats.New(db),
+	}
+}
+
+// TestStaleDataSurvivesTrackerOutage is the core resilience guarantee:
+// when a tracker is down/unreachable, /api/stats must keep returning the
+// last stored stats (with ok=false + the error) — NEVER a blank result.
+func TestStaleDataSurvivesTrackerOutage(t *testing.T) {
+	d := testDeps(t)
+
+	tr := models.Tracker{
+		ID:      "t1",
+		Name:    "Dead Tracker",
+		URL:     "http://127.0.0.1:1", // nothing listens here — connection refused
+		Type:    "unit3d",
+		APIKey:  "irrelevant",
+		Enabled: true,
+	}
+	if err := d.Cfg.AddTracker(tr); err != nil {
+		t.Fatal(err)
+	}
+
+	// Seed the stats engine as if a successful fetch + scrape happened earlier.
+	if err := d.Stats.SaveAPI("t1", map[string]any{
+		"uploaded": "5.00 TiB", "ratio": 2.5, "bonus_points": "12345",
+	}); err != nil {
+		t.Fatal(err)
+	}
+	if err := d.Stats.SaveScrape("t1", map[string]any{
+		"seed_size": "3.21 TiB", "join_date": "2025-01-01",
+	}); err != nil {
+		t.Fatal(err)
+	}
+
+	resp := refreshTracker(d, tr)
+
+	if resp.OK {
+		t.Fatal("expected ok=false for unreachable tracker")
+	}
+	if resp.Error == "" || resp.ErrorKind == "" {
+		t.Fatalf("expected error to be reported, got %+v", resp)
+	}
+	// The whole point: last known data is still there.
+	checks := map[string]any{
+		"uploaded":     "5.00 TiB",
+		"bonus_points": "12345",
+		"seed_size":    "3.21 TiB",
+		"join_date":    "2025-01-01",
+	}
+	for field, want := range checks {
+		got, ok := resp.Fields[field]
+		if !ok {
+			t.Errorf("field %s missing from response after outage", field)
+			continue
+		}
+		if got.Value != want {
+			t.Errorf("field %s: got %v, want %v", field, got.Value, want)
+		}
+	}
+	// Sources must be preserved too (api layer vs scrape layer).
+	if resp.Fields["uploaded"].Source != models.SourceAPI {
+		t.Errorf("uploaded source = %s, want api", resp.Fields["uploaded"].Source)
+	}
+	if resp.Fields["seed_size"].Source != models.SourceScrape {
+		t.Errorf("seed_size source = %s, want scrape", resp.Fields["seed_size"].Source)
+	}
+}
+
+// TestAPIWinsOverScrape verifies the merge priority rule end-to-end:
+// when both layers carry a field, the API value is served; scrape only
+// fills fields the API lacks (or where the API value is zero-ish).
+func TestAPIWinsOverScrape(t *testing.T) {
+	d := testDeps(t)
+
+	if err := d.Stats.SaveAPI("t1", map[string]any{
+		"bonus_points": "593626.75", // authoritative
+		"ratio":        1.05,
+		"fl_tokens":    "0", // zero-ish — scrape may fill
+	}); err != nil {
+		t.Fatal(err)
+	}
+	if err := d.Stats.SaveScrape("t1", map[string]any{
+		"bonus_points": "111111", // stale scrape — must lose
+		"seed_size":    "9.37 TiB",
+		"fl_tokens":    "6",
+	}); err != nil {
+		t.Fatal(err)
+	}
+
+	merged, err := d.Stats.Merged("t1")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if got := merged["bonus_points"]; got.Value != "593626.75" || got.Source != models.SourceAPI {
+		t.Errorf("bonus_points = %v (%s), want API value 593626.75", got.Value, got.Source)
+	}
+	if got := merged["seed_size"]; got.Value != "9.37 TiB" || got.Source != models.SourceScrape {
+		t.Errorf("seed_size = %v (%s), want scrape fill 9.37 TiB", got.Value, got.Source)
+	}
+	if got := merged["fl_tokens"]; got.Value != "6" || got.Source != models.SourceScrape {
+		t.Errorf("fl_tokens = %v (%s), want scrape 6 over zero-ish API value", got.Value, got.Source)
+	}
+}
+
+// TestManualLayerFillsGaps: a user-entered join date (manual layer) fills
+// the field when neither API nor scrape provides it, but a real API/scrape
+// value always wins.
+func TestManualLayerFillsGaps(t *testing.T) {
+	d := testDeps(t)
+
+	// Manual join date only — no API/scrape join date.
+	if err := d.Stats.SaveManual("t1", map[string]any{"join_date": "2024-01-15"}); err != nil {
+		t.Fatal(err)
+	}
+	if err := d.Stats.SaveAPI("t1", map[string]any{"ratio": 1.2}); err != nil {
+		t.Fatal(err)
+	}
+	merged, _ := d.Stats.Merged("t1")
+	if got := merged["join_date"]; got.Value != "2024-01-15" || got.Source != models.SourceManual {
+		t.Errorf("join_date = %v (%s), want manual 2024-01-15", got.Value, got.Source)
+	}
+
+	// Now the API reports a join date — it must win over the manual one.
+	if err := d.Stats.SaveAPI("t1", map[string]any{"ratio": 1.2, "join_date": "2023-06-01"}); err != nil {
+		t.Fatal(err)
+	}
+	merged, _ = d.Stats.Merged("t1")
+	if got := merged["join_date"]; got.Value != "2023-06-01" || got.Source != models.SourceAPI {
+		t.Errorf("join_date = %v (%s), want API 2023-06-01 to win over manual", got.Value, got.Source)
+	}
+}
+
+// TestConcurrentScrapesNeverDoubleHit guards the rate-limit lock: 8
+// simultaneous scrape triggers for one tracker must result in exactly ONE
+// recorded attempt — the rest must see the cooldown inside the lock and
+// back off. This is what keeps users from getting banned when multiple
+// tabs / auto-sync / API-fallback fire at once.
+func TestConcurrentScrapesNeverDoubleHit(t *testing.T) {
+	d := testDeps(t)
+
+	tr := models.Tracker{
+		ID:            "race1",
+		Name:          "Race Tracker",
+		URL:           "http://127.0.0.1:1", // unreachable — attempt still recorded
+		Type:          "unit3d",
+		Username:      "someone",
+		SessionCookie: "session=abc",
+		Enabled:       true,
+	}
+	if err := d.Cfg.AddTracker(tr); err != nil {
+		t.Fatal(err)
+	}
+
+	var wg sync.WaitGroup
+	for i := 0; i < 8; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			tryScrapeFallback(d, tr)
+		}()
+	}
+	wg.Wait()
+
+	n, err := d.DB.ScrapesSince("race1", time.Unix(0, 0))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if n != 1 {
+		t.Fatalf("8 concurrent scrape triggers recorded %d attempts, want exactly 1", n)
+	}
+}
+
+func TestMain(m *testing.M) {
+	os.Exit(m.Run())
+}

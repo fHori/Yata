@@ -1,0 +1,54 @@
+/* Theme: MY EYES! */
+/* id: my-eyes */
+/* swatches: #e8ecf2 #ffffff #6d56eb #15803d */
+[data-theme="my-eyes"] {
+  --bg:       #e8ecf2;
+  --surface:  #ffffff;
+  --surface2: #f3f5f9;
+  --surface3: #eaecf2;
+  --border:  #d0d6e0;
+  --border2: #b0bac8;
+  --accent:      #6d56eb;
+  --accent-h:    #5a44d4;
+  --green:  #15803d;
+  --red:    #dc2626;
+  --amber:  #b45309;
+  --blue:   #1d4ed8;
+  --teal:   #0f766e;
+  --purple: #7c3aed;
+  --orange: #c2410c;
+  --pink:   #be185d;
+  --text:  #0f172a;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --shadow: 0 4px 24px rgba(0,0,0,.10);
+  --topbar-bg:   rgba(232,236,242,.97);
+  --table-hover: rgba(0,0,0,.03);
+  /* White text still legible on dark purple accent */
+  --btn-primary-text: #ffffff;
+  --toggle-thumb: #ffffff;
+  --overlay-bg:    rgba(0,0,0,.40);
+  --overlay-bg-sm: rgba(0,0,0,.30);
+  --accent-glow:      rgba(109,86,235,.12);
+  --accent-bg-sm:     rgba(109,86,235,.08);
+  --accent-bg-md:     rgba(109,86,235,.10);
+  --accent-border-sm: rgba(109,86,235,.25);
+  --accent-border-md: rgba(109,86,235,.35);
+  --accent-border:    rgba(109,86,235,.35);
+  --error-bg:        rgba(220,38,38,.06);
+  --error-border:    rgba(220,38,38,.20);
+  --error-bg-md:     rgba(220,38,38,.10);
+  --error-bg-lg:     rgba(220,38,38,.14);
+  --error-border-md: rgba(220,38,38,.28);
+  --error-border-lg: rgba(220,38,38,.40);
+  --amber-bg:     rgba(180,83,9,.10);
+  --amber-border: rgba(180,83,9,.30);
+  /* Dark blue (#1d4ed8) derived for blue badge on white */
+  --blue-bg:     rgba(29,78,216,.08);
+  --blue-border: rgba(29,78,216,.25);
+  --qui-dl-color:         var(--purple);
+  --qui-ul-color:         var(--green);
+  --qui-free-color:       var(--text3);
+  --qui-ratio-icon-color: var(--text3);
+  --qui-size-color:       var(--teal);
+}

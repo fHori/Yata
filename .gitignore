@@ -1,0 +1,49 @@
+# Binaries & build output
+yata
+yata.exe
+yata.exe~
+*.exe
+static/dashboard.js
+web/dist/
+
+# Editor / tooling
+.claude/
+.vscode/
+.idea/
+
+# User data — never commit credentials or local databases
+config.json
+*.db
+*.db-wal
+*.db-shm
+data/
+
+# Rolling log files (may contain paths/usernames — never commit)
+yata.log
+yata.log.*
+*.log
+
+# Config backups (contain credentials — never commit)
+backups/
+
+# Node
+web/node_modules/
+
+# Dev-only saved tracker pages (large, contain personal profile data)
+reference/
+
+# Dev tools
+internal/scrape/profile_test.go
+tools/scrapetest/
+
+# Self-hosted Font Awesome (e.g. Pro) — licensed assets, must NOT ship in the public repo
+static/fontawesome/
+
+
+*.md
+# README.md — the only user-facing doc that ships
+!/README.md
+
+# OS noise
+.DS_Store
+Thumbs.db

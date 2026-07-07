@@ -1,0 +1,52 @@
+/* Theme: Golden Hour */
+/* id: golden */
+/* swatches: #16120e #1f1813 #f4a900 #d4b896 */
+[data-theme="golden"] {
+  --bg:       #16120e;
+  --surface:  #1f1813;
+  --surface2: #29201a;
+  --surface3: #342a22;
+  --border:  rgba(212,184,150,.10);
+  --border2: rgba(212,184,150,.18);
+  --accent:      #f4a900;
+  --accent-h:    #d49200;
+  --green:  #a8c463;
+  --red:    #e36b62;
+  --amber:  #f4b942;
+  --blue:   #8fb0c4;
+  --teal:   #5fc2a8;
+  --purple: #c79fc0;
+  --orange: #f08a4a;
+  --pink:   #d4848a;
+  --text:  #f4ece0;
+  --text2: #b09a82;
+  --text3: #6b5b4a;
+  --shadow: 0 4px 24px rgba(0,0,0,.5);
+  --topbar-bg:   rgba(22,18,14,.96);
+  --table-hover: rgba(212,184,150,.03);
+  --btn-primary-text: #2a1f0c;
+  --toggle-thumb: #f4ece0;
+  --overlay-bg:    rgba(0,0,0,.72);
+  --overlay-bg-sm: rgba(0,0,0,.55);
+  --accent-glow:      rgba(244,169,0,.20);
+  --accent-bg-sm:     rgba(244,169,0,.10);
+  --accent-bg-md:     rgba(244,169,0,.15);
+  --accent-border-sm: rgba(244,169,0,.25);
+  --accent-border-md: rgba(244,169,0,.35);
+  --accent-border:    rgba(244,169,0,.35);
+  --error-bg:        rgba(227,107,98,.06);
+  --error-border:    rgba(227,107,98,.20);
+  --error-bg-md:     rgba(227,107,98,.12);
+  --error-bg-lg:     rgba(227,107,98,.18);
+  --error-border-md: rgba(227,107,98,.28);
+  --error-border-lg: rgba(227,107,98,.42);
+  --amber-bg:     rgba(244,185,66,.12);
+  --amber-border: rgba(244,185,66,.32);
+  --blue-bg:     rgba(143,176,196,.08);
+  --blue-border: rgba(143,176,196,.22);
+  --qui-dl-color:         var(--purple);
+  --qui-ul-color:         var(--green);
+  --qui-free-color:       var(--text3);
+  --qui-ratio-icon-color: var(--text3);
+  --qui-size-color:       var(--teal);
+}

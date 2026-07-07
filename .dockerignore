@@ -1,0 +1,10 @@
+old/
+reference/
+data/
+web/node_modules/
+yata
+yata.exe
+config.json
+yata.db*
+.git/
+*.md

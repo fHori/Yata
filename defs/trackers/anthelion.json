@@ -1,0 +1,317 @@
+{
+  "schema_version": 1,
+  "key": "anthelion",
+  "name": "Anthelion",
+  "abbr": "ANT",
+  "url": "https://anthelion.me",
+  "type": "gazelle",
+  "last_updated": "2026-07-02",
+  "approved_by": {
+    "name": "",
+    "role": "",
+    "date": ""
+  },
+  "scrape": {
+    "labels": {
+      "orbs": "bonus_points"
+    }
+  },
+  "groups": [
+    {
+      "name": "User",
+      "style": {
+        "color": "#7289DA",
+        "icon": "fas fa-user"
+      },
+      "requirements": {},
+      "perks": [
+        {
+          "icon": "fas fa-download",
+          "label": "Can download"
+        },
+        {
+          "icon": "fas fa-upload",
+          "label": "Can upload"
+        },
+        {
+          "icon": "fas fa-hand-point-up",
+          "label": "Submit & vote on requests"
+        },
+        {
+          "icon": "fas fa-magnifying-glass",
+          "label": "Advanced search"
+        },
+        {
+          "icon": "fas fa-trophy",
+          "label": "Access top 10"
+        },
+        {
+          "icon": "fas fa-bookmark",
+          "label": "Bookmark films, people, collections"
+        }
+      ]
+    },
+    {
+      "name": "Member",
+      "style": {
+        "color": "#43B581",
+        "icon": "fas fa-user-check"
+      },
+      "requirements": {
+        "min_uploaded": "0.5 TiB",
+        "min_ratio": 0.8,
+        "min_bonus_points": 5000,
+        "min_age": "2W"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-layer-group",
+          "label": "Create & manage collections"
+        },
+        {
+          "icon": "fas fa-envelope",
+          "label": "Send invites (if invite tokens owned)"
+        },
+        {
+          "icon": "fas fa-download",
+          "label": "Download multiple torrents at once"
+        },
+        {
+          "icon": "fas fa-seedling",
+          "label": "Foster additional torrents"
+        }
+      ]
+    },
+    {
+      "name": "Power User",
+      "style": {
+        "color": "#63E6BE",
+        "icon": "fas fa-chess-knight"
+      },
+      "requirements": {
+        "min_uploaded": "1 TiB",
+        "min_ratio": 1.0,
+        "min_bonus_points": 25000,
+        "min_age": "1M",
+        "any_of": [
+          {
+            "min_uploads": 5
+          },
+          {
+            "min_adoptions": 10
+          }
+        ]
+      },
+      "perks": [
+        {
+          "icon": "fas fa-magnifying-glass",
+          "label": "TMDb search from site"
+        },
+        {
+          "icon": "fas fa-bell",
+          "label": "Torrent notifications"
+        },
+        {
+          "icon": "fas fa-photo-film",
+          "label": "Collage subscriptions"
+        },
+        {
+          "icon": "fas fa-chart-bar",
+          "label": "Advanced top 10"
+        },
+        {
+          "icon": "fas fa-square-poll-horizontal",
+          "label": "Create forum polls"
+        },
+        {
+          "icon": "fas fa-ticket",
+          "label": "Purchase invite tokens from store"
+        },
+        {
+          "icon": "fas fa-image",
+          "label": "Upload images directly"
+        },
+        {
+          "icon": "fa-brands fa-wpforms",
+          "label": "Access invite forums"
+        },
+        {
+          "icon": "fas fa-seedling",
+          "label": "Foster additional torrents"
+        }
+      ]
+    },
+    {
+      "name": "Fanatic",
+      "style": {
+        "color": "#FAA61A",
+        "icon": "fas fa-fire"
+      },
+      "requirements": {
+        "min_uploaded": "2 TiB",
+        "min_ratio": 1.5,
+        "min_bonus_points": 100000,
+        "min_age": "3M",
+        "any_of": [
+          {
+            "min_uploads": 25
+          },
+          {
+            "min_uploads": 5,
+            "min_adoptions": 50
+          }
+        ]
+      },
+      "perks": [
+        {
+          "icon": "fas fa-folder-open",
+          "label": "1 personal collage"
+        },
+        {
+          "icon": "fas fa-book-open",
+          "label": "Create wiki articles"
+        },
+        {
+          "icon": "fas fa-ticket",
+          "label": "Periodic invites (max 1)"
+        },
+        {
+          "icon": "fas fa-seedling",
+          "label": "Foster additional torrents"
+        },
+        {
+          "icon": "fas fa-flask",
+          "label": "Eligible for ANThELia Internal Order"
+        }
+      ]
+    },
+    {
+      "name": "Elite",
+      "style": {
+        "color": "#F04747",
+        "icon": "fas fa-gem"
+      },
+      "requirements": {
+        "min_uploaded": "5 TiB",
+        "min_ratio": 2.5,
+        "min_bonus_points": 250000,
+        "min_age": "6M",
+        "any_of": [
+          {
+            "min_uploads": 100
+          },
+          {
+            "min_uploads": 10,
+            "min_adoptions": 200
+          }
+        ]
+      },
+      "perks": [
+        {
+          "icon": "fas fa-folder-open",
+          "label": "Up to 2 personal collages"
+        },
+        {
+          "icon": "fas fa-seedling",
+          "label": "Foster additional torrents"
+        },
+        {
+          "icon": "fas fa-ticket",
+          "label": "Periodic invites (max 2)"
+        }
+      ]
+    },
+    {
+      "name": "Guru",
+      "style": {
+        "color": "#9B59B6",
+        "icon": "fas fa-brain"
+      },
+      "requirements": {
+        "min_uploaded": "8 TiB",
+        "min_ratio": 3.0,
+        "min_bonus_points": 500000,
+        "min_age": "1Y",
+        "any_of": [
+          {
+            "min_uploads": 250
+          },
+          {
+            "min_uploads": 25,
+            "min_adoptions": 500
+          }
+        ]
+      },
+      "perks": [
+        {
+          "icon": "fas fa-shield-halved",
+          "label": "Immune from ratio watch"
+        },
+        {
+          "icon": "fas fa-seedling",
+          "label": "Foster additional torrents"
+        },
+        {
+          "icon": "fas fa-ticket",
+          "label": "Periodic invites (max 4)"
+        }
+      ]
+    },
+    {
+      "name": "Torrent Master",
+      "style": {
+        "color": "#E74C3C",
+        "icon": "fas fa-crown"
+      },
+      "requirements": {
+        "min_uploaded": "10 TiB",
+        "min_ratio": 3.5,
+        "min_bonus_points": 1000000,
+        "min_age": "2Y",
+        "any_of": [
+          {
+            "min_uploads": 500
+          },
+          {
+            "min_uploads": 50,
+            "min_adoptions": 1000
+          }
+        ]
+      },
+      "perks": [
+        {
+          "icon": "fas fa-folder-open",
+          "label": "Up to 3 personal collages"
+        },
+        {
+          "icon": "fas fa-pen-to-square",
+          "label": "Edit any torrent"
+        },
+        {
+          "icon": "fas fa-seedling",
+          "label": "Foster additional torrents"
+        },
+        {
+          "icon": "fas fa-shield",
+          "label": "Inactivity immunity"
+        }
+      ]
+    },
+    {
+      "name": "Legend",
+      "style": {
+        "color": "#FFD700",
+        "icon": "fas fa-medal"
+      },
+      "requirements": {
+        "description": "Ex-staff of Anthelion or contributing staff from Nebulance. Awarded by staff."
+      },
+      "perks": [
+        {
+          "icon": "fas fa-star",
+          "label": "Legendary status"
+        }
+      ]
+    }
+  ]
+}

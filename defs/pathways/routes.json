@@ -1,0 +1,5054 @@
+{
+  "schema_version": 1,
+  "source": {
+    "name": "trackerpathways",
+    "url": "https://github.com/handokota/trackerpathways",
+    "license": "MIT",
+    "fetched": "2026-06-12"
+  },
+  "abbr": {
+    "ABTorrents": "ABT",
+    "Aither": "ATH",
+    "AlphaRatio": "AR",
+    "AnimeBytes": "AB",
+    "AnimeWorld": "AW",
+    "Anthelion": "ANT",
+    "ArabicSource": "AST",
+    "AsianCinema": "ACM",
+    "AudioNews": "AN",
+    "Aura4K": "A4K",
+    "AvistaZ": "AZ",
+    "BakaBT": "BBT",
+    "Bemaniso": "SOWS",
+    "BeyondHD": "BHD",
+    "Bibliotik": "BiB",
+    "Bit-HDTV": "BHDTV",
+    "BitGamer": "BG",
+    "BitPorn": "BP",
+    "Blutopia": "BLU",
+    "BroadCity": "BdC",
+    "BroadcasTheNet": "BTN",
+    "BrokenStones": "BS",
+    "BwTorrents": "BwT",
+    "CGPeers": "CGP",
+    "Canal Street": "CAST",
+    "CapybaraBR": "CBR",
+    "Cathode-Ray.Tube": "CRT",
+    "ChileBT": "CHB",
+    "CinemaZ": "CZ",
+    "Cinemageddon": "CG",
+    "Cinematik": "TiK",
+    "ClearJAV": "CJV",
+    "Concertos": "CTS",
+    "Cryptichaven Comedy Club": "CCC",
+    "D3Si": "D3",
+    "DanishBytes": "DBS",
+    "DarkPeers": "DP",
+    "DataScene": "DS",
+    "DesiTorrents": "DT",
+    "DigitalCore.Club": "DCC",
+    "Dolphin Is Coming": "DIC",
+    "Empornium": "EMP",
+    "ExoticaZ": "EZ",
+    "ExtremeBits": "XB",
+    "F1Carreras": "F1C",
+    "Fappaizuri": "FZ",
+    "FileList": "FL",
+    "FunFile": "FF",
+    "GazelleGames": "GGn",
+    "Generation-Free": "GF",
+    "Great Poster Wall": "GPW",
+    "HD Dolby": "HDD",
+    "HD-Forever": "HD-F",
+    "HD-Only": "HD-O",
+    "HD-Space": "HD-S",
+    "HD-Torrents": "HDT",
+    "HD-UNiT3D": "HDU",
+    "HDBits": "HDB",
+    "HDCity": "HDC",
+    "HDFans": "HDF",
+    "HDPlus": "HDP",
+    "HDSky": "HDS",
+    "HDZero": "HDZ",
+    "HELLENIC-HD": "HLN",
+    "Hawke-uno": "HUNO",
+    "HellasHut": "HH",
+    "HomieHelpDesk": "HHD",
+    "IPTorrents": "IPT",
+    "Immortal-s": "IMT",
+    "Infinity": "INF",
+    "InfinityHD": "IHD",
+    "ItaTorrents": "ITT",
+    "JME-REUNIT3D": "JME",
+    "JPTV4us": "JP4",
+    "JPopsuki": "JPS",
+    "KaraGarga": "KG",
+    "Kufirc": "KFC",
+    "LST": "LST",
+    "Last Digital Underground": "LDU",
+    "Lat-Team": "LTM",
+    "LearnFlakes": "LF",
+    "LemonHD": "LHD",
+    "Libble": "LIB",
+    "Locadora": "LDR",
+    "Luminarr": "LUME",
+    "M-Team": "MT",
+    "MONIKADESIGN": "MDU",
+    "Malayabits": "MYB",
+    "Materialize": "MAT",
+    "MoreThanTV": "MTV",
+    "MyAnonamouse": "MAM",
+    "MySpleen": "MS",
+    "Nebulance": "NBL",
+    "NordicQuality": "NQ",
+    "Nzbplanet": "NZBP",
+    "OldToonsWorld": "OTW",
+    "OnlyEncodes+": "OE+",
+    "OpenCD": "OCD",
+    "Orpheus": "OPS",
+    "OurBits": "OB",
+    "PTFiles": "PTF",
+    "PTHome": "PTH",
+    "PTerClub": "PTer",
+    "ParabellumHD": "PBH",
+    "PassThePopcorn": "PTP",
+    "Phoenix Project": "PHX",
+    "PixelCove": "PxC",
+    "PixelHD": "PxHD",
+    "PolishTorrent": "PTT",
+    "Portugas": "PTS",
+    "PreToMe": "PTM",
+    "PrivateHD": "PHD",
+    "Racing4Everyone": "R4E",
+    "RacingForMe": "RFM",
+    "Rastastugan": "RAS",
+    "Redacted": "RED",
+    "ReelFliX": "RFX",
+    "RetroFlix": "RTF",
+    "RevolutionTT": "RTT",
+    "RoTorrent": "ROT",
+    "RocketHD": "RHD",
+    "SAMARITANO": "SAM",
+    "SceneHD": "SHD",
+    "Secret Cinema": "SC",
+    "SexTorrent": "SXT",
+    "ShareIsland": "SIL",
+    "SkipTheCommercials": "STC",
+    "SocietyGlitch": "SG",
+    "Speed.cd": "SPD",
+    "SpeedApp": "SA",
+    "SportsCult": "SPC",
+    "Superbits": "SB",
+    "TLFBits": "TLF",
+    "TV-Vault": "TVV",
+    "TeamHD": "THD",
+    "TheEmpire": "TE",
+    "TheGeeks": "TG",
+    "TheLeachZone": "TLZ",
+    "TheOldSchool": "TOS",
+    "ThePlace": "TP",
+    "TheScenePlace": "TSP",
+    "TheShow": "TSh",
+    "TheVault": "TV",
+    "ToTheGlory": "TTG",
+    "TocaShare": "TCS",
+    "TorrentBD": "TBD",
+    "TorrentLeech": "TL",
+    "Torrenteros": "TTR",
+    "TranceTraffic": "TT",
+    "TurkSeed": "TKS",
+    "U2.dmhy": "U2",
+    "UTOPIA": "UTP",
+    "Unwalled": "UNW",
+    "Upload.cx": "ULCX",
+    "UpscaleVault": "UV",
+    "White Rabbit Network": "WRN",
+    "XSpeeds": "XS",
+    "YuScene": "YS",
+    "eMuwarez": "EMW",
+    "eShareNet": "eSN",
+    "inTheShadow": "iTS",
+    "nCore": "nC",
+    "seedpool": "SP"
+  },
+  "routes": [
+    {
+      "from": "Aither",
+      "to": "Anthelion",
+      "days": 0,
+      "reqs": "Prometheus+",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "Aither",
+      "to": "BrokenStones",
+      "days": 0,
+      "reqs": "Prometheus+",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "Aither",
+      "to": "Cathode-Ray.Tube",
+      "days": 365,
+      "reqs": "Prometheus+, 1 year, ratio\u003e=1",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "Aither",
+      "to": "ExtremeBits",
+      "days": 365,
+      "reqs": "Prometheus+, 1 year",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "Aither",
+      "to": "GazelleGames",
+      "days": 365,
+      "reqs": "Oceanus+, 1 year",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "Aither",
+      "to": "HDBits",
+      "days": 730,
+      "reqs": "Titan+, 2 years, 200 uploads",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "Aither",
+      "to": "Hawke-uno",
+      "days": 0,
+      "reqs": "Prometheus+",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "Aither",
+      "to": "LST",
+      "days": 90,
+      "reqs": "Prometheus+, 3 months",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "Aither",
+      "to": "Nebulance",
+      "days": 0,
+      "reqs": "Prometheus+",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "Aither",
+      "to": "OldToonsWorld",
+      "days": 180,
+      "reqs": "Prometheus+, 6 months",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "Aither",
+      "to": "OnlyEncodes+",
+      "days": 0,
+      "reqs": "Prometheus+",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "Aither",
+      "to": "Orpheus",
+      "days": 0,
+      "reqs": "Prometheus+",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "Aither",
+      "to": "PassThePopcorn",
+      "days": 730,
+      "reqs": "Titan+, 2 years, 200 uploads",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "Aither",
+      "to": "Racing4Everyone",
+      "days": 0,
+      "reqs": "Prometheus+",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "Aither",
+      "to": "ReelFliX",
+      "days": 0,
+      "reqs": "Prometheus+",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "Aither",
+      "to": "Unwalled",
+      "days": 0,
+      "reqs": "Harmonia+, 5 seeded uploads",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "Aither",
+      "to": "seedpool",
+      "days": 0,
+      "reqs": "1TiB seedsize",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "AlphaRatio",
+      "to": "Aither",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "AlphaRatio",
+      "to": "Cathode-Ray.Tube",
+      "days": 0,
+      "reqs": "Ratio\u003e1.0",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "AlphaRatio",
+      "to": "HellasHut",
+      "days": 360,
+      "reqs": "12 months",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "AlphaRatio",
+      "to": "LST",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "AlphaRatio",
+      "to": "LzTr",
+      "days": 0,
+      "reqs": "20 uploads",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "AlphaRatio",
+      "to": "MoreThanTV",
+      "days": 0,
+      "reqs": "Ratio\u003e1.5",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "AlphaRatio",
+      "to": "Orpheus",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "AlphaRatio",
+      "to": "PixelHD",
+      "days": 180,
+      "reqs": "2 extra tracker proofs that are 6 months old",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "AlphaRatio",
+      "to": "Racing4Everyone",
+      "days": 0,
+      "reqs": "None",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "AlphaRatio",
+      "to": "ReelFliX",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "AlphaRatio",
+      "to": "SceneHD",
+      "days": 360,
+      "reqs": "12 months",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "AnimeBytes",
+      "to": "Aither",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "AnimeBytes",
+      "to": "AsianCinema",
+      "days": 180,
+      "reqs": "6 months, 4TB upload",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "AnimeBytes",
+      "to": "BakaBT",
+      "days": 180,
+      "reqs": "6 months, ratio\u003e1, seeding at least half of your snatched torrents",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "AnimeBytes",
+      "to": "BroadcasTheNet",
+      "days": 365,
+      "reqs": "TM, 1 year",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "AnimeBytes",
+      "to": "Concertos",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "AnimeBytes",
+      "to": "D3Si",
+      "days": 360,
+      "reqs": "TM, 12 months, 50 perfect FLACs, ratio\u003e=1.5",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "AnimeBytes",
+      "to": "Dolphin Is Coming",
+      "days": 0,
+      "reqs": "10 music torrents or 15 other torrents",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "AnimeBytes",
+      "to": "Empornium",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "AnimeBytes",
+      "to": "FunFile",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "AnimeBytes",
+      "to": "GazelleGames",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "AnimeBytes",
+      "to": "HDBits",
+      "days": 365,
+      "reqs": "Legend, 1 year, 3 profile links",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "AnimeBytes",
+      "to": "LST",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "AnimeBytes",
+      "to": "LzTr",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "AnimeBytes",
+      "to": "OldToonsWorld",
+      "days": 90,
+      "reqs": "3 months, seedsize\u003e=1TB OR Average Seedtime\u003e=1month",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "AnimeBytes",
+      "to": "Orpheus",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "AnimeBytes",
+      "to": "PassThePopcorn",
+      "days": 730,
+      "reqs": "Legend, 2 years",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "AnimeBytes",
+      "to": "PixelHD",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "AnimeBytes",
+      "to": "ReelFliX",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "AnimeBytes",
+      "to": "TeamHD",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "AnimeBytes",
+      "to": "TheEmpire",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "AnimeBytes",
+      "to": "TheGeeks",
+      "days": 0,
+      "reqs": "2-3x full tracker profile screenshots (including AB)",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "AnimeBytes",
+      "to": "U2.dmhy",
+      "days": 0,
+      "reqs": "2 options: A) Contribute original content (include some photos of your self-brought stuff), and give some example of your uploads here (links). B) Screenshot your current anime collection and write 1 short paragraph (no longer than 100 words) to introduce your favorite anime in current season or previous season to me (imagine you want me to get attracted by your introduction and watch it).",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "AnimeWorld",
+      "to": "RocketHD",
+      "days": 60,
+      "reqs": "2 months",
+      "active": true,
+      "updated": "Oct 2025"
+    },
+    {
+      "from": "AnimeZ",
+      "to": "AvistaZ",
+      "days": 120,
+      "reqs": "10k bp, Member Rank, 120 days, seeding 5 torrents, ratio\u003e2.0, 300 GB",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "AnimeZ",
+      "to": "CinemaZ",
+      "days": 120,
+      "reqs": "10k bp, Member Rank, 120 days, seeding 5 torrents, ratio\u003e2.0, 300 GB",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "AnimeZ",
+      "to": "ExoticaZ",
+      "days": 120,
+      "reqs": "10k bp, Member Rank, 120 days, seeding 5 torrents, ratio\u003e2.0, 300 GB",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "AnimeZ",
+      "to": "PrivateHD",
+      "days": 120,
+      "reqs": "10k bp, Member Rank, 120 days, seeding 5 torrents, ratio\u003e2.0, 300 GB",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "Anthelion",
+      "to": "Aither",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Anthelion",
+      "to": "Aura4K",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Anthelion",
+      "to": "BakaBT",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Anthelion",
+      "to": "BeyondHD",
+      "days": 540,
+      "reqs": "Elite+, 18 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Anthelion",
+      "to": "CapybaraBR",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Anthelion",
+      "to": "Cathode-Ray.Tube",
+      "days": 90,
+      "reqs": "3 months, ratio \u003e= 1",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Anthelion",
+      "to": "CinemaZ",
+      "days": 180,
+      "reqs": "Fanatic+, 6 months (180 days), 50 uploads or 75 adopted torrents + 5 uploads, 1TiB upload, ratio\u003e=1.1",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Anthelion",
+      "to": "LST",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Anthelion",
+      "to": "Luminarr",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Anthelion",
+      "to": "Nebulance",
+      "days": 90,
+      "reqs": "Fanatic+, 3 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Anthelion",
+      "to": "OldToonsWorld",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Anthelion",
+      "to": "Orpheus",
+      "days": 180,
+      "reqs": "Fanatic+, 6 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Anthelion",
+      "to": "ReelFliX",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Anthelion",
+      "to": "RetroFlix",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Anthelion",
+      "to": "Unwalled",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Anthelion",
+      "to": "seedpool",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "AsianCinema",
+      "to": "Luminarr",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "AsianCinema",
+      "to": "Nebulance",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": false,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "Aura4K",
+      "to": "YuScene",
+      "days": 0,
+      "reqs": "No Requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Aura4K",
+      "to": "seedpool",
+      "days": 0,
+      "reqs": "1 TiB seeding size",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "AvistaZ",
+      "to": "AnimeZ",
+      "days": 120,
+      "reqs": "10k bp, Member Rank, 4 months, seeding 5 torrents, ratio\u003e2.0, 300 GB",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "AvistaZ",
+      "to": "CinemaZ",
+      "days": 120,
+      "reqs": "10k bp, Member Rank, 4 months, seeding 5 torrents, ratio\u003e2.0, 300 GB",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "AvistaZ",
+      "to": "ExoticaZ",
+      "days": 120,
+      "reqs": "10k bp, Member Rank, 4 months, seeding 5 torrents, ratio\u003e2.0, 300 GB",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "AvistaZ",
+      "to": "PrivateHD",
+      "days": 120,
+      "reqs": "10k bp, Member Rank, 4 months, seeding 5 torrents, ratio\u003e2.0, 300 GB",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "Bemaniso",
+      "to": "Orpheus",
+      "days": 0,
+      "reqs": "PU",
+      "active": true,
+      "updated": "Oct 2024"
+    },
+    {
+      "from": "Bemaniso",
+      "to": "PixelCove",
+      "days": 84,
+      "reqs": "PU, 12 weeks",
+      "active": true,
+      "updated": "Sep 2024"
+    },
+    {
+      "from": "BeyondHD",
+      "to": "Aither",
+      "days": 0,
+      "reqs": "Pro+",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "BeyondHD",
+      "to": "Anthelion",
+      "days": 0,
+      "reqs": "Pro+",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "BeyondHD",
+      "to": "CapybaraBR",
+      "days": 0,
+      "reqs": "Pro+",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "BeyondHD",
+      "to": "Cathode-Ray.Tube",
+      "days": 0,
+      "reqs": "Pro+ ratio\u003e1.0",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "BeyondHD",
+      "to": "Concertos",
+      "days": 365,
+      "reqs": "Pro+, 1 year",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "BeyondHD",
+      "to": "ExtremeBits",
+      "days": 365,
+      "reqs": "Pro+, 1 year",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "BeyondHD",
+      "to": "HDBits",
+      "days": 0,
+      "reqs": "King, 100 uploads",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "BeyondHD",
+      "to": "Hawke-uno",
+      "days": 0,
+      "reqs": "Pro+",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "BeyondHD",
+      "to": "Immortal-s",
+      "days": 360,
+      "reqs": "Pro+, 3 profile links, 12 months",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "BeyondHD",
+      "to": "LST",
+      "days": 0,
+      "reqs": "Pro+",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "BeyondHD",
+      "to": "MoreThanTV",
+      "days": 0,
+      "reqs": "Pro+, ratio\u003e1.5",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "BeyondHD",
+      "to": "Nebulance",
+      "days": 0,
+      "reqs": "Pro+",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "BeyondHD",
+      "to": "OldToonsWorld",
+      "days": 0,
+      "reqs": "Pro+, ≥1.3 ratio",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "BeyondHD",
+      "to": "OnlyEncodes+",
+      "days": 0,
+      "reqs": "Pro+",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "BeyondHD",
+      "to": "PassThePopcorn",
+      "days": 0,
+      "reqs": "King, 100 uploads",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "BeyondHD",
+      "to": "PixelHD",
+      "days": 0,
+      "reqs": "Pro+, 3 profile links",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "BeyondHD",
+      "to": "ReelFliX",
+      "days": 0,
+      "reqs": "Pro+",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "BeyondHD",
+      "to": "Unwalled",
+      "days": 0,
+      "reqs": "Pro+",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "BeyondHD",
+      "to": "seedpool",
+      "days": 0,
+      "reqs": "Pro+",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "Bibliotik",
+      "to": "FileList",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": false,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "Bibliotik",
+      "to": "LzTr",
+      "days": 360,
+      "reqs": "12 months",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "Bibliotik",
+      "to": "Orpheus",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "Bibliotik",
+      "to": "PassThePopcorn",
+      "days": 730,
+      "reqs": "Elite with either 200 uploads, 3 years or 300 uploads, 2 years",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "Bibliotik",
+      "to": "RetroFlix",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "Bibliotik",
+      "to": "SceneHD",
+      "days": 365,
+      "reqs": "1 year",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "Bibliotik",
+      "to": "TheGeeks",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "Bibliotik",
+      "to": "ThePlace",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": false,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "Bibliotik",
+      "to": "TheShow",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": false,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "Bibliotik",
+      "to": "TheVault",
+      "days": 180,
+      "reqs": "6 months",
+      "active": false,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "Bit-HDTV",
+      "to": "PTerClub",
+      "days": 180,
+      "reqs": "Elite, 6months",
+      "active": true,
+      "updated": "Oct 2025"
+    },
+    {
+      "from": "Bit-HDTV",
+      "to": "SpeedApp",
+      "days": 0,
+      "reqs": "Screenshot",
+      "active": false,
+      "updated": "Oct 2025"
+    },
+    {
+      "from": "Bit-HDTV",
+      "to": "seedpool",
+      "days": 0,
+      "reqs": "500 GB seedsize",
+      "active": true,
+      "updated": "Oct 2025"
+    },
+    {
+      "from": "BitPorn",
+      "to": "Aura4K",
+      "days": 0,
+      "reqs": "Insane User",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "BitPorn",
+      "to": "BrokenStones",
+      "days": 0,
+      "reqs": "Insane User",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "BitPorn",
+      "to": "DarkPeers",
+      "days": 0,
+      "reqs": "Insane User",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "BitPorn",
+      "to": "seedpool",
+      "days": 0,
+      "reqs": "Insane User",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Blutopia",
+      "to": "BrokenStones",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "Blutopia",
+      "to": "CapybaraBR",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": false,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "Blutopia",
+      "to": "Cinematik",
+      "days": 365,
+      "reqs": "BluArchivist or higher, 20 TiB seeding size, 3 months average seedtime; or you have a good track record of uploading personal TiK worthy releases to BLU, 1 year, clear record of seeding full disc torrents",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "Blutopia",
+      "to": "Concertos",
+      "days": 0,
+      "reqs": "10 uploads",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Blutopia",
+      "to": "ExtremeBits",
+      "days": 365,
+      "reqs": "1 year",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "Blutopia",
+      "to": "Immortal-s",
+      "days": 365,
+      "reqs": "3x 1 year old additional profile links and screenshots",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Blutopia",
+      "to": "LST",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": false,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "Blutopia",
+      "to": "Luminarr",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Blutopia",
+      "to": "OldToonsWorld",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Blutopia",
+      "to": "PixelCove",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "Blutopia",
+      "to": "ReelFliX",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Blutopia",
+      "to": "RetroFlix",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "Blutopia",
+      "to": "Unwalled",
+      "days": 0,
+      "reqs": "5 uploads",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Blutopia",
+      "to": "YuScene",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "BroadCity",
+      "to": "PTerClub",
+      "days": 120,
+      "reqs": "Gold User+, 4 months, 2 proofs from another tracker",
+      "active": false,
+      "updated": "May 2024"
+    },
+    {
+      "from": "BroadCity",
+      "to": "TeamHD",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "Aither",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "AlphaRatio",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "AnimeBytes",
+      "days": 90,
+      "reqs": "PU+, 3 months",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "Anthelion",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "AsianCinema",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "AvistaZ",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "BakaBT",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "BeyondHD",
+      "days": 0,
+      "reqs": "Guru",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "Canal Street",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "Concertos",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "D3Si",
+      "days": 540,
+      "reqs": "Elite, 18 months",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "F1Carreras",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "FunFile",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "GazelleGames",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "HD-Forever",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "HDBits",
+      "days": 730,
+      "reqs": "Master, 2 years, seedsize \u003e2TB, avg seedtime \u003e1500 hrs",
+      "active": true,
+      "updated": "May 2025"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "Immortal-s",
+      "days": 365,
+      "reqs": "3x 1 year old additional profile links",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "Lat-Team",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "LzTr",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "MyAnonamouse",
+      "days": 0,
+      "reqs": "No Requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "OldToonsWorld",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "Orpheus",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "PassThePopcorn",
+      "days": 730,
+      "reqs": "Master, 2 years",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "PixelCove",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "PixelHD",
+      "days": 180,
+      "reqs": "Elite or high-level PU, 3x 6 months old profile links (including BTN)",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "BroadcasTheNet",
+      "to": "TheGeeks",
+      "days": 0,
+      "reqs": "2-3x full tracker profile screenshots (including BTN)",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "CapybaraBR",
+      "to": "DarkPeers",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "CapybaraBR",
+      "to": "F1Carreras",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "CapybaraBR",
+      "to": "LST",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "CapybaraBR",
+      "to": "Luminarr",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "CapybaraBR",
+      "to": "OldToonsWorld",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "CapybaraBR",
+      "to": "YuScene",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Cathode-Ray.Tube",
+      "to": "Aither",
+      "days": -1,
+      "reqs": "Unknown",
+      "active": false,
+      "updated": "Dec 2024"
+    },
+    {
+      "from": "Cathode-Ray.Tube",
+      "to": "Hawke-uno",
+      "days": -1,
+      "reqs": "Unknown",
+      "active": false,
+      "updated": "Dec 2024"
+    },
+    {
+      "from": "CinemaZ",
+      "to": "AnimeZ",
+      "days": 120,
+      "reqs": "10k bp, Member Rank, 4 months, seeding 5 torrents, ratio\u003e2.0, 300 GB",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "CinemaZ",
+      "to": "AvistaZ",
+      "days": 120,
+      "reqs": "10k bp, Member Rank, 4 months, seeding 5 torrents, ratio\u003e2.0, 300 GB",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "CinemaZ",
+      "to": "ExoticaZ",
+      "days": 120,
+      "reqs": "10k bp, Member Rank, 4 months, seeding 5 torrents, ratio\u003e2.0, 300 GB",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "CinemaZ",
+      "to": "PrivateHD",
+      "days": 120,
+      "reqs": "10k bp, Member Rank, 4 months, seeding 5 torrents, ratio\u003e2.0, 300 GB",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "Cinemageddon",
+      "to": "Aither",
+      "days": 180,
+      "reqs": "Superfan+, 6 months",
+      "active": false,
+      "updated": "Mar 2025"
+    },
+    {
+      "from": "Cinemageddon",
+      "to": "Great Poster Wall",
+      "days": 0,
+      "reqs": "PU+, 10 uploads",
+      "active": true,
+      "updated": "Mar 2025"
+    },
+    {
+      "from": "Cinemageddon",
+      "to": "HD-Space",
+      "days": 0,
+      "reqs": "Abandoned",
+      "active": false,
+      "updated": "Mar 2025"
+    },
+    {
+      "from": "Cinemageddon",
+      "to": "MyAnonamouse",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Mar 2025"
+    },
+    {
+      "from": "Cinemageddon",
+      "to": "Orpheus",
+      "days": 0,
+      "reqs": "Abandoned",
+      "active": false,
+      "updated": "Oct 2025"
+    },
+    {
+      "from": "Cinemageddon",
+      "to": "PTFiles",
+      "days": 0,
+      "reqs": "Abandoned",
+      "active": false,
+      "updated": "Mar 2025"
+    },
+    {
+      "from": "Cinemageddon",
+      "to": "ReelFliX",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Mar 2025"
+    },
+    {
+      "from": "Cinemageddon",
+      "to": "SocietyGlitch",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Mar 2025"
+    },
+    {
+      "from": "Cinemageddon",
+      "to": "SpeedApp",
+      "days": 0,
+      "reqs": "Abandoned",
+      "active": false,
+      "updated": "Mar 2025"
+    },
+    {
+      "from": "Cinemageddon",
+      "to": "TeamHD",
+      "days": 0,
+      "reqs": "Abandoned",
+      "active": false,
+      "updated": "Mar 2025"
+    },
+    {
+      "from": "Cinemageddon",
+      "to": "TheEmpire",
+      "days": 0,
+      "reqs": "Abandoned",
+      "active": false,
+      "updated": "Mar 2025"
+    },
+    {
+      "from": "Cinemageddon",
+      "to": "TheGeeks",
+      "days": 0,
+      "reqs": "Abandoned",
+      "active": false,
+      "updated": "Mar 2025"
+    },
+    {
+      "from": "Cinemageddon",
+      "to": "TheShow",
+      "days": 0,
+      "reqs": "Abandoned",
+      "active": false,
+      "updated": "Mar 2025"
+    },
+    {
+      "from": "Cinemageddon",
+      "to": "TorrentLeech",
+      "days": 0,
+      "reqs": "Abandoned",
+      "active": false,
+      "updated": "Mar 2025"
+    },
+    {
+      "from": "Cinemageddon",
+      "to": "Unwalled",
+      "days": 0,
+      "reqs": "Superfan+, 5 seeded uploads",
+      "active": true,
+      "updated": "Mar 2025"
+    },
+    {
+      "from": "DarkPeers",
+      "to": "BitPorn",
+      "days": 30,
+      "reqs": "5 TiB of uploaded, avg seedtime \u003e= 1 month",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "DarkPeers",
+      "to": "DigitalCore.Club",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "DarkPeers",
+      "to": "HomieHelpDesk",
+      "days": 120,
+      "reqs": "Account age  \u003e=4 months minimum, 5TB upload, 2 additional proofs",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "DarkPeers",
+      "to": "Luminarr",
+      "days": 90,
+      "reqs": "3 months",
+      "active": false,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "DarkPeers",
+      "to": "YuScene",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "DarkPeers",
+      "to": "seedpool",
+      "days": 0,
+      "reqs": "1 TiB seeding size",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "Empornium",
+      "to": "Aither",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "Empornium",
+      "to": "AnimeBytes",
+      "days": 360,
+      "reqs": "Sextreme Perv+, 12 months",
+      "active": true,
+      "updated": "Mar 2025"
+    },
+    {
+      "from": "Empornium",
+      "to": "GazelleGames",
+      "days": 90,
+      "reqs": "Great Perv+, 3 months",
+      "active": true,
+      "updated": "Mar 2025"
+    },
+    {
+      "from": "Empornium",
+      "to": "Immortal-s",
+      "days": 0,
+      "reqs": "Backstory, 3 profile links and screenshots",
+      "active": true,
+      "updated": "Mar 2025"
+    },
+    {
+      "from": "Empornium",
+      "to": "MoreThanTV",
+      "days": 180,
+      "reqs": "Great Perv+, ratio\u003e1.5, 6 months",
+      "active": true,
+      "updated": "Mar 2025"
+    },
+    {
+      "from": "Empornium",
+      "to": "Orpheus",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Mar 2025"
+    },
+    {
+      "from": "Empornium",
+      "to": "PixelCove",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Mar 2025"
+    },
+    {
+      "from": "Empornium",
+      "to": "ReelFliX",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Mar 2025"
+    },
+    {
+      "from": "Empornium",
+      "to": "Unwalled",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Mar 2025"
+    },
+    {
+      "from": "ExoticaZ",
+      "to": "AnimeZ",
+      "days": 120,
+      "reqs": "10k bp, Member Rank, 4 months, seeding 5 torrents, ratio\u003e2.0, 300 GB",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "ExoticaZ",
+      "to": "AvistaZ",
+      "days": 120,
+      "reqs": "10k bp, Member Rank, 4 months, seeding 5 torrents, ratio\u003e2.0, 300 GB",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "ExoticaZ",
+      "to": "CinemaZ",
+      "days": 120,
+      "reqs": "10k bp, Member Rank, 4 months, seeding 5 torrents, ratio\u003e2.0, 300 GB",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "ExoticaZ",
+      "to": "PrivateHD",
+      "days": 120,
+      "reqs": "10k bp, Member Rank, 4 months, seeding 5 torrents, ratio\u003e2.0, 300 GB",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "Aither",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "AnimeBytes",
+      "days": 180,
+      "reqs": "Elite Gamer, 6 months",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "Anthelion",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "BakaBT",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "BeyondHD",
+      "days": 730,
+      "reqs": "Legendary Gamer, 2 years, Legendary Invites forum",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "BroadcasTheNet",
+      "days": 730,
+      "reqs": "Master Gamer, 2 years,  250 uploads, Legendary Invites forum",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "Canal Street",
+      "days": 365,
+      "reqs": "1 year",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "Cathode-Ray.Tube",
+      "days": 0,
+      "reqs": "Ratio\u003e=1.0",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "Dolphin Is Coming",
+      "days": 0,
+      "reqs": "10 music torrents or 15 other torrents",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "FunFile",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "HDBits",
+      "days": 730,
+      "reqs": "Master Gamer, 2 years, 250 seeded uploads, seedsize \u003e 2TB AND avg. seedtime \u003e 2 months OR avg. seedtime \u003e 5 months, Legendary Invites forum",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "Last Digital Underground",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "LzTr",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "MoreThanTV",
+      "days": 180,
+      "reqs": "Elite Gamer, 6 months, ratio\u003e=1.5",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "MyAnonamouse",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "Nebulance",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "OldToonsWorld",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "OpenCD",
+      "days": 180,
+      "reqs": "Elite Gamer, 6 months",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "Orpheus",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "PassThePopcorn",
+      "days": 730,
+      "reqs": "Master Gamer, 2 years, 250 uploads, Legendary Invites forum",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "PixelCove",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "PixelHD",
+      "days": 180,
+      "reqs": "3x 6 months old profile links (including GGn)",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "ReelFliX",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "RocketHD",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "Unwalled",
+      "days": 0,
+      "reqs": "Elite Gamer, 5 video game uploads",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "Upload.cx",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "YuScene",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "GazelleGames",
+      "to": "seedpool",
+      "days": 0,
+      "reqs": "1TiB seedsize",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "1PTBA",
+      "days": 0,
+      "reqs": "PU+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "52PT",
+      "days": 0,
+      "reqs": "PU+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "AgsvPT",
+      "days": 0,
+      "reqs": "PU+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "BTSchool",
+      "days": 0,
+      "reqs": "PU+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "BYRBT",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "Bit-HDTV",
+      "days": 0,
+      "reqs": "Elite+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "CSpt",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "DiscFan",
+      "days": 0,
+      "reqs": "User+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "Dolphin Is Coming",
+      "days": 365,
+      "reqs": "1 year, 5 moderation-checked uploads",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "DragonHD",
+      "days": 0,
+      "reqs": "PU+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "HD Dolby",
+      "days": 0,
+      "reqs": "PU+",
+      "active": false,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "HDCity",
+      "days": 0,
+      "reqs": "User+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "HDFans",
+      "days": 0,
+      "reqs": "PU+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "HDKylin",
+      "days": 0,
+      "reqs": "PU+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "HDSky",
+      "days": 84,
+      "reqs": "Elite+, 12 weeks, ratio\u003e=1.2, seeding 20 torrents, 50 completed downloads, 1TB download",
+      "active": false,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "HDU",
+      "days": 0,
+      "reqs": "PU+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "HDtime",
+      "days": 0,
+      "reqs": "PU+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "HITPT",
+      "days": 0,
+      "reqs": "PU+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "HUDBT",
+      "days": 0,
+      "reqs": "PU+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "HaiDan",
+      "days": 0,
+      "reqs": "PU+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "JoyHD",
+      "days": 0,
+      "reqs": "PU+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "M-Team",
+      "days": 60,
+      "reqs": "Elite+, 2 months",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "MONIKADESIGN",
+      "days": 28,
+      "reqs": "PU+, 4 weeks, 3 moderation-checked Japanese/anime uploads, 300GB seedsize of Japanese/anime films (Screenshot proof of torrent client required)",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "NicePT",
+      "days": 0,
+      "reqs": "10TB upload on pt助手, ratio\u003e5",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "NovaHD",
+      "days": 0,
+      "reqs": "No requirements",
+      "active": true,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "OurBits",
+      "days": 70,
+      "reqs": "PU+, 10 weeks, 10 uploads, ratio\u003e1, 50 completed downloads, 500GB download",
+      "active": false,
+      "updated": "Dec 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "PTHome",
+      "days": 0,
+      "reqs": "Elite+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "PTerClub",
+      "days": 180,
+      "reqs": "Elite+, 6 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "Piggo",
+      "days": 0,
+      "reqs": "PU+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "PuTao",
+      "days": 180,
+      "reqs": "1 year, Elite or 6 months, TM+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "ReelFliX",
+      "days": 0,
+      "reqs": "PU+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "SoulVoice",
+      "days": 0,
+      "reqs": "PU+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "TopTBDev",
+      "days": 0,
+      "reqs": "4 profile links",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "U2.dmhy",
+      "days": 84,
+      "reqs": "PU+, 12 weeks, one of 2 options: A) Five 1-month-old uploads that are ACG, moderation-checked, and alive B) Photos of your physical ACG collection",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "Vicomo",
+      "days": 0,
+      "reqs": "PU+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "Wintersakura",
+      "days": 0,
+      "reqs": "PU+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "Great Poster Wall",
+      "to": "ZmPT",
+      "days": 0,
+      "reqs": "PU+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "HD-Space",
+      "to": "YuScene",
+      "days": 30,
+      "reqs": "HD Spacer, 1 month",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "HD-Torrents",
+      "to": "DigitalCore.Club",
+      "days": 0,
+      "reqs": "Profile will be reviewed",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "HD-Torrents",
+      "to": "Racing4Everyone",
+      "days": 180,
+      "reqs": "HD Daemon, 6 months, proof of a motorsport torrent seeded to ratio of 1",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "HDBits",
+      "to": "Aither",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "HDBits",
+      "to": "AnimeBytes",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "HDBits",
+      "to": "Anthelion",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "HDBits",
+      "to": "AsianCinema",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "HDBits",
+      "to": "BeyondHD",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "HDBits",
+      "to": "Blutopia",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "HDBits",
+      "to": "D3Si",
+      "days": 0,
+      "reqs": "1080p, 1.5 TiB download",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "HDBits",
+      "to": "F1Carreras",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Sep 2025"
+    },
+    {
+      "from": "HDBits",
+      "to": "GazelleGames",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "HDBits",
+      "to": "HD-Forever",
+      "days": 0,
+      "reqs": "1080p",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "HDBits",
+      "to": "HD-Only",
+      "days": 0,
+      "reqs": "1080p",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "HDBits",
+      "to": "HDPlus",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "HDBits",
+      "to": "Immortal-s",
+      "days": 365,
+      "reqs": "3x 1 year old additional profile links",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "HDBits",
+      "to": "MyAnonamouse",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "HDBits",
+      "to": "Nzbplanet",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "HDBits",
+      "to": "OpenCD",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "HDBits",
+      "to": "Orpheus",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "HDBits",
+      "to": "OurBits",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": false,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "HDBits",
+      "to": "PassThePopcorn",
+      "days": 730,
+      "reqs": "1080p, 2 years",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "HDBits",
+      "to": "PixelHD",
+      "days": 180,
+      "reqs": "3x 6 months old profile links (including HDBits)",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "HDBits",
+      "to": "TeamHD",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "HDBits",
+      "to": "TheGeeks",
+      "days": 0,
+      "reqs": "2-3x full tracker profile screenshots (including HDB)",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "HDBits",
+      "to": "ToTheGlory",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "HomieHelpDesk",
+      "to": "DarkPeers",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "HomieHelpDesk",
+      "to": "DigitalCore.Club",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "HomieHelpDesk",
+      "to": "Luminarr",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "HomieHelpDesk",
+      "to": "RocketHD",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "HomieHelpDesk",
+      "to": "YuScene",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "HomieHelpDesk",
+      "to": "seedpool",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "JPopsuki",
+      "to": "U2.dmhy",
+      "days": 90,
+      "reqs": "2 unlimited invite posts, one suspended, another active (requiring 3 months, ACG collection proofs)",
+      "active": true,
+      "updated": "Mar 2023"
+    },
+    {
+      "from": "KaraGarga",
+      "to": "AsianCinema",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "KaraGarga",
+      "to": "Concertos",
+      "days": 0,
+      "reqs": "PU, 5 uploads",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "KaraGarga",
+      "to": "GazelleGames",
+      "days": 90,
+      "reqs": "PU, 3 months",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "KaraGarga",
+      "to": "Immortal-s",
+      "days": 365,
+      "reqs": "3x 1 year additional profile links",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "KaraGarga",
+      "to": "PassThePopcorn",
+      "days": 730,
+      "reqs": "2 years with either 250 movie uploads or 30 completed subtitle pots",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "KaraGarga",
+      "to": "Unwalled",
+      "days": 90,
+      "reqs": "PU, 3 months, 5 uploads",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "LST",
+      "to": "Aither",
+      "days": 360,
+      "reqs": "Leviathan or Ship, 12 months",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "LST",
+      "to": "DarkPeers",
+      "days": 0,
+      "reqs": "Whale or Sailboat",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "LST",
+      "to": "DigitalCore.Club",
+      "days": 0,
+      "reqs": "Whale or Sailbot",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "LST",
+      "to": "ExtremeBits",
+      "days": 365,
+      "reqs": "Whale, 1 year",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "LST",
+      "to": "Luminarr",
+      "days": 0,
+      "reqs": "Whale or Sailbot",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "LST",
+      "to": "ReelFliX",
+      "days": 0,
+      "reqs": "Whale or Sailboat",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "LST",
+      "to": "RetroFlix",
+      "days": 0,
+      "reqs": "Whale or Sailboat",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "LST",
+      "to": "Upload.cx",
+      "days": 0,
+      "reqs": "Whale or Sailboat",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "LST",
+      "to": "seedpool",
+      "days": 0,
+      "reqs": "Whale or Sailboat",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "Last Digital Underground",
+      "to": "BitPorn",
+      "days": 180,
+      "reqs": "6 months, 8TB \"upload volume\", \"No warnings ever\", 2x additional tracker profile screenshots (Not IPT, TL, FL, TD or \"low quality\")",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "Last Digital Underground",
+      "to": "Fappaizuri",
+      "days": 0,
+      "reqs": "10TB \"upload size\", \"Screenshot of personal data\"",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "Last Digital Underground",
+      "to": "HDCity",
+      "days": 0,
+      "reqs": "10TB \"upload size\", \"Screenshots of your stats from well-known trackers\"",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "Last Digital Underground",
+      "to": "Kufirc",
+      "days": 180,
+      "reqs": "6 months, 8TB \"upload volume\", \"No warnings ever\", 2x additional tracker profile screenshots (Not IPT, TL, FL, TD or \"low quality\")",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "Libble",
+      "to": "Luminarr",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Luminarr",
+      "to": "BrokenStones",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "Luminarr",
+      "to": "DarkPeers",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "Luminarr",
+      "to": "HomieHelpDesk",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "Luminarr",
+      "to": "RetroFlix",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "Luminarr",
+      "to": "Upload.cx",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "Luminarr",
+      "to": "YuScene",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "Luminarr",
+      "to": "seedpool",
+      "days": 0,
+      "reqs": "1TiB seedsize",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "M-Team",
+      "to": "Dajiao PT",
+      "days": 0,
+      "reqs": "Elite+ or VIP",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "M-Team",
+      "to": "DiscFan",
+      "days": 200,
+      "reqs": "Elite+, 200 days",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "M-Team",
+      "to": "DragonHD",
+      "days": 0,
+      "reqs": "2TB upload, ratio\u003e1",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "M-Team",
+      "to": "Great Poster Wall",
+      "days": 84,
+      "reqs": "Crazy User+, 12 weeks, 1 movie upload, 500GB upload",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "M-Team",
+      "to": "JoyHD",
+      "days": 0,
+      "reqs": "1TB upload, ratio\u003e1",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "M-Team",
+      "to": "OshenPT",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "M-Team",
+      "to": "TeamHD",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "MoreThanTV",
+      "to": "Aither",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MoreThanTV",
+      "to": "BeyondHD",
+      "days": 540,
+      "reqs": "Gaffer+, 18 months",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MoreThanTV",
+      "to": "CapybaraBR",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MoreThanTV",
+      "to": "Cathode-Ray.Tube",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MoreThanTV",
+      "to": "FunFile",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MoreThanTV",
+      "to": "Immortal-s",
+      "days": 365,
+      "reqs": "3 additional 1 year old proofs",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MoreThanTV",
+      "to": "LST",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MoreThanTV",
+      "to": "OldToonsWorld",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MoreThanTV",
+      "to": "Orpheus",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MoreThanTV",
+      "to": "PassThePopcorn",
+      "days": 730,
+      "reqs": "Engineer+, 2 years",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MoreThanTV",
+      "to": "PixelCove",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": false,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MoreThanTV",
+      "to": "Portugas",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MoreThanTV",
+      "to": "Upload.cx",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "ABTorrents",
+      "days": 0,
+      "reqs": "Some profile links/ratio proofs",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "Aura4K",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "BakaBT",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "Bit-HDTV",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "Blutopia",
+      "days": 180,
+      "reqs": "9 months or 6 months and 10+ uploads",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "BrokenStones",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "Canal Street",
+      "days": 365,
+      "reqs": "1 year",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "CapybaraBR",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "DarkPeers",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "DigitalCore.Club",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "Immortal-s",
+      "days": 365,
+      "reqs": "3x 1 year old additional profile links and screenshots + profile links to any other BT forum you are a member of",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "LST",
+      "days": 270,
+      "reqs": "9 months, No warning PU",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "Luminarr",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "Milkie",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "OldToonsWorld",
+      "days": 180,
+      "reqs": "500GB download on MAM or 6 month account age, 1 TB Upload, and 500 GB Download on another approved tracker",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "Phoenix Project",
+      "days": 365,
+      "reqs": "1 year",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "PixelCove",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "PixelHD",
+      "days": 180,
+      "reqs": "3x 6 months old profile links (including MAM)",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "ReelFliX",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "RetroFlix",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "RocketHD",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "Secret Cinema",
+      "days": 360,
+      "reqs": "VIP+, 1 TB Upload, 12 months",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "ShareIsland",
+      "days": 270,
+      "reqs": "9 months or 10+ uploads",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "Shazbat",
+      "days": 0,
+      "reqs": "VIP+",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "TheEmpire",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "TheGeeks",
+      "days": 0,
+      "reqs": "2-3x profile links and screenshots (including MAM)",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "Unwalled",
+      "days": 0,
+      "reqs": "25 seeded uploads",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "XSpeeds",
+      "days": 0,
+      "reqs": "VIP+",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "YuScene",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "MyAnonamouse",
+      "to": "seedpool",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "Nebulance",
+      "to": "Aither",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "Nebulance",
+      "to": "Anthelion",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "Nebulance",
+      "to": "BakaBT",
+      "days": 90,
+      "reqs": "Ensign, 3 months",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "Nebulance",
+      "to": "Cathode-Ray.Tube",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "Nebulance",
+      "to": "Great Poster Wall",
+      "days": 0,
+      "reqs": "Flattop",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "Nebulance",
+      "to": "Luminarr",
+      "days": 90,
+      "reqs": "3 months",
+      "active": false,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "Nebulance",
+      "to": "Orpheus",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "Nebulance",
+      "to": "PrivateHD",
+      "days": 0,
+      "reqs": "Raptor, No HNRs",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "Nebulance",
+      "to": "ReelFliX",
+      "days": 0,
+      "reqs": "Ensign",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "Nebulance",
+      "to": "RetroFlix",
+      "days": 0,
+      "reqs": "Ensign",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "Nebulance",
+      "to": "seedpool",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jun 2026"
+    },
+    {
+      "from": "OnlyEncodes+",
+      "to": "CapybaraBR",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "OnlyEncodes+",
+      "to": "LST",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "OnlyEncodes+",
+      "to": "ReelFliX",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "OnlyEncodes+",
+      "to": "YuScene",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Orpheus",
+      "to": "Aither",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Orpheus",
+      "to": "Anthelion",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Orpheus",
+      "to": "BeyondHD",
+      "days": 547,
+      "reqs": "TM+, 1.5 years",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Orpheus",
+      "to": "Cathode-Ray.Tube",
+      "days": 0,
+      "reqs": "ratio \u003e 1.0",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Orpheus",
+      "to": "Concertos",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Orpheus",
+      "to": "Empornium",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Orpheus",
+      "to": "ExtremeBits",
+      "days": 365,
+      "reqs": "1 year",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Orpheus",
+      "to": "GazelleGames",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Orpheus",
+      "to": "HDBits",
+      "days": 730,
+      "reqs": "TM+, 2 years, \u003e=50% of uploads are music and fulfill at least 2 of the 4 following requirements: 1. Be seeding 500 GiB of MUSIC (neutral leech is excluded). 2. Be seeding 100% of your snatches. 3. Have 500 perfect FLACs. 4. Three years.",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Orpheus",
+      "to": "Luminarr",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Orpheus",
+      "to": "LzTr",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Orpheus",
+      "to": "MoreThanTV",
+      "days": 180,
+      "reqs": "6 months (26 weeks), ratio \u003e= 1.5",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Orpheus",
+      "to": "Nebulance",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Orpheus",
+      "to": "OldToonsWorld",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Orpheus",
+      "to": "OpenCD",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Orpheus",
+      "to": "PassThePopcorn",
+      "days": 730,
+      "reqs": "TM+, 2 years",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Orpheus",
+      "to": "Phoenix Project",
+      "days": 365,
+      "reqs": "1 year, ratio\u003e=1.1",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Orpheus",
+      "to": "ReelFliX",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Orpheus",
+      "to": "RetroFlix",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Orpheus",
+      "to": "Unwalled",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Orpheus",
+      "to": "seedpool",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "Aither",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "AlphaRatio",
+      "days": 90,
+      "reqs": "3 months, ratio\u003e1.0",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "AnimeBytes",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "Anthelion",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "BakaBT",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "BeyondHD",
+      "days": 180,
+      "reqs": "Elite + 6 months",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "Bit-HDTV",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "BroadcasTheNet",
+      "days": 365,
+      "reqs": "TM, 1 year",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "Canal Street",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "Concertos",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "Cryptichaven Comedy Club",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "D3Si",
+      "days": 540,
+      "reqs": "18 months, 100 uploads, 1.5TiB uploaded",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "Dolphin Is Coming",
+      "days": 0,
+      "reqs": "5 uploads",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "Empornium",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "F1Carreras",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Sep 2025"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "FunFile",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "GazelleGames",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "Great Poster Wall",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "HD-Forever",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "HD-Only",
+      "days": 365,
+      "reqs": "1 year",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "HDBits",
+      "days": 365,
+      "reqs": "TM, 1 year",
+      "active": true,
+      "updated": "May 2025"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "Immortal-s",
+      "days": 365,
+      "reqs": "3x 1 year old additional profile links",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "LzTr",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "MyAnonamouse",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "Nebulance",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "Orpheus",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "PixelCove",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "SceneHD",
+      "days": 365,
+      "reqs": "1 year",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "Secret Cinema",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "TLFBits",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "TheEmpire",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PassThePopcorn",
+      "to": "TheGeeks",
+      "days": 0,
+      "reqs": "2-3x full tracker profile screenshots (including PTP)",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "PrivateHD",
+      "to": "AnimeZ",
+      "days": 120,
+      "reqs": "10k bp, Member Rank, 4 months, seeding 5 torrents, ratio\u003e2.0, 300 GB",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "PrivateHD",
+      "to": "AvistaZ",
+      "days": 120,
+      "reqs": "10k bp, Member Rank, 4 months, seeding 5 torrents, ratio\u003e2.0, 300 GB",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "PrivateHD",
+      "to": "CinemaZ",
+      "days": 120,
+      "reqs": "10k bp, Member Rank, 4 months, seeding 5 torrents, ratio\u003e2.0, 300 GB",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "PrivateHD",
+      "to": "ExoticaZ",
+      "days": 120,
+      "reqs": "10k bp, Member Rank, 4 months, seeding 5 torrents, ratio\u003e2.0, 300 GB",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "Racing4Everyone",
+      "to": "F1Carreras",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "Racing4Everyone",
+      "to": "Unwalled",
+      "days": 0,
+      "reqs": "5tb+ upload",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "Aither",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "AlphaRatio",
+      "days": 180,
+      "reqs": "ratio\u003e1.0, 6 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "AnimeBytes",
+      "days": 180,
+      "reqs": "12 months or Elite+, 6 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "Anthelion",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "Aura4K",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "BakaBT",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "BeyondHD",
+      "days": 540,
+      "reqs": "TM+, 18 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "BroadcasTheNet",
+      "days": 365,
+      "reqs": "TM+, 1 year",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "Concertos",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "Cryptichaven Comedy Club",
+      "days": 0,
+      "reqs": "Additional profile links (one or two other reputable trackers)",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "D3Si",
+      "days": 360,
+      "reqs": "Elite+, 12 months, ratio \u003e 1.5, 100 untrumpable perfect physical media torrents",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "DigitalCore.Club",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "Dolphin Is Coming",
+      "days": 365,
+      "reqs": "1 year, 10 music torrents",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "Empornium",
+      "days": 180,
+      "reqs": "Elite+, 6 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "ExtremeBits",
+      "days": 365,
+      "reqs": "1 year",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "F1Carreras",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "GazelleGames",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "Great Poster Wall",
+      "days": 28,
+      "reqs": "4 weeks",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "HDBits",
+      "days": 730,
+      "reqs": "TM, 2 years, \u003e=50% of uploads are music. Additionally, fulfill 2 of the following 4 criteria: 1) Be seeding 500GiB of MUSIC (neutral leech is excluded), 2) Be seeding 100% of your snatches, 3) Have 500 perfect FLACs, 4) 3 years",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "Immortal-s",
+      "days": 365,
+      "reqs": "3x 1 year old additional profile links",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "LearnBits",
+      "days": 0,
+      "reqs": "1 additional profile link or ratio proof",
+      "active": false,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "Luminarr",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "LzTr",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "Materialize",
+      "days": 365,
+      "reqs": "Elite+, 1 year, 10 perfect flacs",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "MoreThanTV",
+      "days": 180,
+      "reqs": "6 months, ratio \u003e 1.0",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "MyAnonamouse",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "Nebulance",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "OldToonsWorld",
+      "days": 90,
+      "reqs": "3 months, 90%+ seeding percentage OR 100GB seedsize",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "Orpheus",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "PassThePopcorn",
+      "days": 730,
+      "reqs": "TM, 2 years, \u003e=50% of uploads are music",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "Phoenix Project",
+      "days": 365,
+      "reqs": "1 year,  ratio\u003e=1.1",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "PixelCove",
+      "days": 56,
+      "reqs": "8 weeks",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "PixelHD",
+      "days": 180,
+      "reqs": "Elite or high-level PU, 3x 6 months old profile links (including RED)",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "ReelFliX",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "RocketHD",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "SceneHD",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "Secret Cinema",
+      "days": 180,
+      "reqs": "6 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "TLFBits",
+      "days": 90,
+      "reqs": "3 months (13 weeks)",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "TheGeeks",
+      "days": 180,
+      "reqs": "2-3 full tracker profile screenshots (including RED) that meet the following criteria: 180 days, 60GB real upload, real ratio\u003e=1.05",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "Unwalled",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "Upload.cx",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "Redacted",
+      "to": "seedpool",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "ReelFliX",
+      "to": "BitPorn",
+      "days": 180,
+      "reqs": "Elite+, 6 months, 8TB \"upload volume\", \"No warnings ever\", 2x additional tracker profile screenshots (Not FL, IPT, TD, TL or \"low quality\")",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "ReelFliX",
+      "to": "Fappaizuri",
+      "days": 0,
+      "reqs": "Elite+, 10TB \"upload size\"",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "ReelFliX",
+      "to": "HDCity",
+      "days": 0,
+      "reqs": "Elite+, 10TB \"upload size\", (optional) additional tracker profile screenshots",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "ReelFliX",
+      "to": "LST",
+      "days": 90,
+      "reqs": "Elite+, 3 months",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "ReelFliX",
+      "to": "Last Digital Underground",
+      "days": 0,
+      "reqs": "Elite+",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "ReelFliX",
+      "to": "Luminarr",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "ReelFliX",
+      "to": "OldToonsWorld",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "ReelFliX",
+      "to": "YuScene",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "ReelFliX",
+      "to": "seedpool",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Aug 2025"
+    },
+    {
+      "from": "RetroFlix",
+      "to": "DarkPeers",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "RetroFlix",
+      "to": "DigitalCore.Club",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "RetroFlix",
+      "to": "Great Poster Wall",
+      "days": 0,
+      "reqs": "upload 10 non music torrents or 5+ album torrents",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "RetroFlix",
+      "to": "LST",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "RetroFlix",
+      "to": "SpeedApp",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "RetroFlix",
+      "to": "seedpool",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "RocketHD",
+      "to": "AnimeWorld",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "RocketHD",
+      "to": "HomieHelpDesk",
+      "days": 120,
+      "reqs": "4 months, 5TB upload, 2 additional proofs",
+      "active": true,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "RuTracker",
+      "to": "TeamHD",
+      "days": 365,
+      "reqs": "1 year, 20TB upload in public tracker or 2TB upload in private tracker",
+      "active": true,
+      "updated": "Jun 2025"
+    },
+    {
+      "from": "SAMARITANO",
+      "to": "CapybaraBR",
+      "days": 0,
+      "reqs": "Profile link and screenshots",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "SpeedApp",
+      "to": "RetroFlix",
+      "days": 0,
+      "reqs": "Login with SpeedApp account",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "TV-Vault",
+      "to": "AlphaRatio",
+      "days": 90,
+      "reqs": "3 months, ratio\u003e1",
+      "active": true,
+      "updated": "Apr 2025"
+    },
+    {
+      "from": "TV-Vault",
+      "to": "BeyondHD",
+      "days": 0,
+      "reqs": "Superfan+",
+      "active": false,
+      "updated": "Apr 2025"
+    },
+    {
+      "from": "TV-Vault",
+      "to": "Blutopia",
+      "days": 0,
+      "reqs": "Elite+",
+      "active": true,
+      "updated": "Oct 2025"
+    },
+    {
+      "from": "TV-Vault",
+      "to": "Cinemageddon",
+      "days": 0,
+      "reqs": "Unstated",
+      "active": true,
+      "updated": "Apr 2025"
+    },
+    {
+      "from": "TV-Vault",
+      "to": "Great Poster Wall",
+      "days": 0,
+      "reqs": "PU+, 10 torrents",
+      "active": true,
+      "updated": "Apr 2025"
+    },
+    {
+      "from": "TV-Vault",
+      "to": "MoreThanTV",
+      "days": 180,
+      "reqs": "6 months, Elite+, ratio\u003e1.5",
+      "active": false,
+      "updated": "Apr 2025"
+    },
+    {
+      "from": "TV-Vault",
+      "to": "OldToonsWorld",
+      "days": 90,
+      "reqs": "3 months",
+      "active": true,
+      "updated": "Apr 2025"
+    },
+    {
+      "from": "TV-Vault",
+      "to": "Orpheus",
+      "days": 0,
+      "reqs": "Elite+",
+      "active": false,
+      "updated": "Apr 2025"
+    },
+    {
+      "from": "TV-Vault",
+      "to": "ReelFliX",
+      "days": 0,
+      "reqs": "Elite+",
+      "active": true,
+      "updated": "Apr 2025"
+    },
+    {
+      "from": "TV-Vault",
+      "to": "Unwalled",
+      "days": 0,
+      "reqs": "Elite+",
+      "active": true,
+      "updated": "Apr 2025"
+    },
+    {
+      "from": "TeamHD",
+      "to": "BroadCity",
+      "days": 0,
+      "reqs": "Site is dead",
+      "active": false,
+      "updated": "Jun 2025"
+    },
+    {
+      "from": "TeamHD",
+      "to": "Cinemageddon",
+      "days": 0,
+      "reqs": "Abandoned",
+      "active": false,
+      "updated": "Jun 2025"
+    },
+    {
+      "from": "TeamHD",
+      "to": "HD Dolby",
+      "days": 0,
+      "reqs": "1080i+",
+      "active": false,
+      "updated": "Jun 2025"
+    },
+    {
+      "from": "TeamHD",
+      "to": "HD-Space",
+      "days": 0,
+      "reqs": "1080i+",
+      "active": false,
+      "updated": "Jun 2025"
+    },
+    {
+      "from": "TeamHD",
+      "to": "HDCity",
+      "days": 0,
+      "reqs": "1080i+",
+      "active": false,
+      "updated": "Jun 2025"
+    },
+    {
+      "from": "TeamHD",
+      "to": "HDFans",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": false,
+      "updated": "Jun 2025"
+    },
+    {
+      "from": "TeamHD",
+      "to": "Hares",
+      "days": 0,
+      "reqs": "Site is dead",
+      "active": false,
+      "updated": "Jun 2025"
+    },
+    {
+      "from": "TeamHD",
+      "to": "Immortal-s",
+      "days": 360,
+      "reqs": "3 profile links, 12 months",
+      "active": false,
+      "updated": "Jun 2025"
+    },
+    {
+      "from": "TeamHD",
+      "to": "LemonHD",
+      "days": 90,
+      "reqs": "1080i+, 3 months",
+      "active": false,
+      "updated": "Jun 2025"
+    },
+    {
+      "from": "TeamHD",
+      "to": "PTHome",
+      "days": 90,
+      "reqs": "1080i+, 3 months",
+      "active": false,
+      "updated": "Jun 2025"
+    },
+    {
+      "from": "TeamHD",
+      "to": "PTMSG",
+      "days": 90,
+      "reqs": "1080i+, 3 months",
+      "active": false,
+      "updated": "Jun 2025"
+    },
+    {
+      "from": "TeamHD",
+      "to": "SpeedApp",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": false,
+      "updated": "Jun 2025"
+    },
+    {
+      "from": "TeamHD",
+      "to": "TLFBits",
+      "days": 90,
+      "reqs": "1080i+, 3 months",
+      "active": false,
+      "updated": "Jun 2025"
+    },
+    {
+      "from": "TeamHD",
+      "to": "YuScene",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": false,
+      "updated": "Jun 2025"
+    },
+    {
+      "from": "TheGeeks",
+      "to": "Immortal-s",
+      "days": 365,
+      "reqs": "3x 1 year old additional profile links",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "TheGeeks",
+      "to": "TheEmpire",
+      "days": 0,
+      "reqs": "No requirements",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "TheGeeks",
+      "to": "ThePlace",
+      "days": 0,
+      "reqs": "PU",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "TheGeeks",
+      "to": "TheVault",
+      "days": 90,
+      "reqs": "30 valuable forum posts or active IRC user, 3 months",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "TheGeeks",
+      "to": "Unwalled",
+      "days": 0,
+      "reqs": "PU, 5 uploads",
+      "active": true,
+      "updated": "Nov 2024"
+    },
+    {
+      "from": "ToTheGlory",
+      "to": "Audiences",
+      "days": 0,
+      "reqs": "PetaByte, 2TB Audiences official torrents",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "ToTheGlory",
+      "to": "TLFBits",
+      "days": 0,
+      "reqs": "No requirement",
+      "active": true,
+      "updated": "Jan 2026"
+    },
+    {
+      "from": "U2.dmhy",
+      "to": "Audiences",
+      "days": 0,
+      "reqs": "Insane User+, 1TB seeding, ACG prove",
+      "active": false,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "U2.dmhy",
+      "to": "Great Poster Wall",
+      "days": 0,
+      "reqs": "Crazy User+, 1 upload",
+      "active": false,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "U2.dmhy",
+      "to": "KamePT",
+      "days": 0,
+      "reqs": "Elite User+",
+      "active": false,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "U2.dmhy",
+      "to": "PTerClub",
+      "days": 180,
+      "reqs": "Crazy User+, 6 months",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "U2.dmhy",
+      "to": "Piggo",
+      "days": 0,
+      "reqs": "Insane User+",
+      "active": false,
+      "updated": "Nov 2025"
+    },
+    {
+      "from": "Upload.cx",
+      "to": "DigitalCore.Club",
+      "days": 0,
+      "reqs": "PU+",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "Upload.cx",
+      "to": "LST",
+      "days": 90,
+      "reqs": "PU+, 3 months",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "Upload.cx",
+      "to": "Luminarr",
+      "days": 90,
+      "reqs": "PU+, 3 months",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "Upload.cx",
+      "to": "ReelFliX",
+      "days": 0,
+      "reqs": "PU+",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "Upload.cx",
+      "to": "YuScene",
+      "days": 0,
+      "reqs": "PU+",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "Upload.cx",
+      "to": "seedpool",
+      "days": 0,
+      "reqs": "PU+, 1TiB seedsize",
+      "active": true,
+      "updated": "Apr 2026"
+    },
+    {
+      "from": "YuScene",
+      "to": "Aura4K",
+      "days": 0,
+      "reqs": "No requirements",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "YuScene",
+      "to": "CapybaraBR",
+      "days": 0,
+      "reqs": "No requirements",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "YuScene",
+      "to": "DarkPeers",
+      "days": 0,
+      "reqs": "No requirements",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "YuScene",
+      "to": "DigitalCore.Club",
+      "days": 0,
+      "reqs": "No requirements",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "YuScene",
+      "to": "Luminarr",
+      "days": 90,
+      "reqs": "3 months account age",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "YuScene",
+      "to": "Upload.cx",
+      "days": 0,
+      "reqs": "No requirements",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "YuScene",
+      "to": "seedpool",
+      "days": 0,
+      "reqs": "1 TiB seeding size",
+      "active": true,
+      "updated": "Mar 2026"
+    },
+    {
+      "from": "seedpool",
+      "to": "Aura4K",
+      "days": 0,
+      "reqs": "SuperPool",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "seedpool",
+      "to": "BitPorn",
+      "days": 0,
+      "reqs": "SuperPool, 5 TiB upload",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "seedpool",
+      "to": "BrokenStones",
+      "days": 0,
+      "reqs": "SuperPool",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "seedpool",
+      "to": "CapybaraBR",
+      "days": 0,
+      "reqs": "SuperPool",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "seedpool",
+      "to": "DarkPeers",
+      "days": 0,
+      "reqs": "SuperPool",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "seedpool",
+      "to": "DigitalCore.Club",
+      "days": 0,
+      "reqs": "SuperPool",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "seedpool",
+      "to": "HDCity",
+      "days": 0,
+      "reqs": "SuperPool, 5 TB upload, more proofs",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "seedpool",
+      "to": "HomieHelpDesk",
+      "days": 0,
+      "reqs": "SuperPool, 3 TB upload, 2 more proofs",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "seedpool",
+      "to": "LST",
+      "days": 0,
+      "reqs": "SuperPool",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "seedpool",
+      "to": "Luminarr",
+      "days": 0,
+      "reqs": "SuperPool",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "seedpool",
+      "to": "ReelFliX",
+      "days": 0,
+      "reqs": "SuperPool",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "seedpool",
+      "to": "RetroFlix",
+      "days": 0,
+      "reqs": "SuperPool",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "seedpool",
+      "to": "RocketHD",
+      "days": 0,
+      "reqs": "SuperPool",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "seedpool",
+      "to": "Upload.cx",
+      "days": 0,
+      "reqs": "SuperPool",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "seedpool",
+      "to": "White Rabbit Network",
+      "days": 0,
+      "reqs": "SuperPool",
+      "active": true,
+      "updated": "Feb 2026"
+    },
+    {
+      "from": "seedpool",
+      "to": "YuScene",
+      "days": 0,
+      "reqs": "SuperPool",
+      "active": true,
+      "updated": "Feb 2026"
+    }
+  ],
+  "unlocks": {
+    "Aither": {
+      "days": 240,
+      "text": "Prometheus: 8 months, 10TiB upload or 10TiB seedsize, 5 uploads, ratio\u003e=1.0, avg seedtime\u003e=1 month 2 weeks 1 day; Titan: 2 years, 100TiB upload or 65TiB seedsize, 20 uploads, ratio\u003e=2.0, avg seedtime\u003e=6 months"
+    },
+    "AlphaRatio": {
+      "days": 182,
+      "text": "Sphinx: 26 weeks, 3.2TB upload, 1.44m BP"
+    },
+    "AnimeBytes": {
+      "days": 14,
+      "text": "PU: 2 weeks, upload 25GB, 10 torrents, ratio\u003e=0.7"
+    },
+    "AnimeWorld": {
+      "days": 30,
+      "text": "PowerUser: 1 month, 1TB Upload, ratio\u003e=1.0"
+    },
+    "Anthelion": {
+      "days": 30,
+      "text": "PU: 5 uploads and/or 10 adoptions, 1TiB upload, ratio\u003e=1, 25k BP, 1 month"
+    },
+    "AsianCinema": {
+      "days": 30,
+      "text": "PU: 1 month, 1TB Upload"
+    },
+    "Aura4K": {
+      "days": 90,
+      "text": "Luminous: 20TB Upload, 3 month, ratio\u003e0.75"
+    },
+    "Bemaniso": {
+      "days": 14,
+      "text": "PU: 2 weeks, 25GB upload, ratio\u003e1.05"
+    },
+    "BeyondHD": {
+      "days": 180,
+      "text": "Pro: ratio 0.70, upload 1.25TB, average seedtime 1 month, total seedtime 4 years 11 months, completed seeds 60, special seedsize 500GB,6 months"
+    },
+    "Bibliotik": {
+      "days": 14,
+      "text": "PU: 2 weeks, ratio\u003e1.05, (10GB upload, 10 torrents) or (1GB upload, 100 torrents)"
+    },
+    "BitPorn": {
+      "days": 90,
+      "text": "PU: 3 months, ratio\u003e0.6, 100GB upload, average seedtime 1 day"
+    },
+    "Blutopia": {
+      "days": 30,
+      "text": "BluExtremist: 3 months, 20TiB upload, ratio\u003e=0.4, or BluSeeder+: 1 month, 5TiB seedsize, avg seedtime\u003e=1 month, ratio\u003e=0.4"
+    },
+    "BroadcasTheNet": {
+      "days": 28,
+      "text": "PU: 4 weeks, 250GB upload/download, 250 snatches (upload/download), 250,000 bonus points"
+    },
+    "CapybaraBR": {
+      "days": 30,
+      "text": "Arara: 1 month, 1 TiB upload, ratio\u003e=1.0"
+    },
+    "Cathode-Ray.Tube": {
+      "days": 112,
+      "text": "Analog Ace: 16 weeks, 5 TiB upload, 5 uploads, 20 forum posts, ratio 1.5"
+    },
+    "Cinemageddon": {
+      "days": 0,
+      "text": "Superfan: 200GB upload, 20GB download, ratio\u003e1.5"
+    },
+    "DarkPeers": {
+      "days": 120,
+      "text": "ExtremeUser: 4 months, 20TiB upload, ratio\u003e0.8, avg seedtime \u003e= 2 months, 15 torrents"
+    },
+    "Dolphin Is Coming": {
+      "days": 14,
+      "text": "PU: 2 weeks, 5 torrents, 25GB upload, ratio\u003e=1.05"
+    },
+    "Empornium": {
+      "days": 56,
+      "text": "Great Perv: 8 weeks, 100 GB upload, 5 torrents, ratio\u003e1.05 or Sextreme Perv: 13 weeks, 1 TB upload, 50 torrents, ratio\u003e1.05"
+    },
+    "GazelleGames": {
+      "days": 30,
+      "text": "Pro Gamer: 1200 points, 30 days; Legendary Gamer: 3000 points, 90 days"
+    },
+    "Great Poster Wall": {
+      "days": 14,
+      "text": "PU: 2 weeks, 200GB download, 1 upload, ratio\u003e=1.2"
+    },
+    "HD-Space": {
+      "days": 0,
+      "text": "HD Spacer: 100GB upload, ratio\u003e1.05"
+    },
+    "HD-Torrents": {
+      "days": 0,
+      "text": "HD Monster: 250GB upload, ratio\u003e2"
+    },
+    "HDBits": {
+      "days": 28,
+      "text": "1080i: 1 year, 2FA enabled for at least 1 month, last email/password change must have been more than a month ago; 1080i: 4 weeks, 30GB download, ratio\u003e0.95"
+    },
+    "HomieHelpDesk": {
+      "days": 180,
+      "text": "Specialist: 5TiB upload, 1 TiB seedsize, 6 months, ave seedtime \u003e= 3 weeks, ratio \u003e= 0.8, 1 torrent upload"
+    },
+    "JPopsuki": {
+      "days": 0,
+      "text": "No requirement"
+    },
+    "KaraGarga": {
+      "days": 0,
+      "text": "No requirement"
+    },
+    "LST": {
+      "days": 120,
+      "text": "Whale: 4 months, 25 TiB upload or 6 TiB seedsize, 10 uploads, ratio \u003e= 1.0, avg seedtime \u003e= 1 month; Sailboat: 6 months, 10 TiB seedsize, ratio \u003e= 1.0, avg seedtime \u003e= 2 months"
+    },
+    "Last Digital Underground": {
+      "days": 0,
+      "text": "Disciple: 4 TiB upload, ratio\u003e=1"
+    },
+    "Libble": {
+      "days": 28,
+      "text": "Bronze: 4 weeks, top 15%"
+    },
+    "Luminarr": {
+      "days": 90,
+      "text": "Archivist: 3 months, 10TiB upload, 10TiB seedsize, avg seedtime\u003e=2 month, ratio\u003e=1.0, or Elite: 3 months, 10TiB upload, 50 torrents, ratio\u003e=1.0"
+    },
+    "LzTr": {
+      "days": 14,
+      "text": "PU: 2 weeks, 5 torrents, 25GB upload, ratio\u003e1.05"
+    },
+    "M-Team": {
+      "days": 56,
+      "text": "Elite: 8 weeks, 400GB download, ratio\u003e3"
+    },
+    "Materialize": {
+      "days": 56,
+      "text": "Torrent Master: 8 weeks, 250GB upload, 100 torrents, ratio\u003e=0.8"
+    },
+    "MoreThanTV": {
+      "days": 56,
+      "text": "Camera operator (min requirement): 500GB upload, 8 weeks; Boom Operator: 12 weeks, 1000 GB upload, 10 checked uploads, 5 forum posts; Gaffer: 24 weeks, 2000 GB upload, 100 checked uploads, 10 forum posts; Engineer: 48 weeks, 3000 GB upload, 500 checked uploads, 25 forum posts"
+    },
+    "MyAnonamouse": {
+      "days": 180,
+      "text": "PU: 6 months, 1 TiB upload, ratio\u003e=2"
+    },
+    "Nebulance": {
+      "days": 28,
+      "text": "Ensign: 4 weeks, 100GB upload, 100 snatches, 100k BP"
+    },
+    "OnlyEncodes+": {
+      "days": 60,
+      "text": "Trailblazer: 2 months, 5 TB upload, seedsize 100 GB, ratio \u003e=0.4"
+    },
+    "Orpheus": {
+      "days": 28,
+      "text": "Elite: 4 weeks, 100GiB upload, 50 torrents, ratio\u003e1.05"
+    },
+    "PassThePopcorn": {
+      "days": 28,
+      "text": "PU: 4 weeks, 80GB upload, 1 torrent, ratio\u003e1.05"
+    },
+    "PixelCove": {
+      "days": 84,
+      "text": "PU: 12 weeks, 150GB upload, 1 torrent, ratio\u003e1.25, 50 forum posts"
+    },
+    "Redacted": {
+      "days": 14,
+      "text": "PU: 2 weeks, 5 torrents, 25GB upload, ratio\u003e0.65"
+    },
+    "ReelFliX": {
+      "days": 90,
+      "text": "Elite: 90 days, 2.5TiB upload, ratio\u003e=1.2, avg seedtime\u003e=30 days"
+    },
+    "RetroFlix": {
+      "days": 28,
+      "text": "Movie Lover: 4 weeks, 50GB download, ratio\u003e1.05"
+    },
+    "RocketHD": {
+      "days": 60,
+      "text": "Lunar Explorer: 2 months, 2TiB Upload, ratio\u003e=1.0, avg seedtime\u003e=1 month"
+    },
+    "Secret Cinema": {
+      "days": 60,
+      "text": "Cinematographer: 2 months, in the 50th overall percentile/95th seeding percentile"
+    },
+    "TV-Vault": {
+      "days": 182,
+      "text": "Elite: Registered for \u003e= 26 weeks, downloaded \u003e1B, uploaded \u003e= 100GB, uploaded \u003e= 20 torrents, ratio \u003e= 1.25"
+    },
+    "TeamHD": {
+      "days": 0,
+      "text": "No requirement"
+    },
+    "TheGeeks": {
+      "days": 0,
+      "text": "No requirement"
+    },
+    "TheLeachZone": {
+      "days": 0,
+      "text": "No requirement"
+    },
+    "ToTheGlory": {
+      "days": 56,
+      "text": "TeraByte: 8 weeks, 500GB download, ratio \u003e= 2.5"
+    },
+    "TorrentBD": {
+      "days": 180,
+      "text": "Elite: 6 months, 10TiB upload, 30 torrents, avg seed time \u003e= 10 days"
+    },
+    "U2.dmhy": {
+      "days": 56,
+      "text": "PU: 8 weeks, 50GB download, ratio \u003e= 1.05"
+    },
+    "Upload.cx": {
+      "days": 84,
+      "text": "PU: 12 weeks, 3TiB upload, ratio \u003e= 1"
+    },
+    "UpscaleVault": {
+      "days": 0,
+      "text": "No requirement"
+    },
+    "YuScene": {
+      "days": 30,
+      "text": "Seeder: 1 month, ratio \u003e=0.40, seedsize 4 TiB"
+    },
+    "seedpool": {
+      "days": 180,
+      "text": "SuperPool: 6 months, 1TiB seedsize, ratio\u003e=1"
+    }
+  }
+}

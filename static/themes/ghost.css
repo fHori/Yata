@@ -1,0 +1,53 @@
+/* Theme: Ghost */
+/* id: ghost */
+/* swatches: #0e0c14 #15121f #fec0ff #ff69b4 */
+[data-theme="ghost"] {
+  --bg:       #0e0c14;
+  --surface:  #15121f;
+  --surface2: #1d1929;
+  --surface3: #252033;
+  --border:  #2e2840;
+  --border2: #3d3558;
+  --accent:      #fec0ff;
+  --accent-h:    #eeaaee;
+  --green:  #c8b4ff;
+  --red:    #ff5585;
+  --amber:  #ff69b4;
+  --blue:   #a8b4f0;
+  --teal:   #b0c4d8;
+  --purple: #fec0ff;
+  --orange: #e8aac0;
+  --pink:   #ff69b4;
+  --text:  #ede4fc;
+  --text2: #9e90be;
+  --text3: #60547c;
+  --shadow: 0 4px 24px rgba(0,0,0,.6);
+  --topbar-bg:   rgba(14,12,20,.97);
+  --table-hover: rgba(254,192,255,.025);
+  /* near-black text on the lilac #fec0ff accent button */
+  --btn-primary-text: #0e0c14;
+  --toggle-thumb: #ede4fc;
+  --overlay-bg:    rgba(0,0,0,.72);
+  --overlay-bg-sm: rgba(0,0,0,.58);
+  --accent-glow:      rgba(254,192,255,.16);
+  --accent-bg-sm:     rgba(254,192,255,.08);
+  --accent-bg-md:     rgba(254,192,255,.12);
+  --accent-border-sm: rgba(254,192,255,.22);
+  --accent-border-md: rgba(254,192,255,.30);
+  --accent-border:    rgba(254,192,255,.30);
+  --error-bg:        rgba(255,85,133,.05);
+  --error-border:    rgba(255,85,133,.18);
+  --error-bg-md:     rgba(255,85,133,.10);
+  --error-bg-lg:     rgba(255,85,133,.14);
+  --error-border-md: rgba(255,85,133,.25);
+  --error-border-lg: rgba(255,85,133,.38);
+  --amber-bg:     rgba(212,168,204,.12);
+  --amber-border: rgba(212,168,204,.30);
+  --blue-bg:     rgba(168,180,240,.10);
+  --blue-border: rgba(168,180,240,.22);
+  --qui-dl-color:         var(--purple);
+  --qui-ul-color:         var(--green);
+  --qui-free-color:       var(--text3);
+  --qui-ratio-icon-color: var(--text3);
+  --qui-size-color:       var(--teal);
+}

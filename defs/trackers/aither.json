@@ -1,0 +1,560 @@
+{
+  "schema_version": 1,
+  "key": "aither",
+  "name": "Aither",
+  "abbr": "Ath",
+  "url": "https://aither.cc",
+  "type": "unit3d",
+  "last_updated": "2026-07-02",
+  "approved_by": {
+    "name": "",
+    "role": "",
+    "date": ""
+  },
+  "groups": [
+    {
+      "name": "Leech",
+      "style": {
+        "color": "#5E372F",
+        "icon": "fas fa-times"
+      },
+      "requirements": {},
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 0"
+        }
+      ]
+    },
+    {
+      "name": "Phobos",
+      "style": {
+        "color": "#b8c8ff",
+        "icon": "fas fa-user",
+        "sparkle": true
+      },
+      "requirements": {
+        "min_ratio": 0.4
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 4"
+        }
+      ]
+    },
+    {
+      "name": "Harmonia",
+      "style": {
+        "color": "#a5b8ff",
+        "icon": "fas fa-user-plus"
+      },
+      "requirements": {
+        "min_ratio": 0.6,
+        "min_age": "1M",
+        "any_of": [
+          {
+            "min_uploaded": "500 GiB"
+          },
+          {
+            "min_seed_size": "1 TiB"
+          }
+        ]
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 10"
+        }
+      ]
+    },
+    {
+      "name": "Zeus",
+      "style": {
+        "color": "#7f8eff",
+        "icon": "fas fa-user-tag"
+      },
+      "requirements": {
+        "min_ratio": 0.6,
+        "min_age": "3M",
+        "min_seedtime": "1W 3D",
+        "any_of": [
+          {
+            "min_uploaded": "2 TiB"
+          },
+          {
+            "min_seed_size": "2 TiB"
+          }
+        ]
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 25"
+        }
+      ]
+    },
+    {
+      "name": "Helios",
+      "style": {
+        "color": "#508bf2",
+        "icon": "fas fa-user-tie"
+      },
+      "requirements": {
+        "min_ratio": 0.8,
+        "min_age": "6M",
+        "min_seedtime": "2W 6D",
+        "min_uploads": 1,
+        "any_of": [
+          {
+            "min_uploaded": "5 TiB"
+          },
+          {
+            "min_seed_size": "5 TiB"
+          }
+        ]
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 50"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        }
+      ]
+    },
+    {
+      "name": "Prometheus",
+      "style": {
+        "color": "#6c7eff",
+        "icon": "fas fa-user-graduate"
+      },
+      "requirements": {
+        "min_ratio": 1.0,
+        "min_age": "8M",
+        "min_seedtime": "1M 2W 1D",
+        "min_uploads": 5,
+        "any_of": [
+          {
+            "min_uploaded": "10 TiB"
+          },
+          {
+            "min_seed_size": "10 TiB"
+          }
+        ]
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 50"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        }
+      ]
+    },
+    {
+      "name": "Oceanus",
+      "style": {
+        "color": "#596eff",
+        "icon": "fas fa-user-md",
+        "sparkle": true
+      },
+      "requirements": {
+        "min_ratio": 1.5,
+        "min_age": "1Y",
+        "min_seedtime": "2M",
+        "min_uploads": 10,
+        "any_of": [
+          {
+            "min_uploaded": "20 TiB"
+          },
+          {
+            "min_seed_size": "20 TiB"
+          }
+        ]
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 50"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        },
+        {
+          "icon": "fas fa-tasks",
+          "label": "Torrent moderation bypass"
+        }
+      ]
+    },
+    {
+      "name": "Gigantes",
+      "style": {
+        "color": "#466eff",
+        "icon": "fas fa-user-secret",
+        "sparkle": true
+      },
+      "requirements": {
+        "min_ratio": 1.5,
+        "min_age": "1Y 3M",
+        "min_seedtime": "3M",
+        "min_uploads": 15,
+        "any_of": [
+          {
+            "min_uploaded": "40 TiB"
+          },
+          {
+            "min_seed_size": "40 TiB"
+          }
+        ]
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 50"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-tasks",
+          "label": "Torrent moderation bypass"
+        }
+      ]
+    },
+    {
+      "name": "Titan",
+      "style": {
+        "color": "#214e96",
+        "icon": "fas fa-user-astronaut",
+        "sparkle": true
+      },
+      "requirements": {
+        "min_ratio": 2.0,
+        "min_age": "2Y",
+        "min_seedtime": "6M",
+        "min_uploads": 20,
+        "any_of": [
+          {
+            "min_uploaded": "100 TiB"
+          },
+          {
+            "min_seed_size": "65 TiB"
+          }
+        ]
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 50"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-syringe",
+          "label": "Immune to automated HnR warnings"
+        },
+        {
+          "icon": "fas fa-tasks",
+          "label": "Torrent moderation bypass"
+        }
+      ]
+    },
+    {
+      "name": "Junior Uploader",
+      "style": {
+        "color": "#6cdb9b",
+        "icon": "fas fa-angle-up"
+      },
+      "requirements": {
+        "description": "Junior role model in creating torrents on Aither"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 50"
+        },
+        {
+          "icon": "fas fa-tasks",
+          "label": "Torrent moderation bypass"
+        }
+      ]
+    },
+    {
+      "name": "Uploader",
+      "style": {
+        "color": "#2ECC71",
+        "icon": "fas fa-angles-up"
+      },
+      "requirements": {
+        "description": "Role model in creating torrents on Aither"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 50"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-syringe",
+          "label": "Immune to automated HnR warnings"
+        },
+        {
+          "icon": "fas fa-tasks",
+          "label": "Torrent moderation bypass"
+        }
+      ]
+    },
+    {
+      "name": "Typhon",
+      "style": {
+        "color": "#7FFF00",
+        "icon": "fas fa-fire"
+      },
+      "requirements": {
+        "description": "Assigned to users whom Aither staff deems worthy"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 50"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-chevron-double-up torrent-icons__double-upload",
+          "label": "Double upload"
+        },
+        {
+          "icon": "fas fa-syringe",
+          "label": "Immune to automated HnR warnings"
+        },
+        {
+          "icon": "fas fa-tasks",
+          "label": "Torrent moderation bypass"
+        }
+      ]
+    },
+    {
+      "name": "Contributor",
+      "style": {
+        "color": "#912cdb",
+        "icon": "fas fa-paint-brush"
+      },
+      "requirements": {
+        "description": "Contributes any work to Aither"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 50"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-syringe",
+          "label": "Immune to automated HnR warnings"
+        },
+        {
+          "icon": "fas fa-tasks",
+          "label": "Torrent moderation bypass"
+        }
+      ]
+    },
+    {
+      "name": "Trustee",
+      "style": {
+        "color": "#BF55EC",
+        "icon": "fas fa-shield"
+      },
+      "requirements": {
+        "description": "Friends of the site, awarded at staff discretion"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 50"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-syringe",
+          "label": "Immune to automated HnR warnings"
+        },
+        {
+          "icon": "fas fa-tasks",
+          "label": "Torrent moderation bypass"
+        }
+      ]
+    },
+    {
+      "name": "Internal",
+      "style": {
+        "color": "#BAAF92",
+        "icon": "fa fa-magic"
+      },
+      "requirements": {
+        "description": "Creator of internal Aither releases"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: 50"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-syringe",
+          "label": "Immune to automated HnR warnings"
+        },
+        {
+          "icon": "fas fa-tasks",
+          "label": "Torrent moderation bypass"
+        }
+      ]
+    },
+    {
+      "name": "FLS",
+      "style": {
+        "color": "#20726c",
+        "icon": "fas fa-life-ring"
+      },
+      "requirements": {
+        "description": "Front Line Support: Guides members when staff are not present"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: ∞"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-syringe",
+          "label": "Immune to automated HnR warnings"
+        },
+        {
+          "icon": "fas fa-tasks",
+          "label": "Torrent moderation bypass"
+        }
+      ]
+    },
+    {
+      "name": "Editor",
+      "style": {
+        "color": "#20726c",
+        "icon": "fas fa-edit"
+      },
+      "requirements": {
+        "description": "Fixes torrent pages and takes care of torrent reports"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: ∞"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-syringe",
+          "label": "Immune to automated HnR warnings"
+        },
+        {
+          "icon": "fas fa-tasks",
+          "label": "Torrent moderation bypass"
+        }
+      ]
+    },
+    {
+      "name": "Torrent Moderator",
+      "style": {
+        "color": "#15B097",
+        "icon": "fas fa-badge-check"
+      },
+      "requirements": {
+        "description": "Checks pending torrent in the moderation queue"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL slots: ∞"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send invite"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-syringe",
+          "label": "Immune to automated HnR warnings"
+        },
+        {
+          "icon": "fas fa-tasks",
+          "label": "Torrent moderation bypass"
+        }
+      ]
+    }
+  ]
+}

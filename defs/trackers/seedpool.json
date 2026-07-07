@@ -1,0 +1,496 @@
+{
+  "schema_version": 1,
+  "key": "seedpool",
+  "name": "Seedpool",
+  "abbr": "SP",
+  "url": "https://seedpool.org",
+  "type": "unit3d",
+  "last_updated": "2026-07-02",
+  "approved_by": {
+    "name": "Tetrahydroc",
+    "role": "sysop",
+    "date": "2026-04-20"
+  },
+  "scrape": {
+    "min_interval_minutes": 90,
+    "labels": {
+      "seedpool": "seed_size",
+      "unsatisfied torrents": "warnings"
+    }
+  },
+  "groups": [
+    {
+      "name": "Cesspool",
+      "style": {
+        "color": "#964B00",
+        "icon": "fas fa-poop"
+      },
+      "requirements": {},
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: 0"
+        },
+        {
+          "icon": "fas fa-hourglass-half text-warning",
+          "label": "Unsatisfied Slots: 0"
+        }
+      ]
+    },
+    {
+      "name": "KiddiePool",
+      "style": {
+        "color": "#302f91",
+        "icon": "fas fa-baby"
+      },
+      "requirements": {
+        "description": "Timeout Zone"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: 0"
+        },
+        {
+          "icon": "fas fa-hourglass-half text-warning",
+          "label": "Unsatisfied Slots: 0"
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "style": {
+        "color": "#7289DA",
+        "icon": "fas fa-chess-pawn"
+      },
+      "requirements": {
+        "min_ratio": 1.0
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: ∞"
+        },
+        {
+          "icon": "fas fa-hourglass-half text-warning",
+          "label": "Unsatisfied Slots: 20"
+        }
+      ]
+    },
+    {
+      "name": "Pool",
+      "style": {
+        "color": "#63E6BE",
+        "icon": "fas fa-chess"
+      },
+      "requirements": {
+        "min_ratio": 1.0,
+        "min_age": "1M",
+        "min_seed_size": "256 GiB"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: ∞"
+        },
+        {
+          "icon": "fas fa-hands-helping",
+          "label": "Can Request"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send Invite"
+        },
+        {
+          "icon": "fas fa-hourglass-half text-warning",
+          "label": "Unsatisfied Slots: 30"
+        }
+      ]
+    },
+    {
+      "name": "PowerPool",
+      "style": {
+        "color": "#1155cc",
+        "icon": "fas fa-chess-knight"
+      },
+      "requirements": {
+        "min_ratio": 1.0,
+        "min_age": "3M",
+        "min_seed_size": "512 GiB"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: ∞"
+        },
+        {
+          "icon": "fas fa-hands-helping",
+          "label": "Can Request"
+        },
+        {
+          "icon": "fas fa-upload text-success",
+          "label": "Can Fill Requests"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send Invite"
+        },
+        {
+          "icon": "fas fa-hourglass-half text-warning",
+          "label": "Unsatisfied Slots: 50"
+        }
+      ]
+    },
+    {
+      "name": "SuperPool",
+      "style": {
+        "color": "#ff8409",
+        "icon": "fas fa-chess-knight"
+      },
+      "requirements": {
+        "min_ratio": 1.0,
+        "min_age": "6M",
+        "min_seed_size": "1 TiB"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: ∞"
+        },
+        {
+          "icon": "fas fa-hands-helping",
+          "label": "Can Request"
+        },
+        {
+          "icon": "fas fa-upload text-success",
+          "label": "Can Fill Requests"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send Invite"
+        },
+        {
+          "icon": "fa-brands fa-wpforms",
+          "label": "Invite Forums"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-hourglass-half text-warning",
+          "label": "Unsatisfied Slots: 75"
+        }
+      ]
+    },
+    {
+      "name": "UberPool",
+      "style": {
+        "color": "#ffff80",
+        "icon": "fas fa-chess-rook"
+      },
+      "requirements": {
+        "min_ratio": 1.0,
+        "min_age": "9M",
+        "min_seed_size": "5 TiB"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: ∞"
+        },
+        {
+          "icon": "fas fa-hands-helping",
+          "label": "Can Request"
+        },
+        {
+          "icon": "fas fa-upload text-success",
+          "label": "Can Fill Requests"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send Invite"
+        },
+        {
+          "icon": "fa-brands fa-wpforms",
+          "label": "Invite Forums"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-hourglass-half text-warning",
+          "label": "Unsatisfied Slots: 100"
+        }
+      ]
+    },
+    {
+      "name": "ProPool",
+      "style": {
+        "color": "#FFD700",
+        "icon": "fas fa-coins"
+      },
+      "requirements": {
+        "description": "For those with buffer to flash around. Say \"!help upgrade\" in #seedpool."
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: ∞"
+        },
+        {
+          "icon": "fas fa-hands-helping",
+          "label": "Can Request"
+        },
+        {
+          "icon": "fas fa-upload text-success",
+          "label": "Can Fill Requests"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send Invite"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-chevron-double-up torrent-icons__double-upload",
+          "label": "Double Upload"
+        },
+        {
+          "icon": "fas fa-hourglass-half text-warning",
+          "label": "Unsatisfied Slots: 50"
+        }
+      ]
+    },
+    {
+      "name": "MegaPool",
+      "style": {
+        "color": "#e08a4e",
+        "icon": "fas fa-circle-nodes",
+        "sparkle": true
+      },
+      "requirements": {
+        "min_ratio": 1.0,
+        "min_age": "12M",
+        "min_seed_size": "25 TiB"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: ∞"
+        },
+        {
+          "icon": "fas fa-upload text-success",
+          "label": "Upload Torrents"
+        },
+        {
+          "icon": "fas fa-hands-helping",
+          "label": "Can Request"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send Invite"
+        },
+        {
+          "icon": "fa-brands fa-wpforms",
+          "label": "Invite Forums"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-chevron-double-up torrent-icons__double-upload",
+          "label": "Double Upload"
+        },
+        {
+          "icon": "fas fa-hourglass-half text-warning",
+          "label": "Unsatisfied Slots: 125"
+        }
+      ]
+    },
+    {
+      "name": "GodPool",
+      "style": {
+        "color": "#d4ac0d",
+        "icon": "fas fa-circle-nodes",
+        "sparkle": true
+      },
+      "requirements": {
+        "min_ratio": 1.0,
+        "min_age": "12M",
+        "min_seed_size": "100 TiB"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: ∞"
+        },
+        {
+          "icon": "fas fa-upload text-success",
+          "label": "Upload Torrents"
+        },
+        {
+          "icon": "fas fa-hands-helping",
+          "label": "Can Request"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send Invite"
+        },
+        {
+          "icon": "fa-brands fa-wpforms",
+          "label": "Invite Forums"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-chevron-double-up torrent-icons__double-upload",
+          "label": "Double Upload"
+        },
+        {
+          "icon": "fas fa-hourglass-half text-warning",
+          "label": "Unsatisfied Slots: 150"
+        }
+      ]
+    },
+    {
+      "name": "FoundingPool",
+      "style": {
+        "color": "#ff8409",
+        "icon": "fas fa-chess-bishop"
+      },
+      "requirements": {
+        "description": "Group for founding members of seedpool."
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: ∞"
+        },
+        {
+          "icon": "fas fa-hands-helping",
+          "label": "Can Request"
+        },
+        {
+          "icon": "fas fa-upload text-success",
+          "label": "Can Fill Requests"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send Invite"
+        },
+        {
+          "icon": "fa-brands fa-wpforms",
+          "label": "Invite Forums"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-hourglass-half text-warning",
+          "label": "Unsatisfied Slots: 75"
+        }
+      ]
+    },
+    {
+      "name": "SpecialPool",
+      "style": {
+        "color": "#FFD700",
+        "icon": "fas fa-circle-nodes",
+        "sparkle": true
+      },
+      "requirements": {
+        "description": "Invite-only group for outstanding members."
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: ∞"
+        },
+        {
+          "icon": "fas fa-upload text-success",
+          "label": "Upload Torrents"
+        },
+        {
+          "icon": "fas fa-hands-helping",
+          "label": "Can Request"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send Invite"
+        },
+        {
+          "icon": "fa-brands fa-wpforms",
+          "label": "Invite Forums"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-chevron-double-up torrent-icons__double-upload",
+          "label": "Double Upload"
+        },
+        {
+          "icon": "fas fa-tasks",
+          "label": "Torrent Moderation bypass"
+        },
+        {
+          "icon": "fas fa-hourglass-half text-warning",
+          "label": "Unsatisfied Slots: 100"
+        }
+      ]
+    },
+    {
+      "name": "External",
+      "style": {
+        "color": "#0099ff",
+        "icon": "fas fa-skull"
+      },
+      "requirements": {
+        "description": "Members of recognized release groups and/or Staff at respected trackers"
+      },
+      "perks": [
+        {
+          "icon": "fas fa-arrow-down-short-wide text-blue",
+          "label": "DL Slots: ∞"
+        },
+        {
+          "icon": "fas fa-upload text-success",
+          "label": "Upload Torrents"
+        },
+        {
+          "icon": "fas fa-hands-helping",
+          "label": "Can Request"
+        },
+        {
+          "icon": "fas fa-paper-plane",
+          "label": "Send Invite"
+        },
+        {
+          "icon": "fa-brands fa-wpforms",
+          "label": "Invite Forums"
+        },
+        {
+          "icon": "fas fa-star text-gold",
+          "label": "Freeleech"
+        },
+        {
+          "icon": "fas fa-tasks",
+          "label": "Torrent Moderation bypass"
+        },
+        {
+          "icon": "fas fa-hourglass-half text-warning",
+          "label": "Unsatisfied Slots: 100"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Yata</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+<!-- The bundled CSS above is the FREE Font Awesome set. If the user drops a
+     self-hosted set (e.g. Pro) into static/fontawesome/, main.ts auto-loads it
+     and disables the free CDN above, so Pro-only icons (lobster, crab, …) render. -->
+<link rel="stylesheet" href="/static/dashboard.css"/>
+<link rel="icon" type="image/svg+xml" href="/static/logo.svg"/>
+</head>
+<body>
+
+<!-- Login gate — shown by main.ts when an account is configured but the current
+     session is missing/expired. Covers the whole app until login succeeds. -->
+<div id="login-overlay" class="login-overlay" style="display:none">
+  <form class="login-card" id="login-form" onsubmit="submitLogin(event)">
+    <div class="login-logo">
+      <svg width="30" height="30" viewBox="0 0 760 760" fill="var(--accent,#6d56eb)" fill-rule="evenodd" class="yata-logo"><path fill-opacity="0.45" d="M42 653 45 657 57 661ZM34 637 34 645 39 650ZM484 619 472 627 480 626ZM367 614 365 608 364 616 355 618 346 609 349 616 355 620 361 620ZM227 602 208 598 134 672 139 671 210 600 224 604ZM603 590 574 602 599 594ZM257 578 249 583 256 583ZM588 569 562 579 586 572ZM463 564 460 564 454 581ZM407 548 410 555 418 557ZM262 548 259 547 230 578 235 580 233 577 260 550 263 552ZM631 544 591 569 614 558ZM442 530 424 540 429 542 430 538ZM387 527 396 536 408 540ZM382 513 387 522 385 514ZM371 506 380 511 377 507ZM300 506 272 536 282 555 318 578 285 555 275 537 302 508ZM74 456 83 484 87 488ZM719 455 708 483 713 476ZM130 454 133 458 141 460ZM695 447 686 470 689 468ZM121 440 123 448 127 451ZM130 417 124 422 121 432ZM588 400 612 412 606 406ZM573 400 555 406 545 416ZM666 310 675 332 669 312ZM388 257 362 265 355 270ZM649 301 620 264 615 262 604 272 574 248 558 239 546 237 532 248 506 239 478 237 473 248 491 253 510 264 523 277 534 295 540 328 537 345 528 365 500 397 478 413 422 439 352 455 315 494 377 495 392 505 400 523 409 527 429 525 534 410 550 396 567 389 589 388 614 397 626 377 648 387 668 380 665 345ZM638 348 645 350 650 356 648 366 640 371 634 369 628 361 629 355ZM110 217 106 221 99 243ZM85 211 80 218 72 247ZM705 205 721 248 712 216ZM112 165 106 170 95 189ZM680 164 701 195 691 176ZM592 126 625 146 613 136ZM579 94 604 105 600 101ZM221 92 188 103 169 115Z"/><path fill-opacity="0.72" d="M36 646 38 651 46 656ZM255 608 256 612 271 625ZM404 577 409 584 408 579ZM646 564 622 581 641 570ZM196 592 172 581 134 555 49 640 49 643 61 649 89 647 98 657 109 661 131 660 196 595ZM476 550 513 575 519 582 516 575ZM431 536 426 537 426 542ZM401 536 407 540 407 549 410 552 409 538ZM272 535 283 556 315 576 283 554ZM326 521 326 525 332 527ZM441 513 421 526 411 526 400 519 398 522 407 527 421 528 433 523ZM376 494 387 500 399 517 393 503ZM685 476 665 509 675 497ZM332 457 231 459 153 538 184 561 217 574ZM374 493 318 492 356 456 352 454 314 492 314 495ZM123 445 129 455 138 459ZM599 403 611 412 630 438 613 411ZM668 393 658 397 664 440 667 434ZM505 393 490 405 453 426 411 442 370 453 404 446 445 432 480 414ZM630 391 623 408 646 440 653 445 646 399ZM568 388 548 395 533 410 541 402ZM626 376 621 378 612 396 596 388 593 390 614 398ZM669 372 666 379 652 386 631 376 629 378 653 388 667 381ZM539 340 525 370 514 384 529 367ZM629 275 648 303 665 346 659 322 649 300 634 278ZM521 274 533 294 540 315 535 293ZM593 264 600 272 608 272ZM524 301 507 276 488 264 473 260 418 263 370 276 317 303 135 429 134 440 141 447 316 447 367 441 427 425 470 405 495 387 512 369 523 350 527 336 528 320ZM482 249 514 267 505 258ZM505 239 532 249 525 244ZM547 236 565 244 590 262 570 245ZM490 236 478 236 473 249 480 238ZM535 232 529 235 534 235Z"/><path fill-opacity="1" d="M106 171 83 212 69 263 68 423 74 456 84 485 97 510 125 547 34 638 35 646 46 657 66 662 84 661 104 673 138 671 210 599 254 608 271 626 283 623 282 609 346 609 354 619 362 619 367 609 454 609 469 625 479 626 483 622 481 609 556 606 587 598 622 582 660 554 682 530 697 508 717 462 725 419 725 275 722 253 708 208 686 170 656 137 621 112 579 94 537 86 255 86 217 93 170 113 139 135ZM194 594 129 659 111 660 100 656 91 646 63 648 51 642 135 557 165 579ZM260 549 265 560 255 581 234 579 232 577ZM331 508 377 509 384 516 387 528 408 540 408 551 411 555 460 565 455 582 409 583 377 546 328 524ZM302 507 313 508 308 526 311 536 356 557 347 568 342 583 320 583 316 575 281 551 274 535ZM328 460 215 573 186 560 155 537 233 460ZM666 395 665 433 659 399ZM631 393 645 401 650 441 624 406ZM523 303 527 322 525 339 517 358 507 372 487 391 468 404 425 424 365 440 314 446 143 446 135 438 135 433 140 427 316 306 372 277 420 264 471 261 486 265 505 277ZM648 302 661 333 668 377 651 387 625 376 613 395 587 387 567 388 549 395 539 402 428 524 413 527 399 520 394 505 377 494 316 493 354 455 406 445 455 427 495 403 526 371 535 354 540 335 540 314 536 297 528 281 515 266 492 252 474 247 480 237 506 240 531 249 538 248 548 238 552 238 574 250 601 272 607 272 617 264 633 280ZM127 187 152 159 183 136 212 122 254 112 528 111 565 117 601 131 635 154 665 186 686 223 696 255 700 285 700 410 692 455 677 490 655 521 623 550 594 567 555 580 520 583 517 576 477 550 427 540 440 533 542 420 562 404 584 400 609 410 637 449 661 472 671 469 678 448 681 369 677 340 665 304 641 267 618 247 612 248 604 256 574 233 556 225 542 224 531 234 505 226 472 224 458 247 428 249 388 257 329 281 130 416 123 425 121 439 125 450 131 456 141 460 211 461 144 527 126 506 111 481 99 449 93 414 95 264 108 220Z"/></svg>
+      <span>Yata</span>
+    </div>
+    <div class="login-title">Sign in</div>
+    <div class="form-group" style="margin-bottom:10px">
+      <label class="form-label" for="login-username">Username</label>
+      <input class="form-input" type="text" id="login-username" autocomplete="username" autofocus/>
+    </div>
+    <div class="form-group" style="margin-bottom:14px">
+      <label class="form-label" for="login-password">Password</label>
+      <input class="form-input" type="password" id="login-password" autocomplete="current-password"/>
+    </div>
+    <div id="login-error" class="login-error" style="display:none"></div>
+    <button type="submit" class="btn btn-primary" id="login-submit" style="width:100%">Sign in</button>
+    <!-- Lockout + recovery (shown after too many failed attempts) -->
+    <div id="login-locked" class="login-locked" style="display:none">
+      <div id="login-locked-msg" style="margin-bottom:10px"></div>
+      <button type="button" class="btn btn-danger btn-sm" style="width:100%" onclick="resetLogin()">Reset login &amp; erase all data</button>
+      <div style="font-size:11px;color:var(--text3);margin-top:6px">Use this only if you're locked out or forgot your password. It deletes your account, trackers, stats, settings and alerts so you can get back in. Your tracker accounts themselves are not affected.</div>
+    </div>
+  </form>
+</div>
+
+<div class="app-wrapper">
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="topbar-logo">
+      <svg width="26" height="26" viewBox="0 0 760 760" fill="var(--accent,#6d56eb)" fill-rule="evenodd" class="yata-logo"><path fill-opacity="0.45" d="M42 653 45 657 57 661ZM34 637 34 645 39 650ZM484 619 472 627 480 626ZM367 614 365 608 364 616 355 618 346 609 349 616 355 620 361 620ZM227 602 208 598 134 672 139 671 210 600 224 604ZM603 590 574 602 599 594ZM257 578 249 583 256 583ZM588 569 562 579 586 572ZM463 564 460 564 454 581ZM407 548 410 555 418 557ZM262 548 259 547 230 578 235 580 233 577 260 550 263 552ZM631 544 591 569 614 558ZM442 530 424 540 429 542 430 538ZM387 527 396 536 408 540ZM382 513 387 522 385 514ZM371 506 380 511 377 507ZM300 506 272 536 282 555 318 578 285 555 275 537 302 508ZM74 456 83 484 87 488ZM719 455 708 483 713 476ZM130 454 133 458 141 460ZM695 447 686 470 689 468ZM121 440 123 448 127 451ZM130 417 124 422 121 432ZM588 400 612 412 606 406ZM573 400 555 406 545 416ZM666 310 675 332 669 312ZM388 257 362 265 355 270ZM649 301 620 264 615 262 604 272 574 248 558 239 546 237 532 248 506 239 478 237 473 248 491 253 510 264 523 277 534 295 540 328 537 345 528 365 500 397 478 413 422 439 352 455 315 494 377 495 392 505 400 523 409 527 429 525 534 410 550 396 567 389 589 388 614 397 626 377 648 387 668 380 665 345ZM638 348 645 350 650 356 648 366 640 371 634 369 628 361 629 355ZM110 217 106 221 99 243ZM85 211 80 218 72 247ZM705 205 721 248 712 216ZM112 165 106 170 95 189ZM680 164 701 195 691 176ZM592 126 625 146 613 136ZM579 94 604 105 600 101ZM221 92 188 103 169 115Z"/><path fill-opacity="0.72" d="M36 646 38 651 46 656ZM255 608 256 612 271 625ZM404 577 409 584 408 579ZM646 564 622 581 641 570ZM196 592 172 581 134 555 49 640 49 643 61 649 89 647 98 657 109 661 131 660 196 595ZM476 550 513 575 519 582 516 575ZM431 536 426 537 426 542ZM401 536 407 540 407 549 410 552 409 538ZM272 535 283 556 315 576 283 554ZM326 521 326 525 332 527ZM441 513 421 526 411 526 400 519 398 522 407 527 421 528 433 523ZM376 494 387 500 399 517 393 503ZM685 476 665 509 675 497ZM332 457 231 459 153 538 184 561 217 574ZM374 493 318 492 356 456 352 454 314 492 314 495ZM123 445 129 455 138 459ZM599 403 611 412 630 438 613 411ZM668 393 658 397 664 440 667 434ZM505 393 490 405 453 426 411 442 370 453 404 446 445 432 480 414ZM630 391 623 408 646 440 653 445 646 399ZM568 388 548 395 533 410 541 402ZM626 376 621 378 612 396 596 388 593 390 614 398ZM669 372 666 379 652 386 631 376 629 378 653 388 667 381ZM539 340 525 370 514 384 529 367ZM629 275 648 303 665 346 659 322 649 300 634 278ZM521 274 533 294 540 315 535 293ZM593 264 600 272 608 272ZM524 301 507 276 488 264 473 260 418 263 370 276 317 303 135 429 134 440 141 447 316 447 367 441 427 425 470 405 495 387 512 369 523 350 527 336 528 320ZM482 249 514 267 505 258ZM505 239 532 249 525 244ZM547 236 565 244 590 262 570 245ZM490 236 478 236 473 249 480 238ZM535 232 529 235 534 235Z"/><path fill-opacity="1" d="M106 171 83 212 69 263 68 423 74 456 84 485 97 510 125 547 34 638 35 646 46 657 66 662 84 661 104 673 138 671 210 599 254 608 271 626 283 623 282 609 346 609 354 619 362 619 367 609 454 609 469 625 479 626 483 622 481 609 556 606 587 598 622 582 660 554 682 530 697 508 717 462 725 419 725 275 722 253 708 208 686 170 656 137 621 112 579 94 537 86 255 86 217 93 170 113 139 135ZM194 594 129 659 111 660 100 656 91 646 63 648 51 642 135 557 165 579ZM260 549 265 560 255 581 234 579 232 577ZM331 508 377 509 384 516 387 528 408 540 408 551 411 555 460 565 455 582 409 583 377 546 328 524ZM302 507 313 508 308 526 311 536 356 557 347 568 342 583 320 583 316 575 281 551 274 535ZM328 460 215 573 186 560 155 537 233 460ZM666 395 665 433 659 399ZM631 393 645 401 650 441 624 406ZM523 303 527 322 525 339 517 358 507 372 487 391 468 404 425 424 365 440 314 446 143 446 135 438 135 433 140 427 316 306 372 277 420 264 471 261 486 265 505 277ZM648 302 661 333 668 377 651 387 625 376 613 395 587 387 567 388 549 395 539 402 428 524 413 527 399 520 394 505 377 494 316 493 354 455 406 445 455 427 495 403 526 371 535 354 540 335 540 314 536 297 528 281 515 266 492 252 474 247 480 237 506 240 531 249 538 248 548 238 552 238 574 250 601 272 607 272 617 264 633 280ZM127 187 152 159 183 136 212 122 254 112 528 111 565 117 601 131 635 154 665 186 686 223 696 255 700 285 700 410 692 455 677 490 655 521 623 550 594 567 555 580 520 583 517 576 477 550 427 540 440 533 542 420 562 404 584 400 609 410 637 449 661 472 671 469 678 448 681 369 677 340 665 304 641 267 618 247 612 248 604 256 574 233 556 225 542 224 531 234 505 226 472 224 458 247 428 249 388 257 329 281 130 416 123 425 121 439 125 450 131 456 141 460 211 461 144 527 126 506 111 481 99 449 93 414 95 264 108 220Z"/></svg>
+      Yata
+    </div>
+    <div class="topbar-sep"></div>
+    <span class="topbar-badge">DASHBOARD</span>
+    <div class="view-toggle">
+      <button class="view-btn active" id="btn-grid-view"  onclick="setView('grid')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Grid
+      </button>
+      <button class="view-btn" id="btn-table-view" onclick="setView('table')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        Detail
+      </button>
+      <!-- Hidden until /api/pathways/targets succeeds (404 = feature off) -->
+      <button class="view-btn" id="btn-pathways-view" onclick="setView('pathways')" style="display:none">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg>
+        Pathways
+      </button>
+    </div>
+    <div class="topbar-right">
+      <span id="last-refresh" style="font-size:12px;color:var(--text3)"></span>
+      <a href="https://github.com/Yata-Dash/Yata-Dash" target="_blank" rel="noopener noreferrer"
+         class="btn btn-ghost btn-icon btn-sm" title="View on GitHub" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none">
+        <i class="fa-brands fa-github" style="font-size:15px"></i>
+      </a>
+      <button class="btn btn-ghost btn-icon btn-sm" id="privacy-btn" title="Blur usernames (privacy mode)">
+        <svg id="privacy-eye" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+        </svg>
+        <svg id="privacy-eye-off" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+          <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+          <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+          <path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>
+        </svg>
+      </button>
+      <button class="btn btn-ghost btn-icon btn-sm" id="refresh-btn" title="Refresh all">
+        <svg id="refresh-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/>
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+        </svg>
+      </button>
+      <button class="btn btn-ghost btn-icon btn-sm" id="settings-btn" title="Settings">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Scrape alert bar — hidden by default, shown by JS when limits are hit -->
+  <div id="scrape-alert-bar" style="display:none;align-items:center;gap:10px;padding:6px 20px;background:var(--surface);border-bottom:1px solid var(--border);min-height:32px;flex-wrap:wrap"></div>
+
+  <!-- First-run security nudge: shown when no login is configured. -->
+  <div id="auth-nudge" class="auth-nudge" style="display:none">
+    <i class="fas fa-shield-halved" style="margin-right:8px"></i>
+    <span><strong>Login protection is off.</strong> Anyone who can reach this page has full access to your trackers and credentials. Set up a username &amp; password.</span>
+    <a class="btn btn-primary btn-sm" href="#/settings" onclick="switchSettingsTab&&setTimeout(()=>switchSettingsTab('general'),50)" style="margin-left:auto;white-space:nowrap">Set up login</a>
+    <button type="button" class="auth-nudge-x" onclick="dismissAuthNudge()" title="Dismiss">&times;</button>
+  </div>
+
+  <main class="main">
+
+    <!-- ════ GRID VIEW ════ -->
+    <div id="view-grid">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Tracker Stats</div>
+          <div class="page-subtitle">Live user stats · drag cards to reorder</div>
+        </div>
+      </div>
+
+      <div class="stat-cards-row" id="grid-agg-cards">
+        <div class="stat-card" style="--card-accent:var(--green)">
+          <div class="sc-label">Total Uploaded</div>
+          <div class="sc-value" id="g-agg-up">—</div>
+          <div class="sc-sub">across all trackers</div>
+          <div class="sc-spark" id="g-spark-up"></div>
+        </div>
+        <div class="stat-card" style="--card-accent:var(--purple)">
+          <div class="sc-label">Total Downloaded</div>
+          <div class="sc-value" id="g-agg-down">—</div>
+          <div class="sc-sub">across all trackers</div>
+          <div class="sc-spark" id="g-spark-down"></div>
+        </div>
+        <div class="stat-card" style="--card-accent:var(--blue)">
+          <div class="sc-label">Total Buffer</div>
+          <div class="sc-value" id="g-agg-buf">—</div>
+          <div class="sc-sub">upload − download</div>
+          <div class="sc-spark" id="g-spark-buf"></div>
+        </div>
+        <div class="stat-card" style="--card-accent:var(--amber)">
+          <div class="sc-label">Overall Ratio</div>
+          <div class="sc-value" id="g-agg-ratio">—</div>
+          <div class="sc-sub">total up ÷ total down</div>
+          <div class="sc-spark" id="g-spark-ratio"></div>
+        </div>
+        <div class="stat-card" style="--card-accent:var(--pink)">
+          <div class="sc-label">Avg Seed Time</div>
+          <div class="sc-value" id="g-agg-avg-seed" style="font-size:15px;line-height:1.5;margin-top:4px">—</div>
+          <div class="sc-sub" id="g-agg-avg-seed-sub">weighted by seeds</div>
+          <div class="sc-spark" id="g-spark-avg-seed"></div>
+        </div>
+        <div class="stat-card" id="g-health-card" style="--card-accent:var(--green)">
+          <div class="sc-label">Tracker Health</div>
+          <div class="sc-health-row">
+            <span class="sc-health-main" id="g-agg-health-num">—</span>
+            <span class="sc-health-denom" id="g-agg-health-denom"></span>
+          </div>
+          <div class="sc-sub" id="g-agg-health-sub">loading…</div>
+          <div class="sc-spark" id="g-spark-health"></div>
+        </div>
+      </div>
+
+
+      <!-- QUI Live Stats Bars — dynamically rendered by JS per enabled instance -->
+      <div id="qui-bars-grid"></div>
+      <div class="tracker-grid" id="tracker-grid"></div>
+    </div>
+
+    <!-- ════ TABLE / DETAIL VIEW ════ -->
+    <div id="view-table">
+
+      <div class="stat-cards-row" id="tbl-agg-cards">
+        <div class="stat-card" style="--card-accent:var(--green)">
+          <div class="sc-label">Total Uploaded</div>
+          <div class="sc-value" id="t-agg-up">—</div>
+          <div class="sc-sub">across all trackers</div>
+          <div class="sc-spark" id="t-spark-up"></div>
+        </div>
+        <div class="stat-card" style="--card-accent:var(--purple)">
+          <div class="sc-label">Total Downloaded</div>
+          <div class="sc-value" id="t-agg-down">—</div>
+          <div class="sc-sub">across all trackers</div>
+          <div class="sc-spark" id="t-spark-down"></div>
+        </div>
+        <div class="stat-card" style="--card-accent:var(--blue)">
+          <div class="sc-label">Total Buffer</div>
+          <div class="sc-value" id="t-agg-buf">—</div>
+          <div class="sc-sub">upload − download</div>
+          <div class="sc-spark" id="t-spark-buf"></div>
+        </div>
+        <div class="stat-card" style="--card-accent:var(--amber)">
+          <div class="sc-label">Overall Ratio</div>
+          <div class="sc-value" id="t-agg-ratio">—</div>
+          <div class="sc-sub">total up ÷ total down</div>
+          <div class="sc-spark" id="t-spark-ratio"></div>
+        </div>
+        <div class="stat-card" style="--card-accent:var(--pink)">
+          <div class="sc-label">Avg Seed Time</div>
+          <div class="sc-value" id="t-agg-avg-seed" style="font-size:15px;line-height:1.5;margin-top:4px">—</div>
+          <div class="sc-sub" id="t-agg-avg-seed-sub">weighted by seeds</div>
+          <div class="sc-spark" id="t-spark-avg-seed"></div>
+        </div>
+        <div class="stat-card" id="t-health-card" style="--card-accent:var(--green)">
+          <div class="sc-label">Tracker Health</div>
+          <div class="sc-health-row">
+            <span class="sc-health-main" id="t-agg-health-num">—</span>
+            <span class="sc-health-denom" id="t-agg-health-denom"></span>
+          </div>
+          <div class="sc-sub" id="t-agg-health-sub">loading…</div>
+          <div class="sc-spark" id="t-spark-health"></div>
+        </div>
+      </div>
+
+
+      <!-- QUI Live Stats Bars — dynamically rendered by JS per enabled instance -->
+      <div id="qui-bars-table"></div>
+      <div class="section-card" style="margin-bottom:0">
+        <div class="section-head">
+          <div>
+            <div class="section-head-title">Tracker Detail</div>
+            <div class="section-head-sub">Click row to expand · click headings to sort · <svg style="vertical-align:-2px;margin:0 2px" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="16" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="16" y2="18"/><circle cx="19" cy="6" r="3"/><circle cx="3" cy="12" r="3"/><circle cx="19" cy="18" r="3"/></svg> to customise columns</div>
+          </div>
+          <span class="section-head-right" id="t-sum-status"></span>
+        </div>
+        <div class="table-scroll">
+          <table class="tracker-table">
+            <thead id="table-head"><tr></tr></thead>
+            <tbody id="tracker-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div><!-- /view-table -->
+
+    <!-- ════ PATHWAYS VIEW ════ -->
+    <div id="view-pathways" style="display:none">
+      <div class="page-header">
+        <div>
+          <div class="page-title">Pathways to…</div>
+          <div class="page-subtitle">Estimated invite routes from your current trackers — community data, reference only</div>
+        </div>
+        <div class="pw-combo" id="pw-combo">
+          <input class="form-input" type="text" id="pw-target-input" placeholder="Select a target tracker…" autocomplete="off" spellcheck="false"/>
+          <div class="pw-combo-list" id="pw-combo-list" style="display:none"></div>
+        </div>
+      </div>
+      <div id="pw-body"></div>
+      <div class="pw-disclosure" id="pw-disclosure"></div>
+    </div><!-- /view-pathways -->
+
+    <!-- ════ SETTINGS PAGE (full-page view, #/settings) ════ -->
+    <div id="settings-page" style="display:none">
+      <div class="settings-header">
+        <a class="settings-back" href="#/">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Dashboard
+        </a>
+        <div>
+          <div class="page-title">Settings</div>
+          <div class="page-subtitle">Changes save automatically</div>
+        </div>
+      </div>
+
+      <div class="settings-layout">
+        <nav class="settings-tabs" id="settings-tabs" aria-label="Settings sections">
+          <button type="button" class="settings-tab active" data-tab="general">General</button>
+          <button type="button" class="settings-tab" data-tab="display">Display</button>
+          <button type="button" class="settings-tab" data-tab="scraping">Scraping</button>
+          <button type="button" class="settings-tab" data-tab="trackers">Trackers</button>
+          <button type="button" class="settings-tab" data-tab="qui">Integrations</button>
+          <button type="button" class="settings-tab" data-tab="alerts">Alerts</button>
+          <button type="button" class="settings-tab" data-tab="logs">Logs</button>
+        </nav>
+
+        <div class="settings-content">
+
+          <!-- ── Tab: General ─────────────────────────────────────────── -->
+          <div class="settings-panel" id="settings-tab-general">
+            <p class="settings-section-label">About</p>
+            <div class="form-group" style="margin-bottom:14px">
+              <div class="ver-grid" id="s-version-grid">
+                <div class="ver-row"><span class="ver-label">App</span><code id="s-ver-app" class="ver-val">…</code><span id="s-ver-app-badge" class="ver-badge"></span></div>
+                <div class="ver-row"><span class="ver-label">Definitions</span><code id="s-ver-defs" class="ver-val">…</code><span id="s-ver-defs-badge" class="ver-badge"></span></div>
+                <div class="ver-row"><span class="ver-label">Pathways</span><code id="s-ver-pathways" class="ver-val">…</code><span id="s-ver-pathways-badge" class="ver-badge"></span></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;margin-top:10px">
+                <button type="button" id="s-update-check" class="btn btn-ghost btn-sm" onclick="checkForUpdates()">Check for updates</button>
+                <span id="s-update-status" style="font-size:11px;color:var(--text3)"></span>
+              </div>
+              <label class="alerts-inline" style="margin-top:10px;font-size:12px">
+                <input type="checkbox" id="s-update-auto" onchange="toggleAutoUpdate()"/> Check automatically once a day
+              </label>
+              <div style="font-size:11px;color:var(--text3);margin-top:6px">Update checks contact <code>github.com</code> to read the latest published versions — nothing is sent, and only when you click or enable the daily check. Handy for bug reports: quote these three lines so we can tell if your defs or pathways are out of date.</div>
+            </div>
+
+            <p class="settings-section-label" style="margin-top:16px">Account</p>
+            <div class="form-group" style="margin-bottom:14px" id="s-account-section">
+              <div style="font-size:12px;color:var(--text3);font-style:italic">Loading…</div>
+            </div>
+
+            <p class="settings-section-label" style="margin-top:16px">Data</p>
+
+            <div class="form-group" style="margin-bottom:16px">
+              <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Configuration</div>
+              <div style="font-size:11px;color:var(--text3);margin-bottom:10px">Download a full backup of your configuration (trackers, targets, settings) as a JSON file, or import one to restore it. <strong style="color:var(--amber)">The exported file contains API keys and session cookies — keep it private.</strong></div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <button type="button" class="btn btn-ghost btn-sm" onclick="exportConfig()"><i class="fas fa-download" style="margin-right:6px"></i>Export config</button>
+                <button type="button" class="btn btn-ghost btn-sm" onclick="document.getElementById('s-import-file').click()"><i class="fas fa-upload" style="margin-right:6px"></i>Import config</button>
+                <input type="file" id="s-import-file" accept="application/json,.json" style="display:none" onchange="importConfigFile(this)"/>
+              </div>
+              <div style="font-size:11px;color:var(--amber);margin-top:8px"><i class="fas fa-triangle-exclamation" style="margin-right:5px"></i>Importing <strong>overwrites</strong> your current trackers and settings — the existing config is replaced and that data is lost. A backup of the current config is saved automatically first.</div>
+            </div>
+
+            <div class="form-group" style="margin-bottom:16px">
+              <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Tracker history</div>
+              <div style="font-size:11px;color:var(--text3);margin-bottom:10px">Export your recorded daily stat history (uploaded, ratio, seed size, bonus, …) as a CSV for personal analysis in a spreadsheet.</div>
+              <button type="button" class="btn btn-ghost btn-sm" onclick="exportHistoryCsv()"><i class="fas fa-file-csv" style="margin-right:6px"></i>Export history (CSV)</button>
+            </div>
+
+            <div class="form-group" style="margin-bottom:6px">
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+                <div class="toggle-track" id="s-backup-track" onclick="toggleSettingsBackup()"><div class="toggle-thumb"></div></div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:var(--text)">Automatic config backups</div>
+                  <div style="font-size:11px;color:var(--text3);margin-top:2px">Periodically save a copy of your config to the backups folder. Off by default.</div>
+                </div>
+              </label>
+            </div>
+            <div id="s-backup-opts" style="margin:8px 0 0 0">
+              <div style="display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap;margin-bottom:10px">
+                <label style="display:flex;flex-direction:column;gap:4px">
+                  <span style="font-size:11px;color:var(--text3)">Frequency</span>
+                  <select class="form-input" id="s-backup-frequency" style="width:auto;padding:4px 8px">
+                    <option value="daily">Daily</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                  </select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px">
+                  <span style="font-size:11px;color:var(--text3)">Keep last</span>
+                  <input class="form-input" type="number" id="s-backup-keep" min="1" max="99" style="width:80px;padding:4px 8px" oninput="this.value=Math.min(99,Math.max(1,parseInt(this.value)||1))"/>
+                </label>
+                <button type="button" class="btn btn-ghost btn-sm" onclick="backupNow()">Back up now</button>
+              </div>
+              <div id="s-backup-list" style="font-size:11px;color:var(--text3)"></div>
+            </div>
+
+          </div>
+
+          <!-- ── Tab: Display ─────────────────────────────────────────── -->
+          <div class="settings-panel" id="settings-tab-display" style="display:none">
+            <p class="settings-section-label">Theme</p>
+            <div id="s-theme-grid" class="theme-grid" style="margin-bottom:14px">
+              <span style="font-size:12px;color:var(--text3);font-style:italic">Loading themes…</span>
+            </div>
+
+            <!-- Live preview of common app elements — reflects the selected
+                 theme (via CSS variables) AND the Display toggles below, so it
+                 updates instantly. Card body is rendered by renderThemePreview(). -->
+            <div class="theme-preview" aria-label="Theme element preview">
+              <div class="theme-preview-label">Preview</div>
+              <div class="theme-preview-card" id="theme-preview-card"></div>
+            </div>
+
+            <p class="settings-section-label">Tracker Names</p>
+            <div class="form-group" style="margin-bottom:14px">
+              <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Tracker name display</div>
+              <div style="font-size:11px;color:var(--text3);margin-bottom:10px">How tracker names appear in cards and the detail table</div>
+              <div style="display:flex;flex-direction:column;gap:6px" id="s-name-mode-group">
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+                  <input type="radio" name="s-name-mode" value="name" style="accent-color:var(--accent)">
+                  <span style="font-size:13px;color:var(--text)">Name only <span style="color:var(--text3);font-size:12px">— eg. Seedpool</span></span>
+                </label>
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+                  <input type="radio" name="s-name-mode" value="both" style="accent-color:var(--accent)">
+                  <span style="font-size:13px;color:var(--text)">Name and abbreviation <span style="color:var(--text3);font-size:12px">— eg. Seedpool [SP]</span></span>
+                </label>
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+                  <input type="radio" name="s-name-mode" value="abbr" style="accent-color:var(--accent)">
+                  <span style="font-size:13px;color:var(--text)">Abbreviation only <span style="color:var(--text3);font-size:12px">— eg. [SP]</span></span>
+                </label>
+              </div>
+            </div>
+
+            <p class="settings-section-label">Dashboard</p>
+            <div class="form-group" style="margin-bottom:4px">
+              <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Group name display</div>
+              <div style="font-size:11px;color:var(--text3);margin-bottom:4px">How your user group appears in the table and expanded detail rows</div>
+              <div style="font-size:11px;color:var(--amber);margin-bottom:10px"><i class="fas fa-lightbulb" style="margin-right:5px"></i>FA Pro icons won't display unless you drop your Font Awesome <code>css/all.min.css</code> and <code>webfonts/</code> into <code>static/fontawesome/</code></div>
+              <div style="display:flex;flex-direction:column;gap:6px" id="s-group-name-style-group">
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+                  <input type="radio" name="s-group-name-style" value="plain" style="accent-color:var(--accent)">
+                  <span style="font-size:13px;color:var(--text)">Plain <span style="color:var(--text3);font-size:12px">— text matching the current theme</span></span>
+                </label>
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+                  <input type="radio" name="s-group-name-style" value="styled" style="accent-color:var(--accent)">
+                  <span style="font-size:13px;color:var(--text)">Styled <span style="color:var(--text3);font-size:12px">— group colour and icon matching the tracker website</span></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom:4px;margin-top:12px">
+              <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Username display</div>
+              <div style="font-size:11px;color:var(--text3);margin-bottom:10px">Whether your username appears plain or styled with your group colour (as shown on tracker profile pages)</div>
+              <div style="display:flex;flex-direction:column;gap:6px" id="s-username-style-group">
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+                  <input type="radio" name="s-username-style" value="plain" style="accent-color:var(--accent)">
+                  <span style="font-size:13px;color:var(--text)">Plain <span style="color:var(--text3);font-size:12px">— text matching the current theme</span></span>
+                </label>
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+                  <input type="radio" name="s-username-style" value="group" style="accent-color:var(--accent)">
+                  <span style="font-size:13px;color:var(--text)">Styled <span style="color:var(--text3);font-size:12px">— group colour and icon matching the tracker website</span></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom:10px;margin-top:12px">
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+                <div class="toggle-track" id="s-favicon-track" onclick="toggleSettingsFavicon()"><div class="toggle-thumb"></div></div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:var(--text)">Show tracker favicons</div>
+                  <div style="font-size:11px;color:var(--text3);margin-top:2px">Display each tracker's favicon next to its name in cards and the detail table</div>
+                </div>
+              </label>
+            </div>
+            <div class="form-group" style="margin-bottom:10px">
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+                <div class="toggle-track" id="s-stat-src-track" onclick="toggleSettingsStatSources()"><div class="toggle-thumb"></div></div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:var(--text)">Show stat sources</div>
+                  <div style="font-size:11px;color:var(--text3);margin-top:2px">Adds a small dot next to each stat showing whether it came from the tracker API or a profile scrape</div>
+                </div>
+              </label>
+            </div>
+            <div class="form-group" style="margin-bottom:10px">
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+                <div class="toggle-track" id="s-target-eta-track" onclick="toggleSettingsTargetEtas()"><div class="toggle-thumb"></div></div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:var(--text)">Target time estimates</div>
+                  <div style="font-size:11px;color:var(--text3);margin-top:2px">Shows estimated time to reach each target and your next group, from your recent growth rate (uploads, seed size, bonus, account age). Independent of the Pathways estimates.</div>
+                </div>
+              </label>
+            </div>
+            <div class="form-group" style="margin-bottom:10px">
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+                <div class="toggle-track" id="s-rate-hover-track" onclick="toggleSettingsRateHovers()"><div class="toggle-thumb"></div></div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:var(--text)">Trend rate on hover</div>
+                  <div style="font-size:11px;color:var(--text3);margin-top:2px">Hovering a stat shows its recent per-day trend — e.g. bonus points "≈ 3,423 per day" or download "≈ 245.3 GiB per day" (upload, download, buffer, bonus, uploads).</div>
+                </div>
+              </label>
+            </div>
+            <div class="form-group" style="margin-bottom:10px">
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+                <div class="toggle-track" id="s-unread-mail-track" onclick="toggleSettingsUnreadMail()"><div class="toggle-thumb"></div></div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:var(--text)">Unread mail icon</div>
+                  <div style="font-size:11px;color:var(--text3);margin-top:2px">Shows an envelope on a tracker's card (and in the detail table's expanded info) when its site header reports unread mail. Updated by profile scrapes, so at most once per scrape interval.</div>
+                </div>
+              </label>
+            </div>
+            <div class="form-group" style="margin-bottom:10px">
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+                <div class="toggle-track" id="s-unread-notif-track" onclick="toggleSettingsUnreadNotif()"><div class="toggle-thumb"></div></div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:var(--text)">Unread notifications icon</div>
+                  <div style="font-size:11px;color:var(--text3);margin-top:2px">Same, but a bell for the tracker's notification feed (likes, comments, system messages) — often noisier than mail, so it gets its own toggle.</div>
+                </div>
+              </label>
+            </div>
+            <div class="form-group" style="margin-bottom:10px">
+              <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Duration format</div>
+              <div style="font-size:11px;color:var(--text3);margin-bottom:10px">How you want trend estimates displayed. Effects dashboard and pathway views.
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px" id="s-duration-format-group">
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+                  <input type="radio" name="s-duration-format" value="ym" style="accent-color:var(--accent)">
+                  <span style="font-size:13px;color:var(--text)">Years / months</span> <span style="color:var(--text3);font-size:12px">(1Y 9M)</span>
+                </label>
+                <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;color:var(--text2)">
+                  <input type="radio" name="s-duration-format" value="days" style="accent-color:var(--accent)">
+                  <span style="font-size:13px;color:var(--text)">Days</span> <span style="color:var(--text3);font-size:12px">(694 days)</span>
+                </label>
+              </div>
+            </div>
+            <p class="settings-section-label" style="margin-top:16px">Private Mode</p>
+            <div class="form-group" style="margin-bottom:10px">
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+                <div class="toggle-track" id="s-private-track" onclick="toggleSettingsPrivate()"><div class="toggle-thumb"></div></div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:var(--text)">Blur usernames</div>
+                  <div style="font-size:11px;color:var(--text3);margin-top:2px">Blurs usernames so you can share screenshots without exposing account details</div>
+                </div>
+              </label>
+            </div>
+
+            <p class="settings-section-label" style="margin-top:16px">Pathways</p>
+            <div class="form-group" style="margin-bottom:10px">
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+                <div class="toggle-track" id="s-pw-eta-track" onclick="toggleSettingsPathwayEtas()"><div class="toggle-thumb"></div></div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:var(--text)">Estimated time to reach</div>
+                  <div style="font-size:11px;color:var(--text3);margin-top:2px">Shows overall arrival estimates on paths and classes, including exact account-age countdowns. Progress bars always show.</div>
+                </div>
+              </label>
+            </div>
+            <div class="form-group" style="margin-bottom:10px">
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+                <div class="toggle-track" id="s-trend-est-track" onclick="toggleSettingsTrendEstimates()"><div class="toggle-thumb"></div></div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:var(--text)">Stat trend estimates</div>
+                  <div style="font-size:11px;color:var(--text3);margin-top:2px">Projects upload / seed size / bonus requirements from your last 7 days of growth (≈ chips on individual stats)</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- ── Tab: Scraping ────────────────────────────────────────── -->
+          <div class="settings-panel" id="settings-tab-scraping" style="display:none">
+            <p class="settings-section-label">Profile Scraping</p>
+            <div class="form-group" style="margin-bottom:10px">
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+                <div class="toggle-track on" id="s-profile-sync-track" onclick="toggleSettingsSync()"><div class="toggle-thumb"></div></div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:var(--text)">Auto-sync profile on refresh</div>
+                  <div style="font-size:11px;color:var(--text3);margin-top:2px">Re-scrapes Avg Seed Time, Seed Size, Join Date etc. each time the dashboard refreshes (every 5 min)</div>
+                </div>
+              </label>
+            </div>
+            <div class="form-group" style="margin-bottom:10px">
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+                <div class="toggle-track" id="s-api-only-track" onclick="_settingsToggle('s-api-only-track')"><div class="toggle-thumb"></div></div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:var(--text)">API only mode</div>
+                  <div style="font-size:11px;color:var(--text3);margin-top:2px">Disables all HTML profile scraping. Only stats available via the tracker API will be shown.</div>
+                </div>
+              </label>
+            </div>
+            <div class="form-group" style="margin-bottom:4px" id="s-scrape-interval-group">
+              <label style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;display:block">Scrape Interval (minutes)</label>
+              <div style="display:flex;align-items:center;gap:10px">
+                <input type="number" id="s-scrape-interval" class="form-input" min="60" style="width:100px"
+                  placeholder="120" oninput="this.value=Math.max(60,parseInt(this.value)||60)">
+                <span id="s-scrape-interval-lock" style="font-size:11px;color:var(--amber);display:none">🔒 locked — derived from max scrapes</span>
+                <span id="s-scrape-interval-hint" style="font-size:11px;color:var(--text3)">Min 60 min — how often each tracker profile is scraped</span>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:4px" id="s-max-scrapes-group">
+              <label style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;display:block">Max Scrapes Per Day <span style="font-size:11px;font-weight:400;color:var(--text3)">(per tracker, UTC day — 0 = unlimited)</span></label>
+              <div style="display:flex;align-items:center;gap:10px">
+                <input type="number" id="s-max-scrapes" class="form-input" min="0" style="width:100px"
+                  placeholder="0" oninput="_onMaxScrapesChange()">
+                <span style="font-size:11px;color:var(--text3)">Resets at UTC midnight</span>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:10px" id="s-auto-interval-group">
+              <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+                <input type="checkbox" id="s-auto-interval" style="accent-color:var(--accent);width:14px;height:14px" onchange="_onAutoIntervalChange()">
+                <div>
+                  <span style="font-size:13px;color:var(--text)">Auto-calculate interval from max scrapes</span>
+                  <div style="font-size:11px;color:var(--text3);margin-top:1px">Locks the interval field and sets it to 1440 ÷ max (e.g. 24 scrapes → 60 min).</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- ── Tab: Trackers ────────────────────────────────────────── -->
+          <div class="settings-panel" id="settings-tab-trackers" style="display:none">
+
+            <div id="trackers-list-section">
+              <div class="trk-head">
+                <p class="settings-section-label" style="border-bottom:none;padding:0;margin:0;flex:1">Configured Trackers</p>
+                <button class="btn btn-ghost btn-sm" id="trk-test-all-btn" type="button" title="Test API &amp; scrape connectivity for every tracker, one at a time (respects all rate limits)">Test All</button>
+                <button class="btn btn-primary btn-sm" id="trk-add-btn" type="button">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  Add Tracker
+                </button>
+              </div>
+              <div class="trk-table-wrap">
+                <table class="trk-table">
+                  <thead><tr>
+                    <th style="width:48px"></th><th>Name</th><th>URL</th><th>Type</th><th>Def</th><th>Test Status</th><th style="text-align:right">Actions</th>
+                  </tr></thead>
+                  <tbody id="trk-tbody">
+                    <tr><td colspan="7" class="trk-empty">Loading…</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Import from Prowlarr (collapsible) -->
+              <div class="prowlarr-section">
+                <button type="button" class="prowlarr-toggle" id="prowlarr-toggle">
+                  <svg id="prowlarr-chev" class="expand-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+                  Import from Prowlarr
+                </button>
+                <div id="prowlarr-body" style="display:none">
+                  <div class="form-row" style="margin-top:10px">
+                    <div class="form-group">
+                      <label class="form-label">Prowlarr URL</label>
+                      <input class="form-input" type="url" id="prowlarr-url" placeholder="http://localhost:9696"/>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Prowlarr API Key</label>
+                      <input class="form-input" type="password" id="prowlarr-key" placeholder="Prowlarr → Settings → General → API Key"/>
+                    </div>
+                  </div>
+                  <div style="display:flex;gap:8px;align-items:center;margin:10px 0">
+                    <button class="btn btn-ghost btn-sm" id="prowlarr-fetch-btn" type="button" onclick="prowlarrFetch()">Fetch indexers</button>
+                  </div>
+                  <div id="prowlarr-results" class="prowlarr-results"></div>
+                  <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
+                    <button class="btn btn-primary btn-sm" id="prowlarr-import-btn" type="button" onclick="prowlarrImport()" disabled>Import 0 selected</button>
+                  </div>
+                  <p class="form-hint" style="margin-top:8px">API keys come from Prowlarr's stored indexer settings; trackers without one import with no key (add it via Edit).</p>
+                </div>
+              </div>
+
+              <!-- Import from Jackett (collapsible) -->
+              <div class="prowlarr-section">
+                <button type="button" class="prowlarr-toggle" id="jackett-toggle">
+                  <svg id="jackett-chev" class="expand-chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+                  Import from Jackett
+                </button>
+                <div id="jackett-body" style="display:none">
+                  <div class="form-row" style="margin-top:10px">
+                    <div class="form-group">
+                      <label class="form-label">Jackett URL</label>
+                      <input class="form-input" type="url" id="jackett-url" placeholder="http://localhost:9117"/>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Jackett Admin Password</label>
+                      <input class="form-input" type="password" id="jackett-key" placeholder="Leave blank if Jackett has no password"/>
+                    </div>
+                  </div>
+                  <div style="display:flex;gap:8px;align-items:center;margin:10px 0">
+                    <button class="btn btn-ghost btn-sm" id="jackett-fetch-btn" type="button" onclick="jackettFetch()">Fetch indexers</button>
+                  </div>
+                  <div id="jackett-results" class="prowlarr-results"></div>
+                  <div style="display:flex;gap:8px;align-items:center;margin-top:10px">
+                    <button class="btn btn-primary btn-sm" id="jackett-import-btn" type="button" onclick="jackettImport()" disabled>Import 0 selected</button>
+                  </div>
+                  <p class="form-hint" style="margin-top:8px">Credentials come from Jackett's stored indexer settings — API keys <em>and</em> session cookies import where available, so scraping can work out of the box. Cookies expire eventually; refresh them via Edit if a scrape stops working.</p>
+                </div>
+              </div>
+
+              <!-- Tracker definitions (moved here from the Scraping tab) -->
+              <p class="settings-section-label" style="margin-top:18px">Tracker Definitions</p>
+              <div class="form-group" style="margin-bottom:10px">
+                <div style="display:flex;align-items:center;gap:12px">
+                  <button class="btn btn-ghost btn-sm" id="s-reload-defs-btn" onclick="reloadDefs()">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                    Reload Definitions
+                  </button>
+                  <span style="font-size:11px;color:var(--text3)">Re-reads the tracker definition files in <code>defs/</code> without restarting</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Inline add/edit tracker panel (replaces the old tracker modal) -->
+            <div id="tracker-panel" style="display:none">
+              <div class="tracker-panel-head">
+                <button class="btn btn-ghost btn-sm" type="button" onclick="closeModal()">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                  Trackers
+                </button>
+                <span class="tracker-panel-title" id="modal-title">Add Tracker</span>
+              </div>
+              <div class="tracker-panel-body">
+                <input type="hidden" id="modal-tracker-id"/>
+
+                <!-- ══ Add-mode: tracker selection ════════════════════════ -->
+                <div id="modal-add-selection" style="display:none">
+                  <div class="form-group" style="margin-bottom:12px">
+                    <label class="form-label">Select Tracker</label>
+                    <select class="form-input" id="modal-add-select" onchange="onAddTrackerSelect()">
+                      <option value="">— Choose a tracker —</option>
+                    </select>
+                  </div>
+
+                  <!-- Manual mode: type picker (shown when "Add Manually" selected) -->
+                  <div id="modal-add-type-group" style="display:none">
+                    <div class="form-group" style="margin-bottom:12px">
+                      <label class="form-label">Tracker Type</label>
+                      <select class="form-input" id="modal-add-type" onchange="onAddTypeSelect()">
+                        <option value="">— Select type —</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- Predefined tracker header (shown when a known tracker is selected) -->
+                  <div id="modal-def-header" class="modal-def-header" style="display:none">
+                    <div class="modal-def-name-row">
+                      <span class="modal-def-name-text" id="modal-def-name-text"></span>
+                      <span class="modal-def-abbr" id="modal-def-abbr-text"></span>
+                    </div>
+                    <div class="modal-def-meta-row">
+                      <span class="modal-def-type-badge" id="modal-def-type-text"></span>
+                      <span class="modal-def-url-text" id="modal-def-url-text"></span>
+                    </div>
+                    <div class="modal-def-approval" id="modal-def-approval" style="display:none"></div>
+                  </div>
+
+                  <!-- Divider between selection and form fields -->
+                  <div class="modal-divider" id="modal-add-divider" style="display:none">
+                    <div class="modal-divider-line"></div>
+                  </div>
+                </div>
+
+                <!-- ══ Name / URL — shown in manual add mode and always in edit mode ═ -->
+                <!-- In add/predefined mode the values are pre-filled but still editable -->
+                <div id="modal-name-url-group">
+                  <div id="modal-manual-name-url">
+                    <div class="form-group">
+                      <label class="form-label">Name</label>
+                      <input class="form-input" type="text" id="modal-name" placeholder="e.g. Seedpool"/>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Base URL</label>
+                      <input class="form-input" type="url" id="modal-url" placeholder="https://tracker.example.org" oninput="window.checkTrackerOptOut?.()"/>
+                      <span class="form-hint">Root URL — no trailing slash</span>
+                    </div>
+                  </div>
+                  <!-- Opt-out blocking notice (tracker asked not to be supported) -->
+                  <div id="modal-optout-notice" class="optout-notice" style="display:none"></div>
+                </div>
+
+                <!-- ══ Credentials ══════════════════════════════════════════ -->
+                <div id="modal-credentials-section">
+                  <div class="form-group" id="modal-username-group">
+                    <label class="form-label" id="modal-username-label">Username</label>
+                    <input class="form-input" type="text" id="modal-username" placeholder="Your username on this tracker"/>
+                    <span class="form-hint" id="modal-username-hint">Used to scrape extended stats from your profile page. Auto-filled when API key is set.</span>
+                  </div>
+                  <div class="form-group" id="modal-joindate-group">
+                    <label class="form-label" id="modal-joindate-label">Join Date <span class="opt">(optional)</span></label>
+                    <input class="form-input" type="date" id="modal-joindate" max="2100-12-31" style="max-width:200px"/>
+                    <span class="form-hint" id="modal-joindate-hint">Your account creation date. Used for account-age tracking only when the tracker doesn't report it (e.g. MyAnonamouse). Set once — it never changes.</span>
+                  </div>
+                  <div class="form-group" id="modal-key-group">
+                    <label class="form-label" id="modal-key-label">API Key</label>
+                    <input class="form-input" type="password" id="modal-key" placeholder="Your API token"/>
+                    <span class="form-hint" id="modal-key-hint">Profile → API Token settings</span>
+                  </div>
+                  <div class="form-group" id="modal-session-cookie-group">
+                    <label class="form-label">Session Cookie <span class="opt">(optional — for extended profile stats)</span></label>
+                    <input class="form-input" type="password" id="modal-session-cookie" placeholder="Paste cookie string from browser DevTools"/>
+                    <span class="form-hint">
+                      Log in to the tracker in → DevTools (F12) → Application tab → Cookies → copy all cookies as <code>name=value; name2=value2</code> format. <br>-or-
+                      use the <em>Cookie-Editor</em> extension Export button → Header String
+                       Re-paste if profile stats stop working.
+                    </span>
+                  </div>
+                </div>
+
+                <!-- ══ Scraping section (edit mode, non-demo trackers) ══ -->
+                <div id="modal-scrape-section" style="display:none">
+                  <div class="modal-divider"><span class="modal-divider-label">Scraping</span><div class="modal-divider-line"></div></div>
+
+                  <!-- Operator-requested limits — emphasised in red -->
+                  <div id="modal-scrape-req" class="modal-scrape-req" style="display:none"></div>
+
+                  <!-- Per-tracker API-only toggle -->
+                  <div class="form-group" style="margin-bottom:10px">
+                    <label style="display:flex;align-items:center;gap:10px;cursor:pointer" id="modal-api-only-label">
+                      <div class="toggle-track" id="modal-api-only-track" onclick="modalToggleApiOnly()"><div class="toggle-thumb"></div></div>
+                      <div>
+                        <div style="font-size:13px;font-weight:600;color:var(--text)">API only</div>
+                        <div style="font-size:11px;color:var(--text3);margin-top:2px" id="modal-api-only-hint">Only use the tracker API for this tracker — never scrape the profile page.</div>
+                      </div>
+                    </label>
+                  </div>
+
+                  <!-- Scrape options (greyed when API-only) -->
+                  <div id="modal-scrape-opts">
+                    <div class="form-group" id="modal-min-scrape-group">
+                      <label class="form-label">Min Scrape Interval <span class="opt">(minutes, 0 = use global)</span></label>
+                      <div style="display:flex;align-items:center;gap:10px">
+                        <input class="form-input" type="number" id="modal-min-scrape-interval" placeholder="0" min="0" style="max-width:140px" oninput="modalValidateInterval()"/>
+                        <span id="modal-min-scrape-lock" style="font-size:11px;color:var(--amber);display:none">🔒 derived from max scrapes</span>
+                      </div>
+                      <span class="form-hint" id="modal-min-scrape-hint">0 = use global setting.</span>
+                      <span class="form-error" id="modal-min-scrape-error" style="display:none;font-size:11px;color:var(--red);margin-top:4px"></span>
+                    </div>
+                    <div class="form-group" id="modal-max-scrapes-group">
+                      <label class="form-label">Max Scrapes Per Day <span class="opt">(0 = unlimited)</span></label>
+                      <input class="form-input" type="number" id="modal-max-scrapes" placeholder="0" min="0" style="max-width:140px" oninput="modalOnMaxScrapesChange()"/>
+                      <span class="form-hint">Per UTC day for this tracker. Still subject to global / operator caps.</span>
+                    </div>
+                    <div class="form-group">
+                      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--text)">
+                        <input type="checkbox" id="modal-auto-interval" onchange="modalOnAutoIntervalChange()" style="accent-color:var(--accent)"/>
+                        Auto-calculate interval from max scrapes per day
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ══ Targets section ══════════════════════════════════════ -->
+                <div id="modal-targets-section">
+                  <div class="modal-divider"><span class="modal-divider-label">Targets <span style="font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></span><div class="modal-divider-line"></div></div>
+                  <span class="form-hint" style="margin-top:-6px">Goals toward your next user group</span>
+                  <div class="form-row" id="modal-target-group-row" style="display:none">
+                    <div class="form-group" style="flex:1">
+                      <label class="form-label">Load from Group</label>
+                      <div style="display:flex;gap:8px;align-items:center">
+                        <select class="form-input" id="modal-target-group-select" style="flex:1">
+                          <option value="">&#8212; manual &#8212;</option>
+                        </select>
+                        <button type="button" class="btn btn-ghost btn-sm" id="modal-target-group-load" onclick="loadTargetsFromGroup()" style="white-space:nowrap">Load</button>
+                      </div>
+                      <span class="form-hint" id="modal-target-group-hint" style="display:none;max-width:100%"></span>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Upload Target</label>
+                      <input class="form-input" type="text" id="modal-target-uploaded" placeholder="e.g. 500 GiB"/>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Download Target</label>
+                      <input class="form-input" type="text" id="modal-target-downloaded" placeholder="e.g. 100 GiB"/>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Ratio Target</label>
+                      <input class="form-input" type="number" id="modal-target-ratio" placeholder="e.g. 5.00" step="0.01" min="0"/>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Total Uploads Target</label>
+                      <input class="form-input" type="number" id="modal-target-total-uploads" placeholder="e.g. 50" min="0"/>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Seed Size Target</label>
+                      <input class="form-input" type="text" id="modal-target-seed-size" placeholder="e.g. 5 TiB"/>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Avg Seed Time Target</label>
+                      <input class="form-input" type="text" id="modal-target-avg-seed" placeholder="e.g. 3M or 90D"/>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Account Age Target</label>
+                      <input class="form-input" type="text" id="modal-target-days" placeholder="e.g. 1Y 6M or 365"/>
+                      <span class="form-hint">Y M W D format or plain days. Requires Join Date.</span>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Bonus Points Target</label>
+                      <input class="form-input" type="number" id="modal-target-bonus-points" placeholder="e.g. 25000" min="0"/>
+                    </div>
+                  </div>
+                  <div class="form-row" id="modal-target-snatched-row" style="display:none">
+                    <div class="form-group">
+                      <label class="form-label">Snatched Target <span class="opt">(Gazelle)</span></label>
+                      <input class="form-input" type="number" id="modal-target-snatched" placeholder="e.g. 100" min="0"/>
+                    </div>
+                    <div></div>
+                  </div>
+                  <div class="form-row" id="modal-target-adoptions-row" style="display:none">
+                    <div class="form-group">
+                      <label class="form-label">Adoptions Target <span class="opt">(Gazelle)</span></label>
+                      <input class="form-input" type="number" id="modal-target-adoptions" placeholder="e.g. 10" min="0"/>
+                      <span class="form-hint">Completed adoptions (fostered torrents don't count until converted).</span>
+                    </div>
+                    <div></div>
+                  </div>
+                </div>
+
+                <!-- ══ Status toggle (edit mode only) ══════════════════════ -->
+                <div class="form-group" id="modal-enabled-group" style="display:none">
+                  <div class="modal-divider"><span class="modal-divider-label">Status</span><div class="modal-divider-line"></div></div>
+                  <label class="form-toggle" style="margin-top:4px">
+                    <div class="toggle-track on" id="modal-toggle-track" onclick="toggleEnabled()"><div class="toggle-thumb"></div></div>
+                    <span id="modal-toggle-label" style="font-size:13px;color:var(--text2)">Enabled</span>
+                  </label>
+                </div>
+
+                <!-- ══ Demo / test scenario switcher ════════════════════════ -->
+                <div id="modal-mock-group" style="display:none">
+                  <div class="modal-divider"><span class="modal-divider-label" style="color:var(--amber)">⬡ Test Mode</span><div class="modal-divider-line"></div></div>
+                  <div class="form-group">
+                    <label class="form-label">Test Scenario</label>
+                    <select class="form-input" id="modal-mock-scenario"></select>
+                    <span class="form-hint">Data served from <code>test_data.json</code> — no real API calls made.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Inline delete confirmation (no popup) -->
+              <div id="tracker-delete-confirm" class="tracker-delete-confirm" style="display:none">
+                <div style="flex:1;min-width:200px">
+                  <div class="tracker-delete-title">Delete Tracker?</div>
+                  <div class="tracker-delete-body">This will permanently remove <strong id="delete-popup-name"></strong> and all its configuration. This cannot be undone.</div>
+                </div>
+                <div style="display:flex;gap:8px;flex-shrink:0;align-items:center">
+                  <button class="btn btn-ghost btn-sm" type="button" onclick="closeDeletePopup()">Cancel</button>
+                  <button class="btn btn-danger btn-sm" type="button" onclick="confirmDeletePopup()">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                    Delete
+                  </button>
+                </div>
+              </div>
+
+              <!-- Connectivity test result (edit mode) -->
+              <div id="modal-test-result" class="modal-test-result" style="display:none"></div>
+
+              <div class="tracker-panel-footer">
+                <button class="btn btn-ghost btn-sm" id="modal-delete-btn" type="button" style="display:none;color:var(--red);border-color:rgba(239,68,68,.25);margin-right:auto" onclick="showDeleteConfirm()">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                  Delete Tracker
+                </button>
+                <button class="btn btn-ghost" id="modal-test-btn" type="button" style="display:none" onclick="modalTestTracker()" title="Test the API and profile scrape for this tracker">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                  Test connection
+                </button>
+                <button class="btn btn-ghost" type="button" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary" id="modal-save-btn" type="button" onclick="saveTracker()">Add Tracker</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Tab: Integrations (internal id/tab key kept as "qui") ─── -->
+          <div class="settings-panel" id="settings-tab-qui" style="display:none">
+            <p class="settings-section-label">Integrations</p>
+            <div class="form-group" style="margin-bottom:10px">
+              <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
+                <div class="toggle-track" id="s-qui-bars-track" onclick="toggleSettingsQuiBars()"><div class="toggle-thumb"></div></div>
+                <div>
+                  <div style="font-size:13px;font-weight:600;color:var(--text)">qui</div>
+                  <div style="font-size:11px;color:var(--text3);margin-top:2px">Shows general qui (qBittorrent) stats in a bar along the top of the dashboard.</div>
+                </div>
+              </label>
+            </div>
+            <div id="s-qui-options">
+            <p style="font-size:12px;color:var(--text3);margin-bottom:10px">
+              <a href="https://github.com/autobrr/qui" target="_blank" rel="noopener noreferrer">qui</a> is a qBittorrent management UI. Configure its address and API key, then select which instances to show.
+            </p>
+            <div class="form-row">
+              <div class="form-group" style="grid-column:1/-1">
+                <label class="form-label">QUI URL</label>
+                <input class="form-input" type="url" id="s-qui-url" placeholder="http://localhost:7476" oninput="scheduleQuiInstanceLoad()"/>
+                <span class="form-hint">Base URL of your QUI instance — no trailing slash</span>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group" style="grid-column:1/-1">
+                <label class="form-label">API Key</label>
+                <input class="form-input" type="password" id="s-qui-key" placeholder="Your QUI API key" oninput="scheduleQuiInstanceLoad()"/>
+                <span class="form-hint">Found in QUI Settings → API. Shows ●●●●●●●● when a key is stored — leave it to keep the key, clear it to remove.</span>
+              </div>
+            </div>
+            <div id="s-qui-instances-section">
+              <div class="modal-divider" style="margin:14px 0 10px"><span class="modal-divider-label">Instances</span><div class="modal-divider-line"></div>
+                <button class="btn-autofill" id="s-qui-refresh-btn" type="button" onclick="loadQuiInstancesForSettings()" title="Reload instances using the URL/key typed above (works before saving)">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                  Reload
+                </button>
+              </div>
+              <div id="s-qui-instance-list" style="display:flex;flex-direction:column;gap:6px;min-height:32px">
+                <span style="font-size:12px;color:var(--text3);font-style:italic">Loading instances…</span>
+              </div>
+            </div>
+            </div><!-- /s-qui-options -->
+          </div>
+
+          <!-- ── Tab: Alerts (webhooks + rule builder) ────────────────── -->
+          <div class="settings-panel" id="settings-tab-alerts" style="display:none">
+            <p class="settings-section-label">Alerts &amp; Notifications</p>
+            <p style="font-size:12px;color:var(--text3);margin-bottom:14px">
+              Send webhook notifications (Discord, Telegram, Gotify, or a generic JSON POST) when a rule's conditions are met — e.g. ratio drops below a threshold, a hit &amp; run appears, unread mail or notifications arrive (updated by profile scrapes, so up to one scrape interval late), or a tracker event starts (freeleech, open registration, etc. — the banner text is passed through). Rules are checked every few minutes on the server, so alerts fire even with no browser open.
+            </p>
+            <div id="alerts-content"><div style="font-size:12px;color:var(--text3);font-style:italic">Loading…</div></div>
+            <div style="margin-top:16px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <button type="button" class="btn btn-primary" data-action="save-alerts">Save alerts</button>
+              <div style="flex:1"></div>
+              <button type="button" class="btn btn-ghost btn-sm" onclick="exportAlerts()"><i class="fas fa-download" style="margin-right:6px"></i>Export alerts</button>
+              <button type="button" class="btn btn-ghost btn-sm" onclick="document.getElementById('alerts-import-file').click()"><i class="fas fa-upload" style="margin-right:6px"></i>Import alerts</button>
+              <input type="file" id="alerts-import-file" accept="application/json,.json" style="display:none" onchange="importAlertsFile(this)"/>
+            </div>
+            <div style="font-size:11px;color:var(--text3);margin-top:8px">Export/import covers only alerts (destinations + rules). Webhook URLs and tokens are <strong>stripped from the export</strong>, so the file is safe to share. Re-importing it here keeps your saved webhooks; on another instance, re-enter them after importing.</div>
+          </div>
+
+          <!-- ── Tab: Logs (live rolling log viewer) ──────────────────── -->
+          <div class="settings-panel" id="settings-tab-logs" style="display:none">
+            <p class="settings-section-label">Logs</p>
+            <p style="font-size:12px;color:var(--text3);margin-bottom:12px">
+              Live application log — useful for troubleshooting and for attaching to GitHub issues. Everything is captured to a rotating file on disk (<code id="s-log-path">…</code>); the level buttons below only choose what's <em>shown</em> here.
+            </p>
+            <div class="log-toolbar">
+              <span style="font-size:11px;color:var(--text3)">Show</span>
+              <div class="log-levels" id="s-log-levels"></div>
+              <label class="log-tool-item" style="cursor:pointer;margin-left:8px">
+                <input type="checkbox" id="s-log-autoscroll" checked style="accent-color:var(--accent)"/>
+                <span style="font-size:12px;color:var(--text2)">Auto-scroll</span>
+              </label>
+              <div style="flex:1"></div>
+              <button type="button" class="btn btn-ghost btn-sm" id="s-log-pause" onclick="toggleLogPause()">Pause</button>
+              <button type="button" class="btn btn-ghost btn-sm" onclick="downloadLogs()">Download</button>
+              <button type="button" class="btn btn-danger btn-sm" onclick="clearLogs()">Clear</button>
+            </div>
+            <div class="log-view" id="s-log-view"><div class="log-empty">Loading…</div></div>
+          </div>
+
+        </div><!-- /settings-content -->
+      </div><!-- /settings-layout -->
+    </div><!-- /settings-page -->
+  </main>
+</div><!-- /app-wrapper -->
+
+<div class="toast-container" id="toast-container"></div>
+
+<!-- ════ Column customizer modal ════ -->
+<div class="modal-backdrop" id="col-modal">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-header">
+      <span class="modal-title">Customise Columns</span>
+      <button class="modal-close" onclick="closeColModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:12px;color:var(--text3);margin-bottom:4px">Drag to reorder · toggle to show/hide · fixed columns cannot be hidden<br><span style="color:var(--teal)">●</span> Extended columns populate from profile scrapes or extra API fields where the tracker supports them</p>
+      <div class="col-customize-list" id="col-customize-list"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost btn-sm" onclick="resetColPrefs()">Reset to Default</button>
+      <button class="btn btn-primary" onclick="closeColModal()">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- Settings modal helpers — these must be globally accessible via onclick attributes.
+     They are also registered by dashboard.js, but defined here as reliable fallbacks
+     so they work even if the JS bundle hasn't loaded or the build is stale. -->
+<script>
+function _settingsToggle(id) {
+  var t = document.getElementById(id);
+  if (!t) return;
+  var on = !t.classList.contains('on');
+  t.className = 'toggle-track' + (on ? ' on' : '');
+  if (id === 's-private-track') document.body.classList.toggle('private-mode', on);
+  if (id === 's-api-only-track') _applyScrapeLockouts();
+}
+
+/** Grey out + disable scrape inputs when API-only mode is on; show the lock
+ *  hint on the interval input when auto-calculate is checked. Never clears
+ *  saved values — only disabled/opacity. */
+function _applyScrapeLockouts() {
+  var apiOnlyTrack = document.getElementById('s-api-only-track');
+  var apiOnly = !!(apiOnlyTrack && apiOnlyTrack.classList.contains('on'));
+  var autoCb = document.getElementById('s-auto-interval');
+  var autoOn = !!(autoCb && autoCb.checked);
+
+  var intInput = document.getElementById('s-scrape-interval');
+  var maxInput = document.getElementById('s-max-scrapes');
+  var intGroup = document.getElementById('s-scrape-interval-group');
+  var maxGroup = document.getElementById('s-max-scrapes-group');
+  var autoGroup = document.getElementById('s-auto-interval-group');
+  var lockHint = document.getElementById('s-scrape-interval-lock');
+  var normalHint = document.getElementById('s-scrape-interval-hint');
+
+  // API-only: grey out + disable the whole interval/max/auto block.
+  [intGroup, maxGroup, autoGroup].forEach(function(g) {
+    if (g) g.style.opacity = apiOnly ? '0.5' : '';
+  });
+  if (apiOnly) {
+    if (intInput) { intInput.disabled = true; intInput.style.cursor = 'not-allowed'; }
+    if (maxInput) { maxInput.disabled = true; maxInput.style.cursor = 'not-allowed'; }
+    if (autoCb)   { autoCb.disabled = true;   autoCb.style.cursor = 'not-allowed'; }
+  } else {
+    if (maxInput) { maxInput.disabled = false; maxInput.style.cursor = ''; }
+    if (autoCb)   { autoCb.disabled = false;   autoCb.style.cursor = ''; }
+    // Interval input is disabled only when auto-calc is on.
+    if (intInput) { intInput.disabled = autoOn; intInput.style.cursor = autoOn ? 'not-allowed' : ''; }
+  }
+
+  // Visible "locked" state on the interval input when auto-calc drives it.
+  var locked = autoOn && !apiOnly;
+  if (intInput) intInput.style.opacity = locked ? '0.6' : '';
+  if (lockHint)   lockHint.style.display = locked ? '' : 'none';
+  if (normalHint) normalHint.style.display = locked ? 'none' : '';
+}
+function toggleSettingsFavicon()  { _settingsToggle('s-favicon-track'); }
+function toggleSettingsSync()     { _settingsToggle('s-profile-sync-track'); }
+function toggleSettingsPrivate()  { _settingsToggle('s-private-track'); }
+function toggleSettingsStatSources() { _settingsToggle('s-stat-src-track'); }
+function toggleSettingsPathwayEtas() { _settingsToggle('s-pw-eta-track'); }
+function toggleSettingsTrendEstimates() { _settingsToggle('s-trend-est-track'); }
+function toggleSettingsTargetEtas() { _settingsToggle('s-target-eta-track'); }
+function toggleSettingsRateHovers() { _settingsToggle('s-rate-hover-track'); }
+function toggleSettingsUnreadMail() { _settingsToggle('s-unread-mail-track'); }
+function toggleSettingsUnreadNotif() { _settingsToggle('s-unread-notif-track'); }
+function toggleSettingsBackup() { _settingsToggle('s-backup-track'); _applyBackupLock(); }
+function _applyBackupLock() {
+  var on = !!(document.getElementById('s-backup-track') && document.getElementById('s-backup-track').classList.contains('on'));
+  var opts = document.getElementById('s-backup-opts');
+  if (opts) opts.style.opacity = on ? '' : '0.5';
+  var f = document.getElementById('s-backup-frequency');
+  var k = document.getElementById('s-backup-keep');
+  if (f) f.disabled = !on;
+  if (k) k.disabled = !on;
+}
+
+function _onMaxScrapesChange() {
+  var cb = document.getElementById('s-auto-interval');
+  if (cb && cb.checked) _updateAutoInterval();
+}
+function _updateAutoInterval() {
+  var maxEl = document.getElementById('s-max-scrapes');
+  var intEl = document.getElementById('s-scrape-interval');
+  if (!maxEl || !intEl) return;
+  var max = parseInt(maxEl.value) || 0;
+  if (max > 0) { intEl.value = String(Math.max(60, Math.floor(1440 / max))); intEl.disabled = true; }
+  else { intEl.disabled = false; }
+}
+function _onAutoIntervalChange() {
+  var cb = document.getElementById('s-auto-interval');
+  var intEl = document.getElementById('s-scrape-interval');
+  if (!intEl) return;
+  if (cb && cb.checked) { _updateAutoInterval(); } else { intEl.disabled = false; }
+  _applyScrapeLockouts();
+}
+
+// NOTE: saveSettings is intentionally NOT defined inline. PUT /api/settings
+// is a full replace in v2 — a partial fallback payload would wipe settings.
+// The real implementation is registered on window by dashboard.js.
+</script>
+
+<script src="/static/dashboard.js"></script>
+</body>
+</html>

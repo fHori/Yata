@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "key": "test",
+  "label": "Test / Demo",
+  "description": "Local demo tracker. All stats come from test_data.json scenarios. No real HTTP requests are ever made.",
+  "api": { "kind": "demo" },
+  "api_field_map": {
+    "seedbonus": "bonus_points"
+  },
+  "scrape": {
+    "skip_html_scrape": true
+  }
+}

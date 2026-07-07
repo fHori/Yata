@@ -1,0 +1,52 @@
+/* Theme: Dracula */
+/* id: drac */
+/* swatches: #191A21 #282A36 #BD93F9 #FF79C6 */
+[data-theme="drac"] {
+  --bg:       #191A21;
+  --surface:  #282A36;
+  --surface2: #343746;
+  --surface3: #44475A;
+  --border:  #44475A;
+  --border2: #6272A4;
+  --accent:      #BD93F9;
+  --accent-h:    #a87af0;
+  --green:  #50FA7B;
+  --red:    #FF5555;
+  --amber:  #FFB86C;
+  --blue:   #8BE9FD;
+  --teal:   #8BE9FD;
+  --purple: #BD93F9;
+  --orange: #FFB86C;
+  --pink:   #FF79C6;
+  --text:  #F8F8F2;
+  --text2: #6272A4;
+  --text3: #BD93F9;
+  --shadow: 0 4px 24px rgba(0,0,0,.55);
+  --topbar-bg:   rgba(25,26,33,.96);
+  --table-hover: rgba(248,248,242,.03);
+  --btn-primary-text: #1a1a2e;
+  --toggle-thumb: #F8F8F2;
+  --overlay-bg:    rgba(0,0,0,.72);
+  --overlay-bg-sm: rgba(0,0,0,.55);
+  --accent-glow:      rgba(189,147,249,.20);
+  --accent-bg-sm:     rgba(189,147,249,.10);
+  --accent-bg-md:     rgba(189,147,249,.15);
+  --accent-border-sm: rgba(189,147,249,.25);
+  --accent-border-md: rgba(189,147,249,.35);
+  --accent-border:    rgba(189,147,249,.35);
+  --error-bg:        rgba(255,85,85,.06);
+  --error-border:    rgba(255,85,85,.20);
+  --error-bg-md:     rgba(255,85,85,.12);
+  --error-bg-lg:     rgba(255,85,85,.18);
+  --error-border-md: rgba(255,85,85,.28);
+  --error-border-lg: rgba(255,85,85,.42);
+  --amber-bg:     rgba(255,184,108,.12);
+  --amber-border: rgba(255,184,108,.32);
+  --blue-bg:     rgba(139,233,253,.08);
+  --blue-border: rgba(139,233,253,.22);
+  --qui-dl-color:         var(--purple);
+  --qui-ul-color:         var(--green);
+  --qui-free-color:       var(--text3);
+  --qui-ratio-icon-color: var(--text3);
+  --qui-size-color:       var(--teal);
+}

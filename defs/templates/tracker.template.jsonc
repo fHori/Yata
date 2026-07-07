@@ -1,0 +1,249 @@
+// ═══════════════════════════════════════════════════════════════════════════
+// Yata — TRACKER DEFINITION TEMPLATE
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// To add a new tracker WITHOUT touching any application code:
+//   1. Copy this file to  defs/trackers/<key>.json
+//   2. Remove every comment (real def files must be plain JSON — comments are
+//      only allowed in this .jsonc template)
+//   3. Remove every optional field you don't need (only key, name, abbr, url,
+//      type are required)
+//   4. Click "Reload definitions" in Settings (or restart Yata)
+//
+// Fields marked [REQUIRED] must be present. Everything else is optional and
+// inherits sensible defaults from the tracker type (defs/types/<type>.json)
+// and the app's global settings.
+{
+  // [REQUIRED] Schema version — always 1 for now.
+  "schema_version": 1,
+
+  // [REQUIRED] Unique lowercase identifier. Convention: the tracker's domain
+  // name without TLD, e.g. "seedpool" for seedpool.org.
+  "key": "mytracker",
+
+  // [REQUIRED] Full display name shown in the UI.
+  "name": "My Tracker",
+
+  // [REQUIRED] Short abbreviation for compact display, e.g. "SP", "MAM".
+  "abbr": "MT",
+
+  // [REQUIRED] Canonical base URL — no trailing slash.
+  "url": "https://mytracker.example",
+
+  // [OPTIONAL] Alternate base URLs that should also match this definition
+  // (mirror domains, old domains after a rename).
+  "aliases": ["https://mytracker-mirror.example"],
+
+  // [REQUIRED] Tracker type key — must match a file in defs/types/.
+  // Built-in types: "unit3d", "gazelle", "custom", "test".
+  "type": "unit3d",
+
+  // [OPTIONAL — recommended] Date (YYYY-MM-DD) this def's data was last
+  // verified against the tracker's live pages. Version control for def
+  // maintainers — never displayed in the app.
+  "last_updated": "2026-07-02",
+
+  // [OPTIONAL — recommended] Which tracker staff member approved Yata
+  // support, their role, and the approval date. The who/when details are
+  // record-keeping only (never displayed in the app), but the derived STATUS
+  // drives a UI warning:
+  //   - name + date filled                → "approved": no warning shown.
+  //   - "status": "informal"              → staff gave a non-committal OK
+  //     ("whatever", a shrug) but not an official yes. Record what was said
+  //     and by whom in "note" — it's shown in the warning tooltip.
+  //   - "status": "pending"               → asked, awaiting a reply.
+  //   - block absent / fields empty       → "unknown" (the DEFAULT): the UI
+  //     shows "not officially approved — use at your own risk". Hand-written
+  //     and testing defs carry the warning automatically.
+  // An official NO never goes here — those trackers belong in the opt-out
+  // list, which blocks scraping instead of just warning.
+  "approved_by": {
+    "name": "StaffHandle",
+    "role": "SysOp",
+    "date": "2026-07-02"
+    // "status": "informal",
+    // "note": "Staff said 'fine by us' in Discord, no formal sign-off."
+  },
+
+  // [OPTIONAL] Rename API response fields to Yata's canonical names.
+  // Merged ON TOP of the type-level map; tracker entries win on collision.
+  // Canonical names: username, group, uploaded, downloaded, ratio, real_ratio,
+  //   buffer, bonus_points, seeding, leeching, hit_and_runs, fl_tokens,
+  //   seed_size, avg_seed_time, total_seedtime, join_date, snatched,
+  //   upload_snatches, invites, warnings, uploads_approved, requests_filled.
+  "api_field_map": {
+    "seedbonus": "bonus_points"
+  },
+
+  // [OPTIONAL] Scrape behaviour overrides. ALL sub-fields optional.
+  "scrape": {
+    // Operator request: never HTML-scrape this tracker. Users cannot
+    // override this. Use when the tracker forbids automated page access.
+    "disable_scraping": false,
+
+    // Operator request: minimum minutes between profile scrapes.
+    // The EFFECTIVE interval is the MAXIMUM of: hard floor (60), the user's
+    // global setting, this value, and the user's per-tracker setting.
+    // 0 = no tracker-specific request.
+    "min_interval_minutes": 0,
+
+    // Operator request: maximum scrapes per UTC calendar day.
+    // The EFFECTIVE cap is the most restrictive non-zero value of the user's
+    // global setting and this. 0 = no tracker-specific cap.
+    "max_scrapes_per_day": 0,
+
+    // How Yata identifies itself in requests to YOUR tracker (API + scrape),
+    // so your staff can monitor the traffic and ask for adjustments:
+    //   "ua" (default) — browser-style User-Agent with a "Yata/<version>"
+    //                    suffix; greppable in standard access logs.
+    //   "header"       — plain browser UA + an "X-Yata-Version" header, for
+    //                    sites whose session security dislikes UA changes.
+    //   "none"         — plain browser UA, for WAF/bot-protection setups
+    //                    (e.g. Cloudflare bot-fight) that would otherwise
+    //                    challenge the requests.
+    "identify": "ua",
+
+    // Profile page path. "{username}" is replaced with the user's name.
+    // Leave out to inherit the type default (unit3d: "/users/{username}").
+    "profile_path": "/users/{username}",
+
+    // Extra label mappings for this tracker's profile page layout.
+    // key   = label text exactly as it appears on the page (lowercase)
+    // value = canonical field name (see api_field_map list above)
+    "labels": {
+      "account upload (total)": "uploaded",
+      "bon": "bonus_points"
+    },
+
+    // CSS class of the event/freeleech banner title element, when the
+    // tracker doesn't use the standard <strong> tag (e.g. LST uses "badge").
+    "event_title_class": "",
+
+    // Value/label CSS class pair for trackers whose stat cards render the
+    // value element next to a label element under a shared parent.
+    // null/omitted = not used.
+    "stat_card_classes": {
+      "label": "profile-stats__label",
+      "value": "profile-stats__value"
+    }
+  },
+
+  // [OPTIONAL — REQUIRED for type "custom"] Describes a non-standard API
+  // entirely as data. Omit for unit3d/gazelle/test trackers.
+  "api": {
+    // Endpoint path appended to the base URL.
+    "path": "/api/stats.php?summary",
+
+    // One of: "session_cookie", "api_key_query", "api_key_header"
+    //   session_cookie — sends "Cookie: <cookie_name>=<user's session cookie>"
+    //   api_key_query  — appends "?<api_key_param>=<user's API key>"
+    //   api_key_header — sends "Authorization: Bearer <user's API key>"
+    "auth_method": "api_key_query",
+    "cookie_name": "",
+    "api_key_param": "token",
+
+    // Map JSON response paths (dot notation for nesting) → canonical fields.
+    "field_map": {
+      "username": "username",
+      "stats.ratio": "ratio",
+      "leeching.count": "leeching"
+    },
+
+    // Sum several integer paths into one canonical count field.
+    "sum_fields": {
+      "seeding": ["seedOk.count", "seedHnr.count"]
+    },
+
+    // Sum several byte-count paths into one human-readable size field.
+    "sum_bytes_fields": {
+      "seed_size": ["seedOk.size", "seedHnr.size"]
+    },
+
+    // Map byte-count paths → canonical fields, converting to size strings.
+    "byte_fields": {
+      "uploaded_bytes": "uploaded",
+      "downloaded_bytes": "downloaded"
+    },
+
+    // Compute buffer = uploaded bytes − downloaded bytes (requires
+    // byte_fields entries mapped to "uploaded" and "downloaded").
+    "buffer_from_bytes": true,
+
+    // Hint shown under the API key field in the tracker edit modal —
+    // tell users where to find their token.
+    "api_key_hint": "Preferences > Security > Create Session"
+  },
+
+  // [OPTIONAL] Site-wide account rules (from the tracker's rules page).
+  // Distinct from per-group requirements.
+  "rules": {
+    // Ratio below which the account is at risk (warnings/demotion/ban).
+    // When set, the UI colors the ratio red ONLY below this value.
+    "min_ratio": 0.4
+  },
+
+  // [OPTIONAL] Site-wide requirements to USE the invite system when they are
+  // NOT tied to a user class (e.g. MAM: Power User PLUS 1 TB upload, 2.0
+  // ratio, 6 months account age). These AUGMENT the community pathway data
+  // on every route leaving this tracker — which for such trackers often just
+  // says "None". Same min_* fields as group requirements, plus:
+  "invite_requirements": {
+    "min_class": "Power User",   // class that must ADDITIONALLY be held (must match a groups entry)
+    "min_uploaded": "1 TB",
+    "min_ratio": 2.0,
+    "min_age": "6M",
+    // Free text always shown alongside (extra caveats, sources).
+    "note": "Some invite threads additionally require VIP."
+  },
+
+  // [OPTIONAL] User groups/classes in ASCENDING rank order (lowest first).
+  // Powers styled badges, perk display, and "Load from Group" targets.
+  "groups": [
+    {
+      // Group name EXACTLY as the tracker displays it.
+      "name": "Power User",
+
+      // Visual style for the badge and styled-username rendering.
+      "style": {
+        "color": "#3b82f6",          // hex colour; omit for theme default
+        // Font Awesome class; omit for none. Use the EXACT icon the tracker
+        // uses (copy the <i class="..."> from its Stats/User Classes page) —
+        // Pro-only icons are fine: users who drop Font Awesome Pro into
+        // static/fontawesome/ see the real icon, and everyone else gets an
+        // automatic free-icon fallback (missing glyphs are detected at
+        // runtime and swapped for a generic badge icon).
+        "icon": "fas fa-user-plus",
+        "sparkle": false             // shimmer animation for top-tier groups
+      },
+
+      // Promotion requirements. ALL optional — omit what doesn't apply.
+      // For non-stat groups (invite-only/staff/donor) use ONLY "description".
+      "requirements": {
+        "min_uploaded": "1 TiB",     // size string
+        "min_downloaded": "50 GB",   // size string — TBDev-family trackers promote on download volume
+        "min_ratio": 1.0,            // number
+        "min_seedtime": "1M",        // avg seedtime: 30D / 1M / 1Y style
+        "min_seed_size": "5 TiB",    // concurrent seeding size
+        "min_uploads": 0,            // torrent upload count
+        "min_adoptions": 0,          // adopted-torrent count (e.g. ANT's adoption program)
+        "min_bonus_points": 0,       // bonus point balance
+        "min_age": "1M",             // account age
+        "description": "",           // non-stat groups: text shown instead of bars
+
+        // Alternative requirement sets: everything above must be met PLUS
+        // at least ONE complete any_of entry (e.g. LST Whale needs
+        // "6 TiB seeding OR 25 TiB uploaded"). Entries cannot nest further.
+        "any_of": [
+          { "min_seed_size": "6 TiB" },
+          { "min_uploaded": "25 TiB" }
+        ]
+      },
+
+      // Perks: icon + label pairs. Fold values into the label text.
+      "perks": [
+        { "icon": "fas fa-download", "label": "DL Slots: 15" },
+        { "icon": "fas fa-envelope", "label": "Send Invites" }
+      ]
+    }
+  ]
+}

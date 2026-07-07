@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "key": "custom",
+  "label": "Custom API",
+  "description": "Custom API tracker. All fetch details (endpoint, authentication, field mappings) are defined in the individual tracker definition file's \"api\" object. HTML profile scraping is disabled — all stats come from the API.",
+  "api": {
+    "kind": "custom",
+    "required_fields": ["join_date"]
+  },
+  "scrape": {
+    "skip_html_scrape": true
+  }
+}

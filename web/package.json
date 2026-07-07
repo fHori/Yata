@@ -1,0 +1,15 @@
+{
+  "name": "yata-web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "watch": "vite build --watch"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^24.43.1",
+    "typescript": "^5.4.0",
+    "vite": "^5.2.0"
+  }
+}

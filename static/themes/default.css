@@ -1,0 +1,14 @@
+/* Theme: Colorful (default) */
+/* id: default */
+/* swatches: #0d0f14 #13161e #6d56eb #a855f7 */
+/*
+  This is the default theme. All color variables are defined in :root inside
+  dashboard.css, so no overrides are needed here.
+
+  Selecting this theme removes the data-theme attribute from <html> and
+  unloads any active theme stylesheet, falling back to the :root defaults.
+
+  To create your own theme, copy any other theme file, give it a new id and
+  name in the header comments, and drop it in this directory. Only include
+  the variables you want to change — the rest fall back to the defaults.
+*/

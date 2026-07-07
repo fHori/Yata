@@ -1,0 +1,52 @@
+/* Theme: Tech Innovation */
+/* id: tech */
+/* swatches: #080a0d #0f1318 #2b8bff #00ffff */
+[data-theme="tech"] {
+  --bg:       #080a0d;
+  --surface:  #0f1318;
+  --surface2: #161b22;
+  --surface3: #1e2530;
+  --border:  rgba(0,255,255,.08);
+  --border2: rgba(0,255,255,.16);
+  --accent:      #2b8bff;
+  --accent-h:    #1a72e6;
+  --green:  #2ee6b0;
+  --red:    #ff5a6e;
+  --amber:  #ffc24d;
+  --blue:   #4aa8ff;
+  --teal:   #2ce0e0;
+  --purple: #9a8cff;
+  --orange: #ff945a;
+  --pink:   #ff6ec7;
+  --text:  #e8f0f8;
+  --text2: #7d8da3;
+  --text3: #3f4c5e;
+  --shadow: 0 4px 24px rgba(0,0,0,.6);
+  --topbar-bg:   rgba(8,10,13,.96);
+  --table-hover: rgba(0,255,255,.025);
+  --btn-primary-text: #ffffff;
+  --toggle-thumb: #e8f0f8;
+  --overlay-bg:    rgba(0,0,0,.76);
+  --overlay-bg-sm: rgba(0,0,0,.60);
+  --accent-glow:      rgba(43,139,255,.22);
+  --accent-bg-sm:     rgba(43,139,255,.10);
+  --accent-bg-md:     rgba(43,139,255,.16);
+  --accent-border-sm: rgba(43,139,255,.25);
+  --accent-border-md: rgba(43,139,255,.35);
+  --accent-border:    rgba(43,139,255,.35);
+  --error-bg:        rgba(255,90,110,.06);
+  --error-border:    rgba(255,90,110,.20);
+  --error-bg-md:     rgba(255,90,110,.12);
+  --error-bg-lg:     rgba(255,90,110,.18);
+  --error-border-md: rgba(255,90,110,.28);
+  --error-border-lg: rgba(255,90,110,.42);
+  --amber-bg:     rgba(255,194,77,.12);
+  --amber-border: rgba(255,194,77,.32);
+  --blue-bg:     rgba(74,168,255,.08);
+  --blue-border: rgba(74,168,255,.22);
+  --qui-dl-color:         var(--purple);
+  --qui-ul-color:         var(--green);
+  --qui-free-color:       var(--text3);
+  --qui-ratio-icon-color: var(--text3);
+  --qui-size-color:       var(--teal);
+}

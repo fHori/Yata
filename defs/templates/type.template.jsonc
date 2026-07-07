@@ -1,0 +1,103 @@
+// ═══════════════════════════════════════════════════════════════════════════
+// Yata — TRACKER TYPE DEFINITION TEMPLATE
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// A tracker TYPE describes a class of tracker software (Unit3D, Gazelle, …).
+// Individual trackers reference a type and inherit its defaults.
+// Most users never need to create a type — the built-ins (unit3d, gazelle,
+// custom, test) cover nearly everything. Create one only for genuinely new
+// tracker software.
+//
+// To add: copy to defs/types/<key>.json, strip ALL comments (must be plain
+// JSON), then reload definitions.
+{
+  // [REQUIRED] Schema version — always 1.
+  "schema_version": 1,
+
+  // [REQUIRED] Unique lowercase type key, referenced by tracker defs.
+  "key": "mytype",
+
+  // [REQUIRED] Human-readable name shown in the UI.
+  "label": "My Tracker Software",
+
+  // [OPTIONAL] Explanatory text.
+  "description": "Describe the software, its API and profile page layout.",
+
+  // [REQUIRED] Which built-in fetcher this type uses.
+  //   "unit3d"  — GET {url}/api/user?api_token={key}
+  //   "gazelle" — GET {url}/api.php?action=user&apikey={key}&method=getuserinfo&type=username&user={username}
+  //   "custom"  — fully described by each tracker def's "api" object
+  //   "demo"    — local mock data from test_data.json, no HTTP
+  //   "none"    — no API at all; profile scraping is the only source
+  "api": {
+    "kind": "unit3d",
+
+    // [OPTIONAL] Extra config fields users MUST fill at tracker setup.
+    // Valid: "username"       (gazelle needs it for the API call),
+    //        "session_cookie" (API needs a cookie, not a key),
+    //        "join_date"      (API reports no join date — the user enters it
+    //                          once for account-age tracking, e.g. MAM).
+    "required_fields": []
+  },
+
+  // [OPTIONAL] Rename API response fields to canonical Yata names.
+  // Applied to every tracker of this type; tracker-level api_field_map
+  // entries are merged on top and win on collision.
+  "api_field_map": {
+    "seedbonus": "bonus_points"
+  },
+
+  // [OPTIONAL] Type-level scrape defaults. Tracker defs override/merge.
+  "scrape": {
+    // Architectural: this type has no scrapeable profile page at all
+    // (e.g. API-only software). Distinct from a tracker's
+    // disable_scraping, which is an operator REQUEST on one site.
+    "skip_html_scrape": false,
+
+    // Default profile page path for this software. Placeholders:
+    //   {username} — the user's name (unit3d style: /users/{username})
+    //   {id}       — the numeric user id captured from the API's user_id
+    //                field (gazelle style: /user.php?id={id})
+    "profile_path": "/users/{username}",
+
+    // Base label map for profile pages of this software:
+    // on-page label text (lowercase) → canonical field name.
+    "labels": {
+      "seeding size": "seed_size",
+      "average seedtime": "avg_seed_time"
+    },
+
+    // CSS class of the event/freeleech banner title element, when the
+    // software doesn't use the default <strong> strategy.
+    "event_title_class": "",
+
+    // Boolean page states detected by ELEMENT PRESENCE, keyed by canonical
+    // field name. For each flag Yata finds the <a> whose href ends with
+    // link_suffix (query string ignored) and sets the field "true" when the
+    // anchor contains a <marker> element, "false" when it exists without one.
+    // Anchor absent → the field stays unset (unknown never fakes "false").
+    // The site header ships inside the profile page we already fetch — these
+    // cost ZERO extra requests. Unit3D example (inbox/bell unread dots):
+    "presence_flags": {
+      "unread_mail":          { "link_suffix": "/conversations", "marker": "svg" },
+      "unread_notifications": { "link_suffix": "/notifications", "marker": "svg" }
+    },
+
+    // Value/label CSS class pair for software whose stat cards render the
+    // value element next to a label element under a shared parent.
+    // Omit when not used.
+    "stat_card_classes": {
+      "label": "profile-stats__label",
+      "value": "profile-stats__value"
+    },
+
+    // Software-wide scrape rate requests (rare — usually tracker-level).
+    // Same cascade semantics as tracker defs: interval MAX, daily cap MIN.
+    "min_interval_minutes": 0,
+    "max_scrapes_per_day": 0,
+
+    // Traffic identification default for this software ("ua" | "header" |
+    // "none") — see tracker.template.jsonc for details. Tracker defs override.
+    "identify": "ua"
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "key": "retroflix",
+  "name": "RetroFlix",
+  "abbr": "RF",
+  "url": "https://retroflix.net",
+  "type": "scrape_only",
+  "last_updated": "2026-07-02",
+  "approved_by": {
+    "name": "",
+    "role": "",
+    "date": ""
+  },
+  "scrape": {
+    "profile_path": "/userdetails.php?id={id}",
+    "labels": {
+      "share ratio": "ratio",
+      "seed avg.": "avg_seed_time",
+      "seeding time": "total_seedtime",
+      "hit&run": "hit_and_runs",
+      "karma points": "bonus_points",
+      "invitations": "invites",
+      "class": "group"
+    }
+  },
+  "groups": [
+    {
+      "name": "Film Dummy",
+      "style": {
+        "color": "#708090",
+        "icon": "fas fa-thumbs-down"
+      },
+      "requirements": {
+        "description": "Demotion class — improve your ratio within 30 days or be banned."
+      }
+    },
+    {
+      "name": "Film Stunt",
+      "style": {
+        "color": "#A9A9A9",
+        "icon": "fas fa-person-falling"
+      },
+      "requirements": {}
+    },
+    {
+      "name": "Movie Lover",
+      "style": {
+        "color": "#daa520",
+        "icon": "fas fa-heart"
+      },
+      "requirements": {
+        "min_downloaded": "50 GB",
+        "min_ratio": 1.05,
+        "min_age": "4W"
+      },
+      "perks": [
+        { "icon": "fas fa-trophy", "label": "View Top Ten" },
+        { "icon": "fas fa-seedling", "label": "Ask for reseeds" }
+      ]
+    },
+    {
+      "name": "Cinema Addicted",
+      "style": {
+        "color": "#008b8b",
+        "icon": "fas fa-ticket"
+      },
+      "requirements": {
+        "min_downloaded": "120 GB",
+        "min_ratio": 1.55,
+        "min_age": "8W"
+      },
+      "perks": [
+        { "icon": "fas fa-shield", "label": "Never deleted while parked" }
+      ]
+    },
+    {
+      "name": "Film Critic",
+      "style": {
+        "color": "#00bfff",
+        "icon": "fas fa-pen-nib"
+      },
+      "requirements": {
+        "min_downloaded": "300 GB",
+        "min_ratio": 2.05,
+        "min_age": "15W"
+      },
+      "perks": [
+        { "icon": "fas fa-folder-tree", "label": "View torrent structure" },
+        { "icon": "fas fa-image", "label": "Set a userbar" },
+        { "icon": "fas fa-shield", "label": "Never deleted while parked" }
+      ]
+    },
+    {
+      "name": "VIP",
+      "style": {
+        "color": "#009f00",
+        "icon": "fas fa-gem",
+        "sparkle": true
+      },
+      "requirements": {
+        "description": "Assigned by mods at their discretion to users who contribute something special to the site."
+      }
+    },
+    {
+      "name": "Retiree",
+      "style": {
+        "color": "#1cc6d5",
+        "icon": "fas fa-umbrella-beach"
+      },
+      "requirements": {
+        "description": "Former staff members. Granted by the Executive Producer."
+      }
+    },
+    {
+      "name": "Uploader",
+      "style": {
+        "color": "#2ECC71",
+        "icon": "fas fa-upload"
+      },
+      "requirements": {
+        "description": "Appointed by Director/Executive Producer. Can upload torrents, view anonymous uploaders and banned torrents."
+      }
+    },
+    {
+      "name": "Director",
+      "style": {
+        "color": "#6495ed",
+        "icon": "fas fa-clapperboard"
+      },
+      "requirements": {
+        "description": "RetroFlix Moderator."
+      }
+    },
+    {
+      "name": "Producer",
+      "style": {
+        "color": "#4b0082",
+        "icon": "fas fa-user-tie"
+      },
+      "requirements": {
+        "description": "RetroFlix Administrator."
+      }
+    },
+    {
+      "name": "Executive Producer",
+      "style": {
+        "color": "#ff0000",
+        "icon": "fas fa-crown"
+      },
+      "requirements": {
+        "description": "RetroFlix SysOp."
+      }
+    }
+  ]
+}

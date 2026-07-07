@@ -1,0 +1,52 @@
+/* Theme: Sunset Boulevard */
+/* id: sunset */
+/* swatches: #0f2026 #152d34 #e76f51 #e9c46a */
+[data-theme="sunset"] {
+  --bg:       #0f2026;
+  --surface:  #152d34;
+  --surface2: #1b3942;
+  --surface3: #244852;
+  --border:  rgba(233,196,106,.10);
+  --border2: rgba(233,196,106,.18);
+  --accent:      #e76f51;
+  --accent-h:    #d15a3d;
+  --green:  #5cc9a0;
+  --red:    #ef5b5b;
+  --amber:  #e9c46a;
+  --blue:   #5fb0c4;
+  --teal:   #4ec4b4;
+  --purple: #c79ad0;
+  --orange: #f4a261;
+  --pink:   #ef8fa0;
+  --text:  #f6ede0;
+  --text2: #93a3a2;
+  --text3: #4f6168;
+  --shadow: 0 4px 24px rgba(0,0,0,.5);
+  --topbar-bg:   rgba(15,32,38,.96);
+  --table-hover: rgba(233,196,106,.03);
+  --btn-primary-text: #2a140b;
+  --toggle-thumb: #f6ede0;
+  --overlay-bg:    rgba(0,0,0,.72);
+  --overlay-bg-sm: rgba(0,0,0,.55);
+  --accent-glow:      rgba(231,111,81,.22);
+  --accent-bg-sm:     rgba(231,111,81,.10);
+  --accent-bg-md:     rgba(231,111,81,.15);
+  --accent-border-sm: rgba(231,111,81,.25);
+  --accent-border-md: rgba(231,111,81,.35);
+  --accent-border:    rgba(231,111,81,.35);
+  --error-bg:        rgba(239,91,91,.06);
+  --error-border:    rgba(239,91,91,.20);
+  --error-bg-md:     rgba(239,91,91,.12);
+  --error-bg-lg:     rgba(239,91,91,.18);
+  --error-border-md: rgba(239,91,91,.28);
+  --error-border-lg: rgba(239,91,91,.42);
+  --amber-bg:     rgba(233,196,106,.12);
+  --amber-border: rgba(233,196,106,.32);
+  --blue-bg:     rgba(95,176,196,.08);
+  --blue-border: rgba(95,176,196,.22);
+  --qui-dl-color:         var(--purple);
+  --qui-ul-color:         var(--green);
+  --qui-free-color:       var(--text3);
+  --qui-ratio-icon-color: var(--text3);
+  --qui-size-color:       var(--teal);
+}
