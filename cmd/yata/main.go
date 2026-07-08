@@ -147,7 +147,16 @@ func main() {
 		time.Sleep(20 * time.Second) // let startup settle before the first fetch
 		for {
 			api.RunRefreshCycle(deps)
-			time.Sleep(5 * time.Minute)
+			// Cadence follows the user's setting (default 30 min, floor 15) and
+			// is re-read each cycle so changes apply without a restart.
+			iv := cfg.Settings().RefreshIntervalMinutes
+			if iv <= 0 {
+				iv = 30
+			}
+			if iv < api.RefreshFloorMinutes {
+				iv = api.RefreshFloorMinutes
+			}
+			time.Sleep(time.Duration(iv) * time.Minute)
 		}
 	}()
 

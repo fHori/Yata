@@ -519,13 +519,22 @@
 
           <!-- ── Tab: Scraping ────────────────────────────────────────── -->
           <div class="settings-panel" id="settings-tab-scraping" style="display:none">
+            <p class="settings-section-label">Automatic Refresh</p>
+            <div class="form-group" style="margin-bottom:14px">
+              <label style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;display:block">API Refresh Interval (minutes)</label>
+              <div style="display:flex;align-items:center;gap:10px">
+                <input type="number" id="s-refresh-interval" class="form-input" min="15" style="width:100px"
+                  placeholder="30" oninput="this.value=Math.max(15,parseInt(this.value)||15)">
+                <span style="font-size:11px;color:var(--text3)">Min 15 min — how often stats auto-refresh from tracker APIs while idle. Manual refresh &amp; Tracker Test are always allowed.</span>
+              </div>
+            </div>
             <p class="settings-section-label">Profile Scraping</p>
             <div class="form-group" style="margin-bottom:10px">
               <label style="display:flex;align-items:center;gap:10px;cursor:pointer">
                 <div class="toggle-track on" id="s-profile-sync-track" onclick="toggleSettingsSync()"><div class="toggle-thumb"></div></div>
                 <div>
                   <div style="font-size:13px;font-weight:600;color:var(--text)">Auto-sync profile on refresh</div>
-                  <div style="font-size:11px;color:var(--text3);margin-top:2px">Re-scrapes Avg Seed Time, Seed Size, Join Date etc. each time the dashboard refreshes (every 5 min)</div>
+                  <div style="font-size:11px;color:var(--text3);margin-top:2px">Re-scrapes Avg Seed Time, Seed Size, Join Date etc. each time the dashboard auto-refreshes (respecting the scrape rate limits below)</div>
                 </div>
               </label>
             </div>
@@ -952,6 +961,14 @@
                 <label class="form-label">API Key</label>
                 <input class="form-input" type="password" id="s-qui-key" placeholder="Your QUI API key" oninput="scheduleQuiInstanceLoad()"/>
                 <span class="form-hint">Found in QUI Settings → API. Shows ●●●●●●●● when a key is stored — leave it to keep the key, clear it to remove.</span>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group" style="grid-column:1/-1">
+                <label class="form-label">Refresh Interval (seconds)</label>
+                <input class="form-input" type="number" id="s-qui-refresh" min="1" style="max-width:140px"
+                  placeholder="10" oninput="this.value=Math.max(1,parseInt(this.value)||1)"/>
+                <span class="form-hint">How often the qui bars update — local data, so it can stay fast. Min 1 s; use the toggle above to turn qui off entirely.</span>
               </div>
             </div>
             <div id="s-qui-instances-section">
