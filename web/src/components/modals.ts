@@ -50,6 +50,7 @@ interface SettingsDeps {
   applyNameMode: (mode: string) => void;
   applyQuiBarsVisible: (on: boolean) => void;
   applyStatSources: (on: boolean) => void;
+  rescheduleTimers: () => void;
   toast: (msg: string, type?: ToastType) => void;
 }
 
@@ -1273,6 +1274,10 @@ export function openSettingsPage(settings: AppSettings, _meta: unknown[], deps: 
       intervalInput.disabled = false;
     }
   }
+  const refreshInput = document.getElementById('s-refresh-interval') as HTMLInputElement | null;
+  if (refreshInput) refreshInput.value = String(settings.refresh_interval_minutes || 30);
+  const quiRefreshInput = document.getElementById('s-qui-refresh') as HTMLInputElement | null;
+  if (quiRefreshInput) quiRefreshInput.value = String(settings.qui_refresh_seconds || 10);
 
   // Populate theme grid
   renderThemeGrid(settings.theme ?? '');
@@ -1528,6 +1533,8 @@ export async function saveSettings(deps: SettingsDeps) {
     auto_interval:           ((document.getElementById('s-auto-interval') as HTMLInputElement | null)?.checked ?? false),
     scrape_interval_minutes: Math.max(60, parseInt((document.getElementById('s-scrape-interval') as HTMLInputElement | null)?.value ?? '120', 10) || 120),
     max_scrapes_per_day:     Math.max(0, parseInt((document.getElementById('s-max-scrapes') as HTMLInputElement | null)?.value ?? '0', 10) || 0),
+    refresh_interval_minutes: Math.max(15, parseInt((document.getElementById('s-refresh-interval') as HTMLInputElement | null)?.value ?? '30', 10) || 30),
+    qui_refresh_seconds:      Math.max(1,  parseInt((document.getElementById('s-qui-refresh') as HTMLInputElement | null)?.value ?? '10', 10) || 10),
   };
 
   const { ok } = await api.saveSettings(payload);
@@ -1543,6 +1550,8 @@ export async function saveSettings(deps: SettingsDeps) {
     deps.renderQuiBarsWrapper();
     deps.renderTable();
     deps.renderGrid();
+    // Re-arm the auto-refresh + qui timers so a changed cadence applies now.
+    deps.rescheduleTimers();
     // Full-page settings: stay on the page — the toast is the confirmation.
     await deps.refreshQuiStatsWrapper();
   } else {

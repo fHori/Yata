@@ -4,8 +4,9 @@
   "name": "RetroFlix",
   "abbr": "RF",
   "url": "https://retroflix.net",
+  "aliases": ["https://retroflix.club"],
   "type": "scrape_only",
-  "last_updated": "2026-07-02",
+  "last_updated": "2026-07-08",
   "approved_by": {
     "name": "",
     "role": "",

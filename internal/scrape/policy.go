@@ -17,7 +17,7 @@ const HardFloorMinutes = 60
 // tracker at a point in time.
 type Policy struct {
 	Allowed bool   `json:"allowed"`
-	Reason  string `json:"reason,omitempty"` // api_only | scrape_disabled | no_scrape_support | daily_limit | cooldown
+	Reason  string `json:"reason,omitempty"` // opted_out | api_only | scrape_disabled | no_scrape_support | daily_limit | cooldown
 	// NextAllowedAt is set for reason "cooldown" (unix seconds).
 	NextAllowedAt int64 `json:"next_allowed_at,omitempty"`
 	// EffectiveIntervalMinutes is the resolved minimum gap between scrapes.
@@ -90,6 +90,11 @@ func Evaluate(set models.Settings, t models.Tracker, rs defs.ResolvedScrape, db 
 	}
 
 	switch {
+	case rs.OptedOut:
+		// Operator asked not to be supported at all — hard stop, above every
+		// other reason. Enforced here so an existing tracker that lands on the
+		// opt-out list stops being scraped immediately, not just at add-time.
+		p.Reason = "opted_out"
 	case set.APIOnlyMode || t.APIOnly:
 		p.Reason = "api_only"
 	case rs.SkipHTMLScrape:

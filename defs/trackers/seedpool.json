@@ -12,7 +12,7 @@
     "date": "2026-04-20"
   },
   "scrape": {
-    "min_interval_minutes": 60,
+    "min_interval_minutes": 180,
     "labels": {
       "seedpool": "seed_size",
       "unsatisfied torrents": "warnings"

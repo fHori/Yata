@@ -124,6 +124,7 @@ export function buildScrapeRefreshBtn(tracker: Tracker): string {
     }
     let tip: string;
     switch (ss.reason) {
+      case 'opted_out':         tip = 'Operator opted out — Yata no longer contacts this tracker'; break;
       case 'api_only':          tip = 'API only mode — scraping disabled'; break;
       case 'scrape_disabled':   tip = 'Scrape disabled by tracker operator'; break;
       case 'daily_limit':       tip = 'Daily scrape limit reached'; break;

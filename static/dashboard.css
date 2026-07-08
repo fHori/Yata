@@ -809,6 +809,14 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator{filter:invert(.
   font-family:'Geist Mono',monospace;letter-spacing:.2px;
 }
 .trk-def-badge.manual{background:var(--surface3);color:var(--text3);border-color:var(--border2)}
+/* Opt-out badge — an already-added tracker whose operator has since asked not
+   to be supported. Stronger than the amber approval warning: Yata has stopped
+   all traffic to it, so it reads as blocked (red). */
+.trk-optout-badge{
+  font-size:11px;font-weight:600;padding:2px 7px;border-radius:20px;margin-left:6px;
+  color:var(--red);border:1px solid var(--error-border-md);background:var(--error-bg);
+  letter-spacing:.2px;cursor:help;
+}
 /* Unread mail/notification flags (scraped header presence, Display toggle) */
 .unread-flag{color:var(--amber);font-size:10px;margin-left:5px;cursor:help}
 

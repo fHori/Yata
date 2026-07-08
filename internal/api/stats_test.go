@@ -70,7 +70,7 @@ func TestStaleDataSurvivesTrackerOutage(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	resp := refreshTracker(d, tr)
+	resp := refreshTracker(d, tr, true)
 
 	if resp.OK {
 		t.Fatal("expected ok=false for unreachable tracker")

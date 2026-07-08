@@ -7,6 +7,14 @@ package defs
 type ResolvedScrape struct {
 	SkipHTMLScrape  bool
 	DisableScraping bool
+	// OptedOut is true when the tracker's host is on defs/optout.json — the
+	// operator has asked NOT to be supported at all. Unlike DisableScraping
+	// (which only blocks profile scraping), an opt-out blocks BOTH the API
+	// fetch and scraping. OptOut carries the matched entry (name/date/note)
+	// for the UI. This can go true AFTER a tracker was added, so it must be
+	// enforced at runtime — not just at add-time.
+	OptedOut        bool
+	OptOut          OptOutEntry
 	ProfilePath     string
 	Labels          map[string]string
 	EventTitleClass string
@@ -42,6 +50,13 @@ func (r *Registry) ResolveScrape(trackerURL, typeKey string) ResolvedScrape {
 	// Layer 2 — tracker def
 	if hasDef {
 		applySpec(&out, td.Scrape)
+	}
+	// Opt-out is host-based (not part of the type/tracker scrape chain) and
+	// trumps everything: it blocks API + scrape alike. Resolved here so every
+	// caller (scrape policy, UI status, refresh loop) sees it consistently.
+	if entry, opted := r.OptOut(trackerURL); opted {
+		out.OptedOut = true
+		out.OptOut = entry
 	}
 	return out
 }

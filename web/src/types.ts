@@ -49,6 +49,12 @@ export interface Tracker {
    *  Manual trackers report "unknown"; the UI warns unless "approved". */
   def_approval?: string;
   def_approval_note?: string; // informal-OK note, shown in the tooltip
+  /** True when this already-added tracker's host is now on the opt-out list:
+   *  its operator has asked not to be supported, so Yata has STOPPED all API
+   *  + scrape traffic to it. The row flags this so the user knows why it went
+   *  quiet. opted_out_note carries the public note, if any. */
+  opted_out?: boolean;
+  opted_out_note?: string;
 }
 
 /** Sentinel value meaning "credential unchanged" in PUT/POST payloads. */
@@ -132,7 +138,7 @@ export type TestStatusMap = Record<string, TrackerTestResult>;
 
 export interface ScrapeStatus {
   allowed: boolean;
-  reason?: 'api_only' | 'no_scrape_support' | 'scrape_disabled' | 'no_username' | 'no_cookie' | 'daily_limit' | 'cooldown';
+  reason?: 'opted_out' | 'api_only' | 'no_scrape_support' | 'scrape_disabled' | 'no_username' | 'no_cookie' | 'daily_limit' | 'cooldown';
   next_allowed_at?: number;          // unix sec, set for "cooldown"
   effective_interval_minutes: number;
   effective_max_per_day: number;     // 0 = unlimited
@@ -180,6 +186,8 @@ export interface AppSettings {
   scrape_interval_minutes: number;  // min 60 — backend enforces
   max_scrapes_per_day: number;      // 0 = unlimited
   auto_interval: boolean;           // derive interval from max_scrapes_per_day
+  refresh_interval_minutes: number; // idle API auto-refresh cadence; floor 15 (default 30)
+  qui_refresh_seconds: number;      // qui bar refresh cadence; floor 1 (default 10)
   show_unread_mail?: boolean | null;          // null = true — unread envelope icons
   show_unread_notifications?: boolean | null; // null = true — unread bell icons
   update_check_auto?: boolean;                 // opt-in daily update check (default false)

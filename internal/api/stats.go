@@ -25,14 +25,56 @@ func registerStats(r chi.Router, d *Deps) {
 //
 // IMPORTANT (v1 lesson): this runs inside goroutines for bulk refresh.
 // The config manager is mutex-safe; never add file reloads here.
-func refreshTracker(d *Deps, t models.Tracker) models.TrackerStatsResponse {
+//
+// force=true (manual refresh button / Tracker Test / per-tracker refresh)
+// always hits the API. force=false (background loop, open-dashboard polls,
+// page reloads) goes through the min-age guard below so those redundant
+// callers coalesce into ~one API call per configured refresh interval.
+func refreshTracker(d *Deps, t models.Tracker, force bool) models.TrackerStatsResponse {
 	resp := models.TrackerStatsResponse{
 		TrackerID: t.ID,
 		FetchedAt: time.Now().Unix(),
 	}
 
+	// Opt-out gate — a tracker whose operator has asked not to be supported
+	// gets NO API fetch and NO scrape. This is checked here (not just at
+	// add-time) because a tracker can land on defs/optout.json after it was
+	// already configured; without this it would keep being polled. We still
+	// return the last-stored fields so the UI can show why it stopped, and we
+	// skip alert evaluation so opting out never fires a "tracker down" alert.
+	if _, opted := d.Reg.OptOut(t.URL); opted {
+		logOptOutTransition(d, t, true)
+		resp.ErrorKind = "opted_out"
+		resp.Error = "opted_out"
+		if merged, err := d.Stats.Merged(t.ID); err == nil {
+			resp.Fields = merged
+		}
+		return resp
+	}
+	logOptOutTransition(d, t, false)
+
+	// Min-age guard — coalesce non-forced callers. If we fetched this tracker's
+	// API successfully within the guard window, skip the network call and serve
+	// the last-stored merged stats instead. Manual (forced) refreshes bypass it.
+	if !force {
+		if v, ok := lastFetchAt.Load(t.ID); ok {
+			if time.Since(v.(time.Time)) < autoRefreshMinAge(d) {
+				if merged, err := d.Stats.Merged(t.ID); err == nil {
+					resp.Fields = merged
+					resp.OK = true
+					resp.FetchedAt = v.(time.Time).Unix() // reflect the real last fetch
+					if r := d.Stats.GrowthRates(t.ID); len(r) > 0 {
+						resp.Rates = r
+					}
+				}
+				return resp
+			}
+		}
+	}
+
 	data, ferr := d.Fetch.Fetch(t)
 	if ferr == nil {
+		lastFetchAt.Store(t.ID, time.Now()) // gate future non-forced fetches
 		_ = d.Stats.SaveAPI(t.ID, data)
 		resp.OK = true
 		logFetchTransition(d, t, "")
@@ -73,6 +115,32 @@ func refreshTracker(d *Deps, t models.Tracker) models.TrackerStatsResponse {
 	return resp
 }
 
+// RefreshFloorMinutes is the lowest the automatic API-refresh interval can be
+// set to. The manual refresh button and Tracker Test bypass the interval
+// entirely; this floor only bounds the unattended background cadence.
+const RefreshFloorMinutes = 15
+
+// lastFetchAt records the last SUCCESSFUL API fetch time per tracker. In
+// memory only — a restart clears it, which just means the first cycle after
+// boot refetches everyone (desirable). It powers the min-age guard that keeps
+// the background loop, open dashboards, and page reloads from stacking into
+// many API calls per interval.
+var lastFetchAt sync.Map // trackerID -> time.Time
+
+// autoRefreshMinAge is the guard window: a shade under the configured refresh
+// interval (90%), so the scheduled tick still fires while off-phase redundant
+// pollers are skipped. 0/short stored values fall back to sane defaults.
+func autoRefreshMinAge(d *Deps) time.Duration {
+	iv := d.Cfg.Settings().RefreshIntervalMinutes
+	if iv <= 0 {
+		iv = 30 // unset (e.g. upgraded config) → default
+	}
+	if iv < RefreshFloorMinutes {
+		iv = RefreshFloorMinutes
+	}
+	return time.Duration(iv) * time.Minute * 9 / 10
+}
+
 // lastFetchState remembers each tracker's previous API-fetch outcome so the
 // refresh loop logs TRANSITIONS (ok→fail at warn, fail→ok at info) instead of
 // re-warning on every cycle — a tracker that stays down would otherwise flood
@@ -92,6 +160,22 @@ func logFetchTransition(d *Deps, t models.Tracker, errKind string) {
 		d.logWarnf("fetch: %s (%s) still failing — now %s (was %s)", t.Name, t.ID, errKind, prev)
 	case errKind != "":
 		d.logDebugf("fetch: %s (%s) still failing — %s", t.Name, t.ID, errKind)
+	}
+}
+
+// lastOptOutState remembers whether each tracker was opted-out on the previous
+// refresh so the loop logs the TRANSITION once (a warn when it starts being
+// skipped, an info if it later comes off the list) instead of every cycle.
+var lastOptOutState sync.Map // trackerID → bool
+
+func logOptOutTransition(d *Deps, t models.Tracker, opted bool) {
+	prev, seen := lastOptOutState.Load(t.ID)
+	lastOptOutState.Store(t.ID, opted)
+	switch {
+	case opted && (!seen || prev == false):
+		d.logWarnf("fetch: %s (%s) skipped — tracker is on the opt-out list (defs/optout.json); not contacting it", t.Name, t.ID)
+	case !opted && seen && prev == true:
+		d.logInfof("fetch: %s (%s) no longer opted out — resuming", t.Name, t.ID)
 	}
 }
 
@@ -174,13 +258,16 @@ func RunRefreshCycle(d *Deps) {
 		if !t.Enabled {
 			continue
 		}
-		_ = refreshTracker(d, t)
+		_ = refreshTracker(d, t, false) // background loop → guarded
 	}
 }
 
 // GET /api/stats — refresh all enabled trackers concurrently.
+// ?force=1 (the manual refresh button / post-import) bypasses the min-age
+// guard; the plain auto-poll omits it so idle load stays low.
 func bulkStats(d *Deps) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		force := r.URL.Query().Get("force") != ""
 		trackers := d.Cfg.Trackers()
 		results := make(map[string]models.TrackerStatsResponse, len(trackers))
 		var mu sync.Mutex
@@ -195,7 +282,7 @@ func bulkStats(d *Deps) http.HandlerFunc {
 			wg.Add(1)
 			go func(t models.Tracker) {
 				defer wg.Done()
-				res := refreshTracker(d, t)
+				res := refreshTracker(d, t, force)
 				mu.Lock()
 				results[t.ID] = res
 				mu.Unlock()
@@ -206,7 +293,8 @@ func bulkStats(d *Deps) http.HandlerFunc {
 	}
 }
 
-// GET /api/stats/{id} — refresh one tracker.
+// GET /api/stats/{id} — refresh one tracker. This is only ever hit by explicit
+// user actions (per-tracker refresh / Retry / post-edit), so it always forces.
 func singleStats(d *Deps) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		id := chi.URLParam(r, "id")
@@ -219,6 +307,6 @@ func singleStats(d *Deps) http.HandlerFunc {
 			jsonOK(w, models.TrackerStatsResponse{TrackerID: t.ID, ErrorKind: "disabled", Error: "disabled"})
 			return
 		}
-		jsonOK(w, refreshTracker(d, t))
+		jsonOK(w, refreshTracker(d, t, true))
 	}
 }

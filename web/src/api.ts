@@ -109,7 +109,10 @@ export const fetchTestStatus = () =>
 
 // ── Stats (unified merged view) ───────────────────────────────────────────
 
-export const fetchBulkStats = () => call<StatsMap>('/api/stats');
+/** force=true (manual refresh button / post-import) bypasses the server's
+ *  min-age guard so the API is hit immediately; the auto-poll omits it. */
+export const fetchBulkStats = (force = false) =>
+  call<StatsMap>(`/api/stats${force ? '?force=1' : ''}`);
 
 export const fetchSingleStats = (id: string) =>
   call<TrackerStatsResponse>(`/api/stats/${id}`);

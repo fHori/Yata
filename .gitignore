@@ -1,5 +1,5 @@
 # Binaries & build output
-yata
+/yata
 yata.exe
 yata.exe~
 *.exe
@@ -9,7 +9,6 @@ web/dist/
 # Editor / tooling
 .claude/
 .vscode/
-.idea/
 
 # User data — never commit credentials or local databases
 config.json

@@ -74,6 +74,10 @@ func toView(d *Deps, t models.Tracker) models.TrackerView {
 	rs := d.Reg.ResolveScrape(t.URL, t.Type)
 	v.SupportsHTMLScrape = !rs.SkipHTMLScrape && !rs.DisableScraping
 	v.ScrapeDisabledByTracker = rs.DisableScraping
+	if rs.OptedOut {
+		v.OptedOut = true
+		v.OptOutNote = rs.OptOut.Note
+	}
 	v.TrackerMinInterval = rs.MinIntervalMinutes
 	v.TrackerMaxPerDay = rs.MaxScrapesPerDay
 	v.ProfileURL = profileURL(d, t, rs)

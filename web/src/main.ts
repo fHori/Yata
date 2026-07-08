@@ -32,8 +32,12 @@ const modalsReady = import('./components/modals');
 let colPrefs: ColPref[] = loadColPrefs();
 
 // ── Timers ────────────────────────────────────────────────────────────────
-const REFRESH_MS     = 5 * 60 * 1000;
-const QUI_REFRESH_MS = 5_000;
+// Cadences are user-settable; the guards mirror the backend floors. The manual
+// refresh button and Tracker Test bypass these entirely.
+const refreshMs = () =>
+  Math.max(15, state.appSettings.refresh_interval_minutes || 30) * 60 * 1000;
+const quiRefreshMs = () =>
+  Math.max(1, state.appSettings.qui_refresh_seconds || 10) * 1000;
 let refreshTimer: ReturnType<typeof setInterval> | null = null;
 let quiTimer:     ReturnType<typeof setInterval> | null = null;
 
@@ -311,14 +315,14 @@ function mergeStatsEntry(id: string, fresh: TrackerStatsResponse) {
   state.setStatsCacheEntry(id, fresh);
 }
 
-async function refreshAllStats() {
+async function refreshAllStats(force = false) {
   const icon = document.getElementById('refresh-icon');
   const btn  = document.getElementById('refresh-btn') as HTMLButtonElement;
   icon?.classList.add('spinning');
   if (btn) btn.disabled = true;
   state.trackers.forEach(t => setCardLoading(t.id, true));
 
-  const { ok, data } = await api.fetchBulkStats();
+  const { ok, data } = await api.fetchBulkStats(force);
   if (ok && data) {
     // Merge each entry — never wholesale-replace the cache, so trackers
     // missing from the response (or errored without fields) keep old data.
@@ -404,6 +408,7 @@ async function scrapeProfile(id: string, silent = false): Promise<void> {
     // Rate-limited — keep displaying what we have.
     const blocked = res.data as unknown as ScrapeBlocked;
     const reasons: Record<string, string> = {
+      opted_out:         'tracker operator opted out — Yata no longer contacts it',
       api_only:          'API only mode is on',
       no_scrape_support: 'tracker type does not support scraping',
       scrape_disabled:   'scraping disabled by tracker operator',
@@ -557,7 +562,7 @@ async function importConfigFile(input: HTMLInputElement) {
     toast('Config imported — previous config backed up', 'success');
     await loadSettings();
     await loadTrackers();
-    await refreshAllStats();
+    await refreshAllStats(true); // fresh config → force through the guard
     renderGridFull();
     renderTable();
     if (isSettingsRoute()) await initSettingsPage();
@@ -609,8 +614,8 @@ function scheduleQuiInstanceLoad() {
 function updateSummary() { /* summary pills removed — agg cards cover totals */ }
 
 // ── Refresh scheduling ────────────────────────────────────────────────────
-async function fullRefreshCycle() {
-  await refreshAllStats();
+async function fullRefreshCycle(force = false) {
+  await refreshAllStats(force);
   await loadHistory();
   await loadScrapeStatus();
   autoSyncScrapes();
@@ -618,12 +623,19 @@ async function fullRefreshCycle() {
 
 function scheduleRefresh() {
   if (refreshTimer) clearInterval(refreshTimer);
-  refreshTimer = setInterval(() => { void fullRefreshCycle(); }, REFRESH_MS);
+  refreshTimer = setInterval(() => { void fullRefreshCycle(); }, refreshMs());
 }
 
 function scheduleQuiRefresh() {
   if (quiTimer) clearInterval(quiTimer);
-  quiTimer = setInterval(() => refreshQuiStats(state.appSettings), QUI_REFRESH_MS);
+  quiTimer = setInterval(() => refreshQuiStats(state.appSettings), quiRefreshMs());
+}
+
+/** Re-arm both timers with the latest settings — call after a settings save so
+ *  a changed interval takes effect immediately (not on next app load). */
+function rescheduleTimers() {
+  scheduleRefresh();
+  scheduleQuiRefresh();
 }
 
 async function loadQUIInstances() {
@@ -636,7 +648,7 @@ async function loadQUIInstances() {
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('refresh-btn')?.addEventListener('click', async () => {
     scheduleRefresh();
-    await fullRefreshCycle();
+    await fullRefreshCycle(true); // explicit user action → force, bypass guard
   });
   // Gear button → full settings page (hash route, not a modal)
   document.getElementById('settings-btn')?.addEventListener('click', () => {
@@ -752,6 +764,7 @@ const settingsDeps = () => ({
   applyNameMode: (mode: string) => { state.appSettings.tracker_name_mode = mode; renderTable(); renderGridFull(); },
   applyQuiBarsVisible: (on: boolean) => { state.appSettings.qui_bars_visible = on; renderQuiBars(state.appSettings, state.quiInstancesMeta); },
   applyStatSources: (on: boolean) => { state.appSettings.show_stat_sources = on; renderTable(); renderGridFull(); },
+  rescheduleTimers,
   toast,
 });
 

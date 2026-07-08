@@ -27,6 +27,13 @@ let _testing = new Set<string>(); // tracker ids with a test in flight
 // Configured trackers table
 // ─────────────────────────────────────────────────────────────────────────────
 
+/** Tooltip for the opt-out badge: explains Yata has stopped contacting it. */
+function optedOutTitle(t: Tracker): string {
+  const note = t.opted_out_note ? ` ${t.opted_out_note}` : '';
+  return `${t.name}'s operator has asked not to be supported by Yata — `
+    + `all API and scrape traffic to it has stopped. Remove it to clear this.${note}`;
+}
+
 export function renderTrackersTable(trackers: Tracker[], deps: TabDeps): void {
   _deps = deps;
   _trackers = trackers;
@@ -40,10 +47,14 @@ export function renderTrackersTable(trackers: Tracker[], deps: TabDeps): void {
 
   tbody.innerHTML = trackers.map(t => {
     const abbr = t.abbr ? `<span class="trk-abbr-badge">${esc(t.abbr)}</span>` : '';
+    const optOutBadge = t.opted_out
+      ? `<span class="trk-optout-badge" title="${esc(optedOutTitle(t))}">⛔ opted out</span>`
+      : '';
     const defBadge = (t.def_key
       ? `<span class="trk-def-badge">def: ${esc(t.def_key)}</span>`
       : `<span class="trk-def-badge manual">manual</span>`)
-      + approvalIcon(t.def_approval, t.def_approval_note);
+      + approvalIcon(t.def_approval, t.def_approval_note)
+      + optOutBadge;
     const testCell = _testing.has(t.id)
       ? `<span class="trk-test-untested"><i class="fas fa-spinner fa-spin"></i> Testing…</span>`
       : renderTestPills(_testStatus[t.id]);

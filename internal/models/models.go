@@ -6,9 +6,9 @@ package models
 // Tracker is a user-configured tracker account, stored in config.json.
 type Tracker struct {
 	ID            string `json:"id"`
-	Name          string `json:"name"`            // display name; defaults to def name
-	URL           string `json:"url"`             // base URL, e.g. https://seedpool.org
-	Type          string `json:"type"`            // tracker type key, e.g. "unit3d"
+	Name          string `json:"name"` // display name; defaults to def name
+	URL           string `json:"url"`  // base URL, e.g. https://seedpool.org
+	Type          string `json:"type"` // tracker type key, e.g. "unit3d"
 	APIKey        string `json:"api_key"`
 	SessionCookie string `json:"session_cookie"`
 	Username      string `json:"username"`
@@ -50,20 +50,20 @@ type Tracker struct {
 // TrackerView is the safe public representation of a Tracker sent to the
 // frontend. Credentials are masked/boolean-ised.
 type TrackerView struct {
-	ID            string            `json:"id"`
-	Name          string            `json:"name"`
-	Abbr          string            `json:"abbr"`    // from def; "" for manual trackers
-	DefKey        string            `json:"def_key"` // matched def key; "" for manual
-	URL           string            `json:"url"`
-	Type          string            `json:"type"`
-	Enabled       bool              `json:"enabled"`
-	HasKey        bool              `json:"has_key"`
-	APIKeyMasked  string            `json:"api_key_masked"`
-	HasSession    bool              `json:"has_session"`
-	Username      string            `json:"username"`
-	Targets       map[string]string `json:"targets"`
-	TargetGroup   string            `json:"target_group"`
-	JoinDate      string            `json:"join_date"` // user-entered fallback (YYYY-MM-DD)
+	ID           string            `json:"id"`
+	Name         string            `json:"name"`
+	Abbr         string            `json:"abbr"`    // from def; "" for manual trackers
+	DefKey       string            `json:"def_key"` // matched def key; "" for manual
+	URL          string            `json:"url"`
+	Type         string            `json:"type"`
+	Enabled      bool              `json:"enabled"`
+	HasKey       bool              `json:"has_key"`
+	APIKeyMasked string            `json:"api_key_masked"`
+	HasSession   bool              `json:"has_session"`
+	Username     string            `json:"username"`
+	Targets      map[string]string `json:"targets"`
+	TargetGroup  string            `json:"target_group"`
+	JoinDate     string            `json:"join_date"` // user-entered fallback (YYYY-MM-DD)
 
 	MinScrapeIntervalMinutes int    `json:"min_scrape_interval_minutes"`
 	MaxScrapesPerDay         int    `json:"max_scrapes_per_day"`
@@ -97,6 +97,13 @@ type TrackerView struct {
 	// warns for anything but "approved". Who/when details are never exposed.
 	DefApproval     string `json:"def_approval"`
 	DefApprovalNote string `json:"def_approval_note,omitempty"` // informal-OK note
+
+	// OptedOut is true when this already-configured tracker's host is now on
+	// defs/optout.json — the operator has asked not to be supported. Yata
+	// stops all API + scrape traffic to it; the UI flags the row so the user
+	// knows why it went quiet. OptOutNote carries the public note, if any.
+	OptedOut   bool   `json:"opted_out,omitempty"`
+	OptOutNote string `json:"opted_out_note,omitempty"`
 }
 
 // Settings holds application-level configuration.
@@ -151,6 +158,17 @@ type Settings struct {
 	MaxScrapesPerDay      int  `json:"max_scrapes_per_day"`     // 0 = unlimited
 	AutoInterval          bool `json:"auto_interval"`           // derive interval from daily max
 
+	// ── Automatic refresh cadence (API polling, distinct from scraping) ─────
+	// RefreshIntervalMinutes is how often stats are auto-refreshed from tracker
+	// APIs while idle (the background loop + any open dashboards). Floor 15;
+	// 0 = unset → treated as the 30-min default. Manual refresh (the button /
+	// Tracker Test) always bypasses this — it's purely to cut idle load.
+	RefreshIntervalMinutes int `json:"refresh_interval_minutes"`
+	// QUIRefreshSeconds is how often qui (local qBittorrent) stat bars refresh
+	// in an open dashboard. This data is local + time-sensitive, so it stays
+	// fast. Floor 1; 0 = unset → 10-sec default. The qui toggle turns it off.
+	QUIRefreshSeconds int `json:"qui_refresh_seconds"`
+
 	// ── QUI (qBittorrent UI) integration ────────────────────────────────────
 	QUIURL              string `json:"qui_url"`
 	QUIAPIKey           string `json:"qui_api_key"`
@@ -168,15 +186,25 @@ type Settings struct {
 // DefaultSettings returns the defaults for a fresh install.
 func DefaultSettings() Settings {
 	return Settings{
-		Theme:                 "",
-		TrackerNameMode:       "name",
-		GroupNameStyle:        "styled",
-		UsernameStyle:         "plain",
-		ProfileAutoSync:       true,
+		Theme:           "",
+		TrackerNameMode: "name",
+		GroupNameStyle:  "styled",
+		UsernameStyle:   "plain",
+		ProfileAutoSync: true,
+		// New-install default: a conservative 120 min. The HARD FLOOR is still
+		// 60 (see scrape.HardFloorMinutes + the < 60 clamps) — users may lower
+		// it to 60 but not below; unchanged, it stays at 120.
 		ScrapeIntervalMinutes: 120,
 		MaxScrapesPerDay:      0,
-		QUIURL:                "http://localhost:7476",
-		QUIEnabledInstances:   []int{},
+		// Idle API polling: 30 min by default (floor 15). The manual refresh
+		// button and Tracker Test are unaffected — trackers' own API rate
+		// limits still apply, this just lowers unattended background load.
+		RefreshIntervalMinutes: 30,
+		// qui is a local API with time-sensitive data (speed/free space) — keep
+		// it snappy at 10 s (floor 1; the integration toggle turns it off).
+		QUIRefreshSeconds:   10,
+		QUIURL:              "http://localhost:7476",
+		QUIEnabledInstances: []int{},
 	}
 }
 
@@ -221,12 +249,12 @@ type AlertRule struct {
 	ID           string      `json:"id"`
 	Name         string      `json:"name"`
 	Enabled      bool        `json:"enabled"`
-	TrackerIDs   []string    `json:"tracker_ids"`            // trackers this rule includes/excludes
-	TrackerMode  string      `json:"tracker_mode"`           // "include" (default) | "exclude"
-	TrackerID    string      `json:"tracker_id,omitempty"`   // legacy single-tracker field (migrated by Scope)
-	Match        string      `json:"match"`                  // "all" (AND) | "any" (OR)
+	TrackerIDs   []string    `json:"tracker_ids"`          // trackers this rule includes/excludes
+	TrackerMode  string      `json:"tracker_mode"`         // "include" (default) | "exclude"
+	TrackerID    string      `json:"tracker_id,omitempty"` // legacy single-tracker field (migrated by Scope)
+	Match        string      `json:"match"`                // "all" (AND) | "any" (OR)
 	Conditions   []Condition `json:"conditions"`
-	Destinations []string    `json:"destinations"`           // destination IDs; empty = all enabled
+	Destinations []string    `json:"destinations"` // destination IDs; empty = all enabled
 	CooldownMins int         `json:"cooldown_minutes"`
 }
 

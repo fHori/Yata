@@ -230,7 +230,8 @@ export function renderCard(
         if (!ss || ss.allowed) return '';
         let tip: string;
         let setup = false; // setup states (missing credentials) — muted, not amber
-        if (ss.reason === 'api_only')               tip = 'API only mode';
+        if (ss.reason === 'opted_out')              tip = 'Operator opted out';
+        else if (ss.reason === 'api_only')          tip = 'API only mode';
         else if (ss.reason === 'no_scrape_support') tip = 'No scrape support';
         else if (ss.reason === 'scrape_disabled')   tip = 'Scrape disabled';
         else if (ss.reason === 'no_cookie')   { tip = 'Profile scraping off — add your session cookie (Settings → Trackers)'; setup = true; }

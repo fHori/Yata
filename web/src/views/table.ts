@@ -328,13 +328,14 @@ function buildExpanded(
     { l: 'Account Age',  v: joinDate ? memberDur(joinDate) : '—' },
     { l: 'Last API Update', v: stats.fetched_at ? fmtDateTime(stats.fetched_at) : '—' },
     { l: 'Last Scrape Update', v: (() => {
+        if (ss?.reason === 'opted_out') return 'Operator opted out';
         if (ss?.reason === 'api_only' || ss?.reason === 'scrape_disabled' || ss?.reason === 'no_scrape_support')
           return 'Scrape disabled';
         if (ss?.last_scrape_at) return fmtDateTime(ss.last_scrape_at);
         return '—';
       })() },
     { l: 'Next Scrape Update', v: (() => {
-        if (!ss || ss.reason === 'api_only' || ss.reason === 'scrape_disabled' || ss.reason === 'no_scrape_support')
+        if (!ss || ss.reason === 'opted_out' || ss.reason === 'api_only' || ss.reason === 'scrape_disabled' || ss.reason === 'no_scrape_support')
           return '—';
         if (ss.allowed) return 'Now';
         if (ss.next_allowed_at) return fmtDateTime(ss.next_allowed_at);

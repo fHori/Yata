@@ -101,6 +101,12 @@ func runTrackerTest(d *Deps, t models.Tracker) TrackerTestResult {
 }
 
 func testAPI(d *Deps, t models.Tracker) CheckResult {
+	// Opt-out is a hard stop for the API too — a "Test" must never contact a
+	// tracker whose operator asked not to be supported (testScrape enforces the
+	// same via the scrape policy).
+	if _, opted := d.Reg.OptOut(t.URL); opted {
+		return CheckResult{Status: "not_applicable", Detail: "opted_out"}
+	}
 	kind := d.Reg.APIKind(t.URL, t.Type)
 	if kind == "none" {
 		return CheckResult{Status: "not_applicable", Detail: "scrape_only"}
@@ -141,7 +147,7 @@ func testScrape(d *Deps, t models.Tracker) CheckResult {
 	pol := scrape.Evaluate(d.Cfg.Settings(), t, rs, d.DB, time.Now())
 	if !pol.Allowed {
 		switch pol.Reason {
-		case "api_only", "no_scrape_support", "scrape_disabled":
+		case "opted_out", "api_only", "no_scrape_support", "scrape_disabled":
 			return CheckResult{Status: "not_applicable", Detail: pol.Reason}
 		case "no_username", "no_cookie":
 			return CheckResult{Status: "not_configured", Detail: pol.Reason}
