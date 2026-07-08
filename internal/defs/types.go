@@ -138,6 +138,13 @@ type TrackerDef struct {
 	// API configures the fetch for type kind "custom". Null otherwise.
 	API *CustomAPI `json:"api,omitempty"`
 
+	// ExtendedStats, when set on a unit3d tracker, adds a supplementary API
+	// stats endpoint (e.g. the /api/user/stats that newer UNIT3D trackers add to
+	// expose formerly scrape-only stats). Its fields are merged on top of the
+	// core /api/user response — letting a tracker turn OFF scraping entirely
+	// while Yata still shows seed size, seed times, unread flags, etc.
+	ExtendedStats *ExtendedStatsSpec `json:"extended_stats,omitempty"`
+
 	// Groups lists user ranks in ascending order (lowest first).
 	Groups []GroupDef `json:"groups,omitempty"`
 
@@ -239,6 +246,20 @@ type TrackerRules struct {
 	// demotion / ban per the tracker's rules). The UI colors the ratio stat
 	// red ONLY below this value when set (otherwise generic thresholds).
 	MinRatio float64 `json:"min_ratio,omitempty"`
+}
+
+// ExtendedStatsSpec declares a supplementary UNIT3D stats endpoint. Field names
+// in the response are expected to already be canonical (UNIT3D/Yata names, e.g.
+// seed_size, avg_seed_time, fl_tokens, real_ratio, unread_mail), so only the
+// byte-count fields need conversion — everything else (seconds, counts, ratios,
+// bools) passes through unchanged. Authenticated with the same api_token query
+// param as /api/user; the endpoint's fields never overwrite core /api/user ones.
+type ExtendedStatsSpec struct {
+	// Path is appended to the tracker base URL, e.g. "/api/user/stats".
+	Path string `json:"path"`
+	// ByteFields lists response fields returned as raw byte counts that must be
+	// formatted as human-readable sizes (e.g. seed_size, real_uploaded).
+	ByteFields []string `json:"byte_fields,omitempty"`
 }
 
 // CustomAPI describes a non-standard tracker API entirely as data.

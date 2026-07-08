@@ -8,13 +8,15 @@ Yata pulls your stats from each tracker's **API** (and, where the operator permi
 
 **Status: public beta.** It works, it's been running against real trackers for months, and feedback is very welcome — see [Feedback & beta notes](#feedback--beta-notes).
 
+> **⚠️ Protect your `config.json`.** Yata stores your tracker **API keys and session cookies in plain text** in `config.json` (next to the binary, or in `./data` under Docker). Anyone who can read that file can act as you on your trackers. Lock it down like a password file — restrict its permissions and never share or commit it — and take extra care on **shared boxes such as seedboxes**. See [Your data and security](#your-data-and-security) before you start.
+
 ---
 
 ## Why Yata
 
 - **Private by design.** Runs entirely on your own machine/server. The only network requests it ever makes are to *your* trackers with *your* credentials, plus any integrations you explicitly configure (webhooks, qui, Prowlarr). No telemetry, no analytics, no phoning home.
 - **API first, always.** API data is authoritative. Profile scraping only fills stats the API doesn't provide, and both are merged into ONE stats view per tracker (with an optional per-stat origin dot so you can see where each number came from).
-- **Respect the trackers.** Scraping is rate-limited with a hard 60-minute floor that cannot be lowered (default set as 120min). Tracker operators can request stricter limits — or forbid scraping entirely — in their definition file, and those requests always win. There's an API-only mode, and an opt-out list for sites that don't want to be supported at all.
+- **Respect the trackers.** Scraping is rate-limited with a hard 60-minute floor that cannot be lowered. Tracker operators can request stricter limits — or forbid scraping entirely — in their definition file, and those requests always win. There's an API-only mode, and an opt-out list for sites that don't want to be supported at all.
 - **Trackers are data, not code.** Every tracker is a JSON file in `defs/trackers/`. Adding or fixing a tracker never touches the app; tracker staff can own their definition.
 
 ## Feature tour
@@ -56,7 +58,7 @@ The effective interval is the **maximum** of every layer — nothing can undercu
 | Layer | Set by | Notes |
 |---|---|---|
 | Hard floor | the app | 60 min — cannot be lowered by anyone |
-| Global setting | you (Settings → Scraping) | default 120 min |
+| Global setting | you (Settings → Scraping) | default 120 min (floor 60) |
 | Tracker type def | software def file | rarely used |
 | Tracker def | **tracker operator** | e.g. "≥ 120 min, max 6/day" |
 | Per-tracker setting | you (tracker edit) | can only make it stricter |
@@ -122,6 +124,23 @@ Also: `--config`, `--data` (SQLite file), `--defs`, `--base`, `--log` — each w
 
 ## Setting up
 
+### Your data and security
+
+**Read this first.** Yata keeps everything in two files, next to the binary (or in `./data` under Docker):
+
+- **`config.json`** — your trackers, settings, and **credentials**. Your tracker **API keys and session cookies are stored in plain text** in this file. Anyone who can read it can act as you on every tracker you've added.
+- **`yata.db`** — stats, history, and login sessions.
+
+**Treat `config.json` like a password file:**
+
+- Restrict its permissions so only you can read it (`chmod 600 config.json` on Linux/macOS; under Docker keep the `./data` volume private).
+- Never commit it to git, paste it into a bug report, or share it — the config export in Settings → General strips webhook secrets for sharing, but the raw `config.json` does **not**.
+- Be especially careful on **shared or multi-user boxes such as seedboxes**: anyone who can read your home directory can read your tracker credentials. If you can't lock the file down there, prefer **API-only** setups (an API key alone, no session cookie) and rotate/revoke keys you no longer use.
+
+Both files are yours to back up and move (export/import from Settings → General) — just treat every backup as the bundle of credentials it is.
+
+### Add your trackers
+
 1. Open **Settings → Trackers → Add Tracker** and pick your tracker from the list (or enter any base URL — trackers without a definition still work for all API stats).
 2. Paste your **API key** (usually tracker profile → API/Security settings; the form shows a tracker-specific hint where we have one).
 3. *Optional, for extra stats:* add your **username** and **session cookie** to enable profile scraping for the stats the API doesn't expose (seed size, average seed time, and friends). Log in to the tracker → DevTools (F12) → copy the cookie header. Trackers that report no join date will ask you to enter it once, for account-age tracking.
@@ -130,10 +149,6 @@ Also: `--config`, `--data` (SQLite file), `--defs`, `--base`, `--log` — each w
 ### If your instance is reachable from outside localhost
 
 Yata binds to `0.0.0.0` by default (so Docker/LAN/Tailscale setups just work) and will warn you at startup and in the UI: **anyone who can reach the port has full access until you enable login protection** (Settings → General → Account). Sessions are httpOnly cookies; five failed logins lock the IP for 15 minutes. If you ever lose the password, the reset path deliberately wipes all config and data — a stolen box can't be pried open that way. Put it behind a reverse proxy with TLS if you expose it beyond your LAN.
-
-### Your data
-
-Everything lives in two files next to the binary (or in `./data` under Docker): `config.json` (trackers, credentials, settings) and `yata.db` (stats, history, sessions). Both are yours — export/import from Settings → General, and treat backups like the credential files they are.
 
 ## For tracker staff
 
@@ -150,6 +165,8 @@ Questions, corrections, or requests — please open an issue.
 ## Bundled tracker definitions
 
 Aither, Anthelion, InfinityHD, LST, Luminarr, MyAnonamouse, Oldtoons, OnlyEncodes+, RetroFlix, seedpool, YUSCENE, Zenith — plus a credential-free demo tracker. Definitions include the full group ladders (colors, icons, promotion requirements incl. either/or paths, perks) where the tracker publishes them.
+
+**OldToonsWorld is fully API-supported:** its staff added an API endpoint that exposes every stat Yata tracks — including seed size, seed times, and unread mail/notification flags — so Yata reads everything from the API and does **no** profile scraping for it. It's the model we hope more trackers follow (UNIT3D is rolling out richer stats APIs); when they do, a tracker can be added to Yata with an API key alone, no session cookie.
 
 Adding one is a JSON file away: copy `defs/templates/tracker.template.jsonc` (every field documented) to `defs/trackers/<key>.json`, strip comments, then **Settings → Trackers → Reload Definitions**. Defs that fail to parse are skipped and reported — they never crash the app.
 

@@ -220,8 +220,10 @@ func authLogin(d *Deps) http.HandlerFunc {
 		}
 		// Always run exactly one bcrypt compare — against a dummy hash when the
 		// username doesn't match — so response timing can't confirm the username.
+		// Usernames are matched case-insensitively (the password stays exact);
+		// the stored username keeps its original case for display.
 		hash := dummyHash
-		userMatch := ok && u.Username == c.Username
+		userMatch := ok && strings.EqualFold(u.Username, c.Username)
 		if userMatch {
 			hash = []byte(u.PasswordHash)
 		}

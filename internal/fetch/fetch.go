@@ -84,8 +84,68 @@ func (c *Client) fetchUnit3D(t models.Tracker) (map[string]any, *Error) {
 	if strings.TrimSpace(t.APIKey) == "" {
 		return nil, errf("no_key", nil)
 	}
-	apiURL := strings.TrimRight(t.URL, "/") + "/api/user?api_token=" + t.APIKey
-	return c.getJSON(apiURL, nil, c.identify(t))
+	base := strings.TrimRight(t.URL, "/")
+	id := c.identify(t)
+	data, ferr := c.getUnit3D(base+"/api/user", t.APIKey, id)
+	if ferr != nil {
+		return nil, ferr
+	}
+	// Supplementary extended-stats endpoint (opt-in per def). Newer UNIT3D
+	// trackers expose formerly scrape-only stats (seed size, seed times, unread
+	// flags, …) here, letting them turn scraping off entirely. Best-effort: a
+	// failure here never fails the whole fetch — the core stats still return.
+	if ext := c.Registry.ExtendedStats(t.URL, t.Type); ext != nil && ext.Path != "" {
+		if extData, eErr := c.getUnit3D(base+ext.Path, t.APIKey, id); eErr == nil {
+			mergeExtended(data, extData, ext.ByteFields)
+		}
+	}
+	return data, nil
+}
+
+// getUnit3D fetches a UNIT3D JSON endpoint using Bearer auth, which keeps the
+// API token out of the request URL — and therefore out of the tracker's access
+// logs and any intermediary proxy/CDN. If a tracker rejects the header (401/403,
+// e.g. an older UNIT3D instance), it transparently falls back to the classic
+// ?api_token= query form so no setup can regress. Every current UNIT3D tracker
+// we've probed accepts Bearer, so the fallback effectively never fires.
+func (c *Client) getUnit3D(url, key, identify string) (map[string]any, *Error) {
+	data, ferr := c.getJSON(url, map[string]string{"Authorization": "Bearer " + key}, identify)
+	if ferr == nil {
+		return data, nil
+	}
+	if ferr.Kind == "http_401" || ferr.Kind == "http_403" {
+		return c.getJSON(url+"?api_token="+key, nil, identify)
+	}
+	return nil, ferr
+}
+
+// mergeExtended folds an extended-stats response into the core /api/user map.
+// Core values are authoritative (never overwritten — e.g. username appears in
+// both); fields named in byteFields are converted from raw bytes to size
+// strings; everything else (seconds, counts, ratios, bools) passes through.
+func mergeExtended(core, ext map[string]any, byteFields []string) {
+	isByte := make(map[string]bool, len(byteFields))
+	for _, f := range byteFields {
+		isByte[f] = true
+	}
+	for k, v := range ext {
+		if _, exists := core[k]; exists {
+			continue // core /api/user wins on any overlap
+		}
+		switch {
+		case isByte[k]:
+			core[k] = parse.BytesToSize(int64(parse.AnyFloat(v)))
+		default:
+			if b, ok := v.(bool); ok {
+				// Present booleans (e.g. unread_mail) as the "true"/"false"
+				// strings the scrape presence-flag path already produces, so the
+				// UI's unread-flag rows render identically whatever the source.
+				core[k] = fmt.Sprintf("%t", b)
+			} else {
+				core[k] = v
+			}
+		}
+	}
 }
 
 // identify resolves the def-level traffic-identification mode for a tracker
@@ -151,16 +211,16 @@ func (c *Client) fetchGazelle(t models.Tracker) (map[string]any, *Error) {
 		joinDate = joinDate[:10] // "2026-03-05 01:18:59" → date only
 	}
 	out := map[string]any{
-		"username":     r.Username,
-		"group":        r.Class,
-		"uploaded":     parse.BytesToSize(r.Uploaded),
-		"downloaded":   parse.BytesToSize(r.Downloaded),
-		"buffer":       parse.BytesToSize(bufBytes),
-		"ratio":        ratio,
-		"seeding":      r.SeedCount,
-		"invites":      fmt.Sprintf("%d", r.Invites),
-		"snatched":     fmt.Sprintf("%d", r.Snatched),
-		"join_date":    joinDate,
+		"username":   r.Username,
+		"group":      r.Class,
+		"uploaded":   parse.BytesToSize(r.Uploaded),
+		"downloaded": parse.BytesToSize(r.Downloaded),
+		"buffer":     parse.BytesToSize(bufBytes),
+		"ratio":      ratio,
+		"seeding":    r.SeedCount,
+		"invites":    fmt.Sprintf("%d", r.Invites),
+		"snatched":   fmt.Sprintf("%d", r.Snatched),
+		"join_date":  joinDate,
 	}
 	// user_id drives the ID-based profile URL (/user.php?id=N). Not rendered as
 	// a stat row (frontend NON_ROW_FIELDS) — consumed by profileURL().
