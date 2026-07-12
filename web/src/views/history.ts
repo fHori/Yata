@@ -7,8 +7,8 @@ import { exportChart, renderChart } from '../components/chart';
 import type { ChartEvent, ChartMilestone, ChartRefLine, ChartSeries } from '../components/chart';
 import {
   deltaStats, fmtPointTime, fmtUnitValue, HISTORY_METRICS, HISTORY_RANGES,
-  isSummableUnit, metricLabel, milestonesFor, portfolioSeries, smoothSeries,
-  toRateSeries, valueAt,
+  isSummableUnit, metricLabel, milestonesFor, portfolioSeries, recentRatePerDay,
+  smoothSeries, toRateSeries, valueAt,
 } from '../utils/series';
 import type { HistoryRangeKey, SeriesUnit } from '../utils/series';
 import { esc, fmtTrackerName } from '../utils/format';
@@ -246,7 +246,9 @@ function overlayApplicable(key: string): boolean {
     case 'milestones':   return single && ui.mode === 'value';
     case 'groupChanges': return single;
     case 'portfolio':    return isSummableUnit(metricUnit()) && selectedIds().length >= 2;
-    case 'projection':   return ui.mode === 'value' && PROJECTABLE.has(ui.metric);
+    // Projection works for every metric now that the rate falls back to the
+    // charted points' recent slope (flat/declining stats project too).
+    case 'projection':   return ui.mode === 'value';
     case 'smoothing':    return true;
     default:             return true;
   }
@@ -325,9 +327,6 @@ async function refetch() {
   drawChart();
 }
 
-/** Metrics the stats engine computes growth rates for (projection tails). */
-const PROJECTABLE = new Set(['uploaded', 'downloaded', 'buffer', 'seed_size', 'bonus_points', 'uploads_approved']);
-
 const PORTFOLIO_ID = '__portfolio__';
 
 function metricUnit(): SeriesUnit {
@@ -405,17 +404,20 @@ function chartSeries(): ChartSeries[] {
   return out;
 }
 
-/** Recent per-day growth for a series (portfolio = sum of member rates). */
-function rateFor(id: string): number | null {
-  if (id === PORTFOLIO_ID) {
-    let sum = 0, any = false;
-    for (const tid of selectedIds()) {
-      const v = statsCache[tid]?.rates?.[ui.metric];
-      if (v != null) { sum += v; any = true; }
-    }
-    return any ? sum : null;
+/** Per-day rate used for a series' projection tail. Prefers the backend's
+ *  stable growth rate (same number behind the dashboard ETAs — only present
+ *  for growing stats), then falls back to the signed recent slope of the
+ *  charted points, then to 0. A flat or downward tail is still a correct
+ *  projection — "nothing is changing" / "this is shrinking" is information,
+ *  so the tail always draws (user request 2026-07-12). */
+function rateFor(s: ChartSeries): number {
+  if (s.id !== PORTFOLIO_ID) {
+    const r = statsCache[s.id]?.rates?.[ui.metric];
+    if (r != null) return r;
   }
-  return statsCache[id]?.rates?.[ui.metric] ?? null;
+  // Portfolio projects from its own summed points — the sum of member slopes
+  // is exactly the slope of the sum, and this handles flat/declining members.
+  return recentRatePerDay(s.points) ?? 0;
 }
 
 /** Which targets-map keys speak about a given history metric. */
@@ -513,13 +515,14 @@ function drawChart() {
   const drawn = ui.smoothing ? series.map(s => ({ ...s, points: smoothSeries(s.points) })) : series;
   const ghosts: ChartSeries[] = [];
   if (projectionActive()) {
-    // Extend the window ~25% (1 day – 90 days) and continue each line at its
-    // recent growth rate. Ghosts draw dashed and ignore the crosshair.
+    // Extend the window ~25% (1 day – 90 days) and continue every line at its
+    // recent rate — flat and downward tails included (a stat that stopped
+    // moving, or is shrinking, projects exactly that). Ghosts draw dashed and
+    // ignore the crosshair.
     to = win.to + Math.min(Math.max((win.to - win.from) * 0.25, 86400), 90 * 86400);
     for (const s of drawn) {
       if (!s.points.length) continue;
-      const rate = rateFor(s.id);
-      if (rate == null) continue;
+      const rate = rateFor(s);
       const [lt, lv] = s.points[s.points.length - 1];
       ghosts.push({
         ...s, id: `${s.id}:proj`, ghost: true,

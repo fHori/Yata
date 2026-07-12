@@ -44,6 +44,19 @@ version heading — those notes become the GitHub Release body automatically.
   tracker list no longer fans out into one simultaneous request per tracker.
 
 ### Fixed
+- **History milestones are clearer and no longer misfire.** Each milestone now
+  shows its value on the chart (e.g. "10 TiB") with a hover tooltip ("Reached
+  10 TiB · Jun 3"); those tooltips work again (they were being swallowed by the
+  chart's hover layer). Milestones now mark only genuine new highs, so a
+  temporary dip that recovers (a data glitch, or removed-then-re-added
+  torrents) no longer fires false markers on the way back up.
+- **History projection always draws — and works on every metric.** A flat stat
+  now projects a flat dashed tail and a shrinking one projects downward
+  (previously nothing appeared unless the stat was growing, which looked
+  broken). Growing stats keep using the same stable rate as the dashboard
+  ETAs; everything else continues at the charted line's recent slope. The
+  projection toggle is also no longer limited to growth-tracked stats — ratio,
+  seeding, or avg seed time project too.
 
 ### Security
 
@@ -64,7 +77,7 @@ version heading — those notes become the GitHub Release body automatically.
 - Custom-API trackers that report a join date (like HUNO's `member_since`) no
   longer ask you to enter one manually; ISO datetimes are trimmed to a date and
   an infinite ratio (`"Inf"` at zero download) renders as ∞.
-- **Long-range history foundation** (groundwork for the upcoming History view):
+- **Long-range history foundation** (groundwork for the History view):
   daily history rollups are now kept ~2 years instead of 35 days (configurable
   via `history_daily_retention_days`; ~150 KB per tracker per year), and a new
   `GET /api/history/series` endpoint serves filtered per-tracker/per-field

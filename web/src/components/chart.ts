@@ -150,22 +150,8 @@ export function renderChart(container: HTMLElement, opts: ChartOptions): void {
     svg.appendChild(lbl);
   }
 
-  // ── Event markers (group changes) — vertical line + label + hover title ────
-  const eventColor = (k: ChartEvent['kind']) =>
-    resolveColor(k === 'promotion' ? '--green' : k === 'demotion' ? '--red' : '--text3');
-  for (const ev of opts.events ?? []) {
-    if (ev.at < from || ev.at > to) continue;
-    const ex = x(ev.at);
-    const g = svgEl('g', { class: 'hc-event' });
-    const title = svgEl('title', {});
-    title.textContent = ev.detail;
-    g.appendChild(title);
-    g.appendChild(svgEl('line', { x1: ex, x2: ex, y1: M.top, y2: M.top + plotH, stroke: eventColor(ev.kind), 'stroke-width': 1, 'stroke-dasharray': '2 3', opacity: 0.85 }));
-    const flag = svgEl('text', { x: ex + 3, y: M.top + 9, fill: eventColor(ev.kind), 'font-size': 9, 'font-weight': 700 });
-    flag.textContent = (ev.kind === 'promotion' ? '▲ ' : ev.kind === 'demotion' ? '▼ ' : '') + ev.label;
-    g.appendChild(flag);
-    svg.appendChild(g);
-  }
+  // Event / milestone markers are drawn LAST (after the hit layer) so their
+  // hover tooltips work — see drawAnnotations() near the end.
 
   // ── Series paths ──────────────────────────────────────────────────────────
   for (const s of drawable) {
@@ -180,23 +166,6 @@ export function renderChart(container: HTMLElement, opts: ChartOptions): void {
       'stroke-linejoin': 'round', 'stroke-linecap': 'round',
       ...(s.ghost ? { 'stroke-dasharray': '5 4', opacity: 0.75 } : {}),
     }));
-  }
-
-  // ── Milestone markers (threshold crossings) — diamond + hover title ────────
-  const msColor = resolveColor('--amber');
-  for (const ms of opts.milestones ?? []) {
-    if (ms.at < from || ms.at > to) continue;
-    const mx = x(ms.at), my = y(ms.value);
-    const g = svgEl('g', { class: 'hc-milestone' });
-    const title = svgEl('title', {});
-    title.textContent = ms.label;
-    g.appendChild(title);
-    const r = 3.5;
-    g.appendChild(svgEl('path', {
-      d: `M${mx},${my - r} L${mx + r},${my} L${mx},${my + r} L${mx - r},${my} Z`,
-      fill: msColor, stroke: resolveColor('--surface'), 'stroke-width': 1,
-    }));
-    svg.appendChild(g);
   }
 
   // ── Pins (view-owned, redrawn on every render) ────────────────────────────
@@ -279,6 +248,48 @@ export function renderChart(container: HTMLElement, opts: ChartOptions): void {
     else pins = [...pins, t].sort((a, b) => a - b);
     opts.onPin?.(pins);
   });
+
+  // ── Annotations (drawn on TOP of the hit layer so hover tooltips work) ─────
+  const dateStr = (t: number) => new Date(t * 1000).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: '2-digit' });
+  const eventColor = (k: ChartEvent['kind']) =>
+    resolveColor(k === 'promotion' ? '--green' : k === 'demotion' ? '--red' : '--text3');
+  for (const ev of opts.events ?? []) {
+    if (ev.at < from || ev.at > to) continue;
+    const ex = x(ev.at);
+    const g = svgEl('g', { class: 'hc-event' });
+    const title = svgEl('title', {});
+    const verb = ev.kind === 'promotion' ? 'Promoted' : ev.kind === 'demotion' ? 'Demoted' : 'Group change';
+    title.textContent = `${verb}: ${ev.detail} · ${dateStr(ev.at)}`;
+    g.appendChild(title);
+    g.appendChild(svgEl('line', { x1: ex, x2: ex, y1: M.top, y2: M.top + plotH, stroke: eventColor(ev.kind), 'stroke-width': 1, 'stroke-dasharray': '2 3', opacity: 0.85 }));
+    // Widen the hover target with an invisible thicker line.
+    g.appendChild(svgEl('line', { x1: ex, x2: ex, y1: M.top, y2: M.top + plotH, stroke: 'transparent', 'stroke-width': 8, 'pointer-events': 'stroke' }));
+    const flag = svgEl('text', { x: ex + 3, y: M.top + 9, fill: eventColor(ev.kind), 'font-size': 9, 'font-weight': 700 });
+    flag.textContent = (ev.kind === 'promotion' ? '▲ ' : ev.kind === 'demotion' ? '▼ ' : '') + ev.label;
+    g.appendChild(flag);
+    svg.appendChild(g);
+  }
+
+  const msColor = resolveColor('--amber');
+  for (const ms of opts.milestones ?? []) {
+    if (ms.at < from || ms.at > to) continue;
+    const mx = x(ms.at), my = y(ms.value);
+    const g = svgEl('g', { class: 'hc-milestone' });
+    const title = svgEl('title', {});
+    title.textContent = `Reached ${ms.label} · ${dateStr(ms.at)}`;
+    g.appendChild(title);
+    const r = 4;
+    // Invisible larger hit circle so the tooltip is easy to trigger.
+    g.appendChild(svgEl('circle', { cx: mx, cy: my, r: 9, fill: 'transparent', 'pointer-events': 'all' }));
+    g.appendChild(svgEl('path', {
+      d: `M${mx},${my - r} L${mx + r},${my} L${mx},${my + r} L${mx - r},${my} Z`,
+      fill: msColor, stroke: resolveColor('--surface'), 'stroke-width': 1,
+    }));
+    const lbl = svgEl('text', { x: mx, y: my - r - 3, 'text-anchor': 'middle', fill: msColor, 'font-size': 8.5, 'font-weight': 700 });
+    lbl.textContent = ms.label;
+    g.appendChild(lbl);
+    svg.appendChild(g);
+  }
 
   container.replaceChildren(svg);
 }

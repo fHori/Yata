@@ -211,6 +211,28 @@ export function toRateSeries(points: [number, number][]): [number, number][] {
   return out;
 }
 
+/** Signed per-day rate from a series' recent points — the client-side
+ *  complement to the backend's GrowthRates (which omits flat/declining fields
+ *  because the dashboard only projects ETAs for growth). The History
+ *  projection wants the true recent slope whatever its sign, so it can draw
+ *  flat and downward tails too. Looks at the last `windowDays` of data
+ *  (mirroring the backend's stable-rate window); needs ≥2 points spanning
+ *  ≥3 h. Returns null when the series can't support a rate. */
+export function recentRatePerDay(points: [number, number][], windowDays = 14): number | null {
+  if (points.length < 2) return null;
+  const last = points[points.length - 1];
+  const cutoff = last[0] - windowDays * 86400;
+  let first = points[0];
+  for (const p of points) {
+    if (p[0] >= cutoff) { first = p; break; }
+  }
+  // Degenerate window (e.g. only the last point is inside) → widen to all.
+  if (first[0] >= last[0]) first = points[0];
+  const spanSec = last[0] - first[0];
+  if (spanSec < 3 * 3600) return null;
+  return (last[1] - first[1]) / (spanSec / 86400);
+}
+
 /** Sum several series into one "portfolio" line. At each distinct timestamp
  *  every series contributes its last-known value (carry-forward); a series
  *  joins the sum from its first point on — so a young tracker appearing
@@ -267,18 +289,28 @@ function milestoneLabel(unit: SeriesUnit, v: number): string {
   return fmtAxisValue('count', v);
 }
 
-/** First upward crossing of each milestone threshold within the series (points
- *  oldest→newest). Only crossings that happen inside the data are returned, so
- *  a stat already above a level when the window starts isn't falsely marked. */
+/** New-high milestones within the window: the first time the series reaches a
+ *  round threshold it hadn't reached before (points oldest→newest). Uses a
+ *  running maximum seeded by the first point, so:
+ *   - a level already achieved when the window opens isn't re-marked, and
+ *   - a transient dip that recovers (data glitch / removed-then-readded
+ *     torrents) doesn't fire a false milestone when it re-crosses on the way
+ *     back up — only genuine new peaks count. */
 export function milestonesFor(points: [number, number][], unit: SeriesUnit): { at: number; value: number; label: string }[] {
   const out: { at: number; value: number; label: string }[] = [];
-  for (const th of MILESTONES[unit] ?? []) {
-    for (let i = 1; i < points.length; i++) {
-      if (points[i - 1][1] < th && points[i][1] >= th) {
+  const thresholds = MILESTONES[unit] ?? [];
+  if (points.length < 2 || !thresholds.length) return out;
+  let runningMax = points[0][1];
+  const start = points[0][1];
+  for (let i = 1; i < points.length; i++) {
+    const v = points[i][1];
+    if (v <= runningMax) continue;
+    for (const th of thresholds) {
+      if (th > start && th > runningMax && th <= v) {
         out.push({ at: points[i][0], value: th, label: milestoneLabel(unit, th) });
-        break;
       }
     }
+    runningMax = v;
   }
   return out;
 }
