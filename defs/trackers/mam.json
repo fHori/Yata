@@ -5,7 +5,7 @@
   "abbr": "MAM",
   "url": "https://www.myanonamouse.net",
   "type": "custom",
-  "last_updated": "2026-07-03",
+  "last_updated": "2026-07-12",
   "approved_by": {
     "name": "Support Staff",
     "role": "Staff",
@@ -17,6 +17,9 @@
   },
   "scrape": {
     "disable_scraping": true
+  },
+    "rules": {
+    "min_ratio": 1.0
   },
   "api": {
     "path": "/jsonLoad.php?snatch_summary",

@@ -5,11 +5,14 @@
   "abbr": "LUME",
   "url": "https://luminarr.me",
   "type": "unit3d",
-  "last_updated": "2026-07-02",
+  "last_updated": "2026-07-12",
   "approved_by": {
     "name": "",
     "role": "",
     "date": ""
+  },
+    "rules": {
+    "min_ratio": 0.6
   },
   "groups": [
     {

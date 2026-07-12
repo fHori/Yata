@@ -9,6 +9,8 @@ version heading — those notes become the GitHub Release body automatically.
 
 ## [Unreleased]
 
+## [Beta-20260712]
+
 ### Added
 - **History view** — a new dashboard tab graphing the months of stats Yata
   already records. Pick a metric, overlay one or many trackers in their own

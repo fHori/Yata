@@ -5,11 +5,14 @@
   "abbr": "Ath",
   "url": "https://aither.cc",
   "type": "unit3d",
-  "last_updated": "2026-07-02",
+  "last_updated": "2026-07-12",
   "approved_by": {
     "name": "",
     "role": "",
     "date": ""
+  },
+    "rules": {
+    "min_ratio": 0.4
   },
   "groups": [
     {

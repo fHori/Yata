@@ -20,6 +20,9 @@
     "path": "/api/user/stats",
     "byte_fields": ["seed_size", "real_uploaded", "real_downloaded"]
   },
+    "rules": {
+    "min_ratio": 0.4
+  },
   "groups": [
     {
       "name": "Leech",

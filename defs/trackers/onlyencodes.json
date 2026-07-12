@@ -15,6 +15,9 @@
   "scrape": {
     "max_scrapes_per_day": 1
   },
+    "rules": {
+    "min_ratio": 0.4
+  },
   "groups": [
     {
       "name": "Leech",

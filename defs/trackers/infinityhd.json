@@ -5,7 +5,7 @@
   "abbr": "IHD",
   "url": "https://infinityhd.net",
   "type": "unit3d",
-  "last_updated": "2026-07-07",
+  "last_updated": "2026-07-12",
   "approved_by": {
     "name": "Jeditwo",
     "role": "Magician",
@@ -20,6 +20,9 @@
       "total leeching": "leeching",
       "total seeding": "seeding"
     }
+  },
+    "rules": {
+    "min_ratio": 0.4
   },
   "groups": [
     {
