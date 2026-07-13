@@ -1,8 +1,10 @@
 // utils/series.ts — pure helpers for the History view (HISTORY_VIEW_PLAN.md).
 // Range/metric metadata, unit-aware value formatting, axis tick math, and
 // point lookups. No DOM, no fetch — everything here is unit-testable.
-import { fmtSeedTime } from './format';
-import type { HistorySeries } from '../types';
+import { fmtEtaDays, fmtSeedTime } from './format';
+import { findGroupDef, groupRequirementsToTargets } from './group';
+import { parseSize, parseSeedTime } from './parse';
+import type { HistorySeries, Tracker, TrackerGroupMap } from '../types';
 
 // ── Ranges ──────────────────────────────────────────────────────────────────
 
@@ -40,6 +42,75 @@ export type SeriesUnit = 'GiB' | 'count' | 'ratio' | 'seconds';
 
 export function metricLabel(key: string): string {
   return HISTORY_METRICS.find(m => m.key === key)?.label ?? key;
+}
+
+export function metricUnit(key: string): SeriesUnit {
+  return HISTORY_METRICS.find(m => m.key === key)?.unit ?? 'count';
+}
+
+// ── Target reference lines ──────────────────────────────────────────────────
+
+/** Which targets-map keys speak about a given history metric. */
+export const TARGET_KEYS_FOR_METRIC: Record<string, string[]> = {
+  uploads_approved: ['total_uploads'],
+  avg_seed_time: ['avg_seed'],
+};
+
+/** One tracker's target thresholds for a metric, as chart reference lines —
+ *  shared by the History view and the Tracker Detail mini-charts. Resolved
+ *  from the SAME sources the dashboard TARGETS bars use, so every surface
+ *  agrees:
+ *   1. the stored targets map (base requirements — manual targets, OR a chosen
+ *      group's requirements, which the edit modal materialises into this map),
+ *   2. the target group's `min_counts` (live from the def — e.g. HUNO's
+ *      seed-time brackets, never stored in the targets map),
+ *   3. the target group's `any_of` alternatives (live from the def).
+ *  Group targets are the important case, so base requirements are read from
+ *  `tracker.targets` directly and NEVER re-derived (an earlier version wrongly
+ *  overwrote them, dropping group targets whose def lookup didn't line up). */
+export function targetRefLinesFor(
+  t: Tracker,
+  metric: string,
+  groupDefs: TrackerGroupMap | undefined,
+): { value: number; label: string }[] {
+  const unit = metricUnit(metric);
+  const keys = TARGET_KEYS_FOR_METRIC[metric] ?? [metric];
+
+  const parseTarget = (raw: string): number | null => {
+    if (unit === 'GiB') return parseSize(raw);
+    if (unit === 'seconds') return parseSeedTime(raw);
+    const n = parseFloat(raw);
+    return isNaN(n) ? null : n;
+  };
+  const values: number[] = [];
+  const addFromMap = (map: Record<string, string>) => {
+    for (const key of keys) {
+      const raw = map[key];
+      if (!raw) continue;
+      const v = parseTarget(raw);
+      if (v != null && v > 0) values.push(v);
+    }
+  };
+
+  // 1. Base requirements (manual or materialised-group) — the dashboard's
+  //    primary source. Never overwrite it.
+  addFromMap(t.targets ?? {});
+
+  // 2 & 3. Live extras from the target group's def.
+  const g = t.target_group && t.def_key && groupDefs
+    ? findGroupDef(groupDefs, t.def_key, t.target_group) : undefined;
+  if (g) {
+    for (const mc of g.requirements.min_counts ?? []) {
+      if (mc.count > 0 && keys.includes(mc.field)) values.push(mc.count);
+    }
+    for (const alt of g.requirements.any_of ?? []) addFromMap(groupRequirementsToTargets(alt));
+  }
+
+  // De-dupe overlapping thresholds; draw lowest→highest. Durations use the
+  // day/month/year duration setting so the target label matches the axis ticks.
+  const fmt = (v: number) => unit === 'seconds' ? fmtEtaDays(v / 86400) : fmtUnitValue(unit, v);
+  return [...new Set(values)].sort((a, b) => a - b)
+    .map(v => ({ value: v, label: `Target ${fmt(v)}` }));
 }
 
 // ── Value formatting ────────────────────────────────────────────────────────
@@ -99,8 +170,10 @@ function trim1(v: number): string {
 
 // ── Axis tick math ──────────────────────────────────────────────────────────
 
-/** "Nice" value ticks covering [min,max] — 1/2/5×10ⁿ steps, ~want ticks. */
-export function niceTicks(min: number, max: number, want = 5): number[] {
+/** "Nice" value ticks covering [min,max] — 1/2/5×10ⁿ steps, ~want ticks.
+ *  `minStep` floors the step (pass 1 for integer metrics so a narrow domain
+ *  never yields impossible ticks like 14.5 uploads). */
+export function niceTicks(min: number, max: number, want = 5, minStep = 0): number[] {
   if (!isFinite(min) || !isFinite(max)) return [];
   if (min === max) { min -= 1; max += 1; }
   const span = max - min;
@@ -110,6 +183,7 @@ export function niceTicks(min: number, max: number, want = 5): number[] {
   for (const m of [1, 2, 5, 10]) {
     if (rawStep <= m * mag) { step = m * mag; break; }
   }
+  if (minStep > 0 && step < minStep) step = minStep;
   const first = Math.ceil(min / step) * step;
   const out: number[] = [];
   // Epsilon guards float drift so the top tick isn't dropped.

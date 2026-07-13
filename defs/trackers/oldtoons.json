@@ -5,7 +5,7 @@
   "abbr": "OTW",
   "url": "https://oldtoons.world",
   "type": "unit3d",
-  "last_updated": "2026-07-08",
+  "last_updated": "2026-07-14",
   "approved_by": {
     "name": "Jhonny",
     "role": "Gang Leader",
@@ -21,7 +21,8 @@
     "byte_fields": ["seed_size", "real_uploaded", "real_downloaded"]
   },
     "rules": {
-    "min_ratio": 0.4
+    "min_ratio": 0.4,
+    "min_seed_days": 2
   },
   "groups": [
     {

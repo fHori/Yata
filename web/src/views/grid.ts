@@ -123,7 +123,9 @@ export function renderCard(
     <div class="card-header-info">
       <div class="card-tracker-name" style="display:flex;align-items:center;gap:5px">
         ${favicon}
-        <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(fmtTrackerName(tracker.name, tracker.abbr, settings.tracker_name_mode))}${tracker.type === 'test' ? '<span class="mock-badge">TEST</span>' : ''}${eventBeacon}${unreadFlags}</span>
+        <span class="tracker-name-link" title="Open tracker detail"
+          onclick="event.stopPropagation();openTrackerDetail('${tracker.id}')"
+          style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(fmtTrackerName(tracker.name, tracker.abbr, settings.tracker_name_mode))}</span><span style="flex-shrink:0">${tracker.type === 'test' ? '<span class="mock-badge">TEST</span>' : ''}${eventBeacon}${unreadFlags}</span>
       </div>
       <div class="card-header-meta">
         <a class="card-tracker-url" href="${esc(tracker.url)}" target="_blank" rel="noopener"
@@ -222,6 +224,7 @@ export function renderCard(
         <div class="card-section-title">More Stats</div>
         ${moreHtml}
       </div>` : ''}
+      ${buildRulesLine(tracker, settings)}
     </div>
     <div class="card-footer">
       <span class="card-last-updated">API ${updated}</span>
@@ -249,6 +252,21 @@ export function renderCard(
   el.innerHTML = header + body;
   // Re-attach drag/drop listeners after innerHTML wipe (drop targets still needed)
   attachDragEvents(el, tracker.id, () => {});
+}
+
+/** Compact display-only rules line at the bottom of a card (def account-wide
+ *  rules: min ratio / min seed time). Follows the Display toggle; the fine
+ *  print stays on the tracker's rules page. */
+function buildRulesLine(tracker: Tracker, settings: AppSettings): string {
+  if (settings.show_tracker_rules === false) return '';
+  const parts: string[] = [];
+  if (tracker.min_ratio && tracker.min_ratio > 0) parts.push(`Ratio ≥ ${tracker.min_ratio}`);
+  if (tracker.min_seed_days && tracker.min_seed_days > 0)
+    parts.push(`Seed ≥ ${tracker.min_seed_days} day${tracker.min_seed_days === 1 ? '' : 's'}`);
+  if (!parts.length) return '';
+  return `<div class="card-rules" title="Tracker rules (reference) — full details on the tracker's rules page">
+    <i class="fas fa-scale-balanced"></i><span>${parts.map(esc).join(' · ')}</span>
+  </div>`;
 }
 
 /** Small row of perk icons (with custom tooltip) shown after the group badge */

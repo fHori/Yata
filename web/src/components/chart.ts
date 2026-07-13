@@ -8,8 +8,35 @@
 // re-render per mousemove). Re-call renderChart() to change data or size.
 // If dual-axis / small-multiples ever outgrow this, swap the internals for
 // uPlot behind this same signature (HISTORY_VIEW_PLAN.md §6).
-import { fmtAxisValue, fmtTimeTick, nearestIndex, niceTicks, timeTicks } from '../utils/series';
+import { fmtAxisValue, fmtTimeTick, fmtUnitValue, nearestIndex, niceTicks, timeTicks } from '../utils/series';
 import type { SeriesUnit } from '../utils/series';
+import { esc, fmtEtaDays } from '../utils/format';
+
+// ── Duration axis ticks ─────────────────────────────────────────────────────
+// Seconds domains get whole, human durations (days → months → years) rather
+// than nice-second steps that land on fractions like "115.7d". Labels use the
+// app's duration setting so the axis matches the target line ("1Y", "3M").
+
+const DURATION_STEPS_DAYS = [1, 2, 3, 5, 7, 10, 14, 21, 30, 45, 60, 90, 120, 180, 270, 365, 547, 730, 1095, 1825];
+
+/** Tick values (in seconds) at a whole-day step chosen for ~4 ticks. */
+function durationTicks(minSec: number, maxSec: number): number[] {
+  const spanDays = Math.max((maxSec - minSec) / 86400, 1e-6);
+  let stepDays = DURATION_STEPS_DAYS[DURATION_STEPS_DAYS.length - 1];
+  for (const s of DURATION_STEPS_DAYS) { if (spanDays / s <= 4) { stepDays = s; break; } }
+  const stepSec = stepDays * 86400;
+  const first = Math.ceil(minSec / stepSec) * stepSec;
+  const out: number[] = [];
+  for (let v = first; v <= maxSec + stepSec * 1e-6; v += stepSec) out.push(v);
+  if (minSec <= 0 && out[0] !== 0) out.unshift(0);
+  return out;
+}
+
+/** Duration tick label — "0", "3M", "1Y" — following the duration setting. */
+function fmtDurationTick(sec: number): string {
+  if (sec <= 0) return '0';
+  return fmtEtaDays(sec / 86400);
+}
 
 export interface ChartSeries {
   id: string;
@@ -52,6 +79,12 @@ export interface ChartOptions {
   refLines?: ChartRefLine[];
   events?: ChartEvent[];
   milestones?: ChartMilestone[];
+  // Floor the y-tick step at 1 — for whole-number metrics (uploads, seeding)
+  // in value mode. Rate mode stays fractional (0.5 uploads/day is real).
+  integerTicks?: boolean;
+  // Show a built-in hover tooltip (date + value per series). The History view
+  // has its own readout panel, so it leaves this off; the mini-charts use it.
+  tooltip?: boolean;
   onHover?: (t: number | null) => void;
   onPin?: (pins: number[]) => void;
 }
@@ -84,26 +117,53 @@ export function renderChart(container: HTMLElement, opts: ChartOptions): void {
   const drawable = opts.series.filter(s => s.points.length > 0);
 
   // ── Scales ────────────────────────────────────────────────────────────────
-  let yMin = Infinity, yMax = -Infinity;
+  // Data extent over every drawn series (projection ghosts included, so the
+  // tail fits) — kept separate from the target lines so the two can drive the
+  // domain differently.
+  let dMin = Infinity, dMax = -Infinity;
   for (const s of drawable) {
     for (const [, v] of s.points) {
-      if (v < yMin) yMin = v;
-      if (v > yMax) yMax = v;
+      if (v < dMin) dMin = v;
+      if (v > dMax) dMax = v;
     }
   }
-  // Reference lines are part of the story — keep them on screen.
-  for (const r of opts.refLines ?? []) {
-    if (r.value < yMin) yMin = r.value;
-    if (r.value > yMax) yMax = r.value;
+  const refs = opts.refLines ?? [];
+  let rMin = Infinity, rMax = -Infinity;
+  for (const r of refs) { if (r.value < rMin) rMin = r.value; if (r.value > rMax) rMax = r.value; }
+  const hasRef = refs.length > 0;
+  if (!isFinite(dMin)) { dMin = 0; dMax = 1; }
+
+  // A near-flat line carries no shape of its own — the scale is all context.
+  const flat = (dMax - dMin) <= Math.max(Math.abs(dMax), 1e-9) * 0.06;
+
+  let yMin: number, yMax: number;
+  if (hasRef) {
+    // With a target on screen, height should read as "how close am I": ground
+    // at zero (unless the data dips negative) so the value sits at its true
+    // fraction of the target, and keep whichever of data/target is higher in
+    // frame. 14 of 15 → ~90% up; 9.8 of 15 TiB → ~two-thirds up.
+    yMin = Math.min(0, dMin);
+    yMax = Math.max(dMax, rMax);
+  } else if (flat) {
+    // No target and no movement: centre the line with zero as the baseline, so
+    // it reads at its real magnitude instead of pinned to an edge.
+    if (dMax > 0)      { yMin = 0;        yMax = dMax * 2; }
+    else if (dMax < 0) { yMin = dMax * 2; yMax = 0; }
+    else               { yMin = 0;        yMax = 1; }
+  } else {
+    // Growing/varying, no target: ground at zero (or the negative floor) so the
+    // climb reads against a fixed baseline.
+    yMin = Math.min(0, dMin);
+    yMax = dMax;
   }
-  if (!isFinite(yMin)) { yMin = 0; yMax = 1; }
   if (yMin === yMax) { yMin -= 1; yMax += 1; }
-  // Ground near-zero domains at 0 (a count going 0→4 should start at 0),
-  // then pad 5% so lines don't kiss the frame.
-  if (yMin > 0 && yMin < (yMax - yMin) * 0.5) yMin = 0;
-  const pad = (yMax - yMin) * 0.05;
-  yMin = yMin === 0 ? 0 : yMin - pad;
-  yMax += pad;
+  // Headroom so lines and target labels don't kiss the frame. The centred-flat
+  // case already has room built in, so skip it there.
+  if (!(flat && !hasRef)) {
+    const pad = (yMax - yMin) * 0.08;
+    if (yMax > 0 || hasRef) yMax += pad;
+    if (yMin < 0) yMin -= pad;
+  }
 
   const x = (t: number) => M.left + ((t - from) / span) * plotW;
   const y = (v: number) => M.top + plotH - ((v - yMin) / (yMax - yMin)) * plotH;
@@ -123,16 +183,22 @@ export function renderChart(container: HTMLElement, opts: ChartOptions): void {
   });
 
   const unit = drawable[0]?.unit ?? opts.series[0]?.unit ?? 'count';
-  for (const v of niceTicks(yMin, yMax, 5)) {
+  // Durations get whole-unit ticks labelled to match the target line (and the
+  // rest of the app's duration setting); everything else uses nice 1/2/5 ticks,
+  // integer-stepped for whole-number metrics.
+  const yticks = unit === 'seconds'
+    ? durationTicks(yMin, yMax)
+    : niceTicks(yMin, yMax, 5, opts.integerTicks ? 1 : 0);
+  for (const v of yticks) {
     svg.appendChild(svgEl('line', {
       x1: M.left, x2: M.left + plotW, y1: y(v), y2: y(v),
       class: 'hc-grid',
     }));
     const lbl = svgEl('text', { x: M.left - 8, y: y(v) + 3, class: 'hc-ylabel' });
-    lbl.textContent = fmtAxisValue(unit, v);
+    lbl.textContent = unit === 'seconds' ? fmtDurationTick(v) : fmtAxisValue(unit, v);
     svg.appendChild(lbl);
   }
-  for (const t of timeTicks(from, to, Math.max(3, Math.floor(plotW / 90)))) {
+  for (const t of timeTicks(from, to, Math.max(5, Math.floor(plotW / 70)))) {
     const lbl = svgEl('text', { x: x(t), y: height - 8, class: 'hc-xlabel' });
     lbl.textContent = fmtTimeTick(t, span);
     svg.appendChild(lbl);
@@ -211,6 +277,27 @@ export function renderChart(container: HTMLElement, opts: ChartOptions): void {
     return times[nearestIndex(timeTuples, t)];
   };
 
+  // Optional built-in hover tooltip (date + value per interactive series).
+  const tip = opts.tooltip ? document.createElement('div') : null;
+  if (tip) { tip.className = 'hc-tip'; tip.style.display = 'none'; }
+  const updateTip = (t: number) => {
+    if (!tip) return;
+    const rows = interactive.map(s => {
+      const idx = nearestIndex(s.points, t);
+      if (idx < 0) return '';
+      const c = resolveColor(s.color);
+      return `<div class="hc-tip-row"><span class="hc-tip-dot" style="background:${c}"></span>`
+        + `${esc(s.label)} <b>${esc(fmtUnitValue(s.unit, s.points[idx][1]))}</b></div>`;
+    }).join('');
+    if (!rows) { tip.style.display = 'none'; return; }
+    tip.innerHTML = `<div class="hc-tip-date">${esc(fmtTimeTick(t, span))}</div>${rows}`;
+    tip.style.display = 'block';
+    let lx = x(t) + 12;
+    if (lx + tip.offsetWidth > width - 4) lx = x(t) - tip.offsetWidth - 12;
+    tip.style.left = `${Math.max(4, lx)}px`;
+    tip.style.top = `${M.top + 2}px`;
+  };
+
   const showCross = (t: number) => {
     const cx = x(t);
     cross.setAttribute('x1', String(cx));
@@ -224,6 +311,7 @@ export function renderChart(container: HTMLElement, opts: ChartOptions): void {
       dot.setAttribute('cy', String(y(s.points[idx][1])));
       dot.setAttribute('visibility', 'visible');
     });
+    updateTip(t);
   };
 
   hit.addEventListener('pointermove', e => {
@@ -235,6 +323,7 @@ export function renderChart(container: HTMLElement, opts: ChartOptions): void {
   hit.addEventListener('pointerleave', () => {
     cross.setAttribute('visibility', 'hidden');
     hoverDots.forEach(d => d.setAttribute('visibility', 'hidden'));
+    if (tip) tip.style.display = 'none';
     opts.onHover?.(null);
   });
   hit.addEventListener('click', e => {
@@ -292,6 +381,10 @@ export function renderChart(container: HTMLElement, opts: ChartOptions): void {
   }
 
   container.replaceChildren(svg);
+  if (tip) {
+    if (!container.style.position) container.style.position = 'relative';
+    container.appendChild(tip);
+  }
 }
 
 // ── Export ────────────────────────────────────────────────────────────────

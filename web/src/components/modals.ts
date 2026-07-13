@@ -65,6 +65,7 @@ let _selectedTypeKey: string       = '';
 let _requiredFields: string[]      = [];
 // Per-tracker scrape-section state (edit mode).
 let _scrapeFloor   = 60;     // effective minimum interval = max(60, def request)
+let _scrapeCap     = 0;      // operator daily cap from the def (0 = none)
 let _apiOnlyLocked = false;  // def forbids scraping → API-only forced on
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -382,6 +383,7 @@ export async function openAddModal(deps: ModalDeps) {
   hide('modal-enabled-group');
   hide('modal-delete-btn');
   hide('modal-test-btn');
+  hide('modal-detail-btn');
   hide('modal-test-result');
 
   show('modal-add-selection');
@@ -421,7 +423,7 @@ export async function openAddModal(deps: ModalDeps) {
 // picker offering every stat this tracker actually reports.
 // ─────────────────────────────────────────────────────────────────────────────
 
-interface TargetSpec {
+export interface TargetSpec {
   key: string;         // targets-map key
   label: string;
   placeholder: string;
@@ -471,7 +473,7 @@ function targetSpecFor(key: string): TargetSpec {
 /** Stats this tracker can target: the core set (where the backing stat is
  *  reported — or all of it before any stats exist) plus every numeric
  *  tracker-specific extra (fl_tokens, upload_snatches, HUNO's *_seeds, …). */
-function buildAvailableTargetSpecs(t: Tracker, resp: TrackerStatsResponse | undefined): TargetSpec[] {
+export function buildAvailableTargetSpecs(t: Tracker, resp: TrackerStatsResponse | undefined): TargetSpec[] {
   const fields = resp?.fields ?? {};
   const noStats = Object.keys(fields).length === 0;
   const have = (f: string) =>
@@ -492,7 +494,7 @@ function buildAvailableTargetSpecs(t: Tracker, resp: TrackerStatsResponse | unde
 }
 
 /** Stored value → what the input shows (days/avg_seed are stored normalized). */
-function targetDisplayValue(key: string, stored: string): string {
+export function targetDisplayValue(key: string, stored: string): string {
   if (key === 'days') {
     const d = parseAgeDays(stored);
     return d != null ? fmtAgeDays(d) : stored;
@@ -550,22 +552,26 @@ export function modalRemoveTargetRow(key: string): void {
   refreshTargetAddSelect();
 }
 
+/** Normalize a raw target input to its stored form (days/avg_seed parse to a
+ *  number string; everything else is passed through). Returns null when the
+ *  value is empty or unparseable, so the caller can drop the row. Shared with
+ *  the dashboard targets popover. */
+export function normalizeTargetValue(key: string, raw: string): string | null {
+  const v = raw.trim();
+  if (!v) return null;
+  if (key === 'days')     { const d = parseAgeDays(v);  return d != null ? String(d) : null; }
+  if (key === 'avg_seed') { const s = parseSeedTime(v); return s !== null ? String(s) : null; }
+  return v;
+}
+
 /** Read the builder rows back into a targets map (normalizing days/avg_seed). */
 function collectTargetRows(): Record<string, string> {
   const out: Record<string, string> = {};
   for (const row of document.querySelectorAll<HTMLElement>('#modal-target-rows [data-target-key]')) {
     const key = row.dataset['targetKey'] ?? '';
-    const raw = row.querySelector<HTMLInputElement>('[data-target-input]')?.value.trim() ?? '';
-    if (!key || !raw) continue;
-    if (key === 'days') {
-      const d = parseAgeDays(raw);
-      if (d != null) out[key] = String(d);
-    } else if (key === 'avg_seed') {
-      const s = parseSeedTime(raw);
-      if (s !== null) out[key] = String(s);
-    } else {
-      out[key] = raw;
-    }
+    const raw = row.querySelector<HTMLInputElement>('[data-target-input]')?.value ?? '';
+    const norm = key ? normalizeTargetValue(key, raw) : null;
+    if (norm != null) out[key] = norm;
   }
   return out;
 }
@@ -692,6 +698,7 @@ export function openEditModal(
   show('modal-enabled-group');
   show('modal-delete-btn');
   show('modal-test-btn');
+  show('modal-detail-btn');
   hide('modal-test-result'); // clear any stale result from a previous tracker
 
   _modalEnabled = t.enabled;
@@ -728,6 +735,7 @@ function setupScrapeSection(t: Tracker) {
 
   // Effective floor the user can't go below = max(60, operator request).
   _scrapeFloor = Math.max(60, t.tracker_min_interval || 0);
+  _scrapeCap   = t.tracker_max_per_day || 0;
   // A def that forbids scraping (skip/disable) makes the tracker API-only —
   // force the toggle on and lock it.
   _apiOnlyLocked = t.supports_html_scrape === false;
@@ -739,6 +747,11 @@ function setupScrapeSection(t: Tracker) {
 
   const intervalInput = document.getElementById('modal-min-scrape-interval') as HTMLInputElement | null;
   if (intervalInput) intervalInput.min = String(_scrapeFloor);
+  const maxScrapesInput = document.getElementById('modal-max-scrapes') as HTMLInputElement | null;
+  if (maxScrapesInput) {
+    if (_scrapeCap > 0) maxScrapesInput.max = String(_scrapeCap);
+    else maxScrapesInput.removeAttribute('max');
+  }
 
   const apiOnlyOn = _apiOnlyLocked || !!t.api_only;
   const track = document.getElementById('modal-api-only-track');
@@ -755,6 +768,7 @@ function setupScrapeSection(t: Tracker) {
   renderScrapeReq(t);
   applyScrapeLockState();
   modalValidateInterval();
+  modalValidateMaxScrapes();
 }
 
 /** Operator-requested limits, emphasised in red above the fields. */
@@ -807,12 +821,22 @@ export function modalToggleApiOnly() {
   track.className = `toggle-track ${track.classList.contains('on') ? '' : 'on'}`;
   applyScrapeLockState();
   modalValidateInterval();
+  modalValidateMaxScrapes();
 }
 
 export function modalOnAutoIntervalChange() { applyScrapeLockState(); }
 export function modalOnMaxScrapesChange() {
   const autoOn = (document.getElementById('modal-auto-interval') as HTMLInputElement | null)?.checked;
   if (autoOn) recomputeAutoInterval();
+  modalValidateMaxScrapes();
+}
+
+/** Disable Save while either scrape field is red-flagged. */
+function updateScrapeSaveLock() {
+  const saveBtn = document.getElementById('modal-save-btn') as HTMLButtonElement | null;
+  if (!saveBtn) return;
+  saveBtn.disabled = ['modal-min-scrape-interval', 'modal-max-scrapes']
+    .some(id => document.getElementById(id)?.classList.contains('input-error'));
 }
 
 /** Validate the interval against the floor; red + blocks save when too low.
@@ -820,7 +844,6 @@ export function modalOnMaxScrapesChange() {
 export function modalValidateInterval(): boolean {
   const input = document.getElementById('modal-min-scrape-interval') as HTMLInputElement | null;
   const errEl = document.getElementById('modal-min-scrape-error');
-  const saveBtn = document.getElementById('modal-save-btn') as HTMLButtonElement | null;
   if (!input) return true;
   const apiOnly = document.getElementById('modal-api-only-track')?.classList.contains('on') ?? false;
   const v = parseInt(input.value, 10);
@@ -832,7 +855,27 @@ export function modalValidateInterval(): boolean {
     if (invalid) { errEl.textContent = `Must be at least ${_scrapeFloor} min (tracker minimum). Use 0 for the global default.`; errEl.style.display = ''; }
     else errEl.style.display = 'none';
   }
-  if (saveBtn) saveBtn.disabled = invalid;
+  updateScrapeSaveLock();
+  return !invalid;
+}
+
+/** Validate the daily cap against the operator maximum; red + blocks save when
+ *  above it. Returns true when valid (or not applicable). */
+export function modalValidateMaxScrapes(): boolean {
+  const input = document.getElementById('modal-max-scrapes') as HTMLInputElement | null;
+  const errEl = document.getElementById('modal-max-scrapes-error');
+  if (!input) return true;
+  const apiOnly = document.getElementById('modal-api-only-track')?.classList.contains('on') ?? false;
+  const v = parseInt(input.value, 10);
+  // Invalid only when a non-zero cap above the operator maximum is entered
+  // while scraping is active (0 = no extra cap, API-only = not applicable).
+  const invalid = !apiOnly && _scrapeCap > 0 && !isNaN(v) && v > _scrapeCap;
+  input.classList.toggle('input-error', invalid);
+  if (errEl) {
+    if (invalid) { errEl.textContent = `Must be at most ${_scrapeCap} per day (tracker maximum). Use 0 to follow the tracker's cap.`; errEl.style.display = ''; }
+    else errEl.style.display = 'none';
+  }
+  updateScrapeSaveLock();
   return !invalid;
 }
 
@@ -919,6 +962,11 @@ export async function saveTracker(deps: ModalDeps) {
   const scrapeVisible = document.getElementById('modal-scrape-section')?.style.display !== 'none';
   if (scrapeVisible && !modalValidateInterval()) {
     deps.toast(`Scrape interval must be at least ${_scrapeFloor} min`, 'error');
+    return;
+  }
+  // Block a daily cap above the tracker operator's maximum.
+  if (scrapeVisible && !modalValidateMaxScrapes()) {
+    deps.toast(`Max scrapes must be at most ${_scrapeCap} per day`, 'error');
     return;
   }
 
@@ -1381,6 +1429,15 @@ export async function toggleAutoUpdate(): Promise<void> {
   _sd.toast(on ? 'Daily update check on' : 'Daily update check off', 'success');
 }
 
+/** Persist the reverse-proxy header opt-in immediately (like the other toggles). */
+export async function toggleTrustProxy(): Promise<void> {
+  if (!_sd) return;
+  const on = (document.getElementById('s-trust-proxy') as HTMLInputElement | null)?.checked ?? false;
+  appSettings.trust_proxy_headers = on;
+  await api.saveSettings({ ...appSettings, trust_proxy_headers: on });
+  _sd.toast(on ? 'Proxy headers trusted' : 'Proxy headers ignored', 'success');
+}
+
 /** Populate the settings page form from current settings (no modal — full page). */
 export function openSettingsPage(settings: AppSettings, _meta: unknown[], deps: SettingsDeps) {
   _sd = deps;
@@ -1409,6 +1466,8 @@ export function openSettingsPage(settings: AppSettings, _meta: unknown[], deps: 
   if (targetEtaTrack) targetEtaTrack.className = `toggle-track ${settings.show_target_etas !== false ? 'on' : ''}`;
   const rateHoverTrack = document.getElementById('s-rate-hover-track');
   if (rateHoverTrack) rateHoverTrack.className = `toggle-track ${settings.show_rate_hovers !== false ? 'on' : ''}`;
+  const trackerRulesTrack = document.getElementById('s-tracker-rules-track');
+  if (trackerRulesTrack) trackerRulesTrack.className = `toggle-track ${settings.show_tracker_rules !== false ? 'on' : ''}`;
   const unreadMailTrack = document.getElementById('s-unread-mail-track');
   if (unreadMailTrack) unreadMailTrack.className = `toggle-track ${settings.show_unread_mail !== false ? 'on' : ''}`;
   const unreadNotifTrack = document.getElementById('s-unread-notif-track');
@@ -1479,6 +1538,8 @@ export function openSettingsPage(settings: AppSettings, _meta: unknown[], deps: 
 
   // Account / login protection (General tab).
   void renderAccountSection();
+  const trustProxy = document.getElementById('s-trust-proxy') as HTMLInputElement | null;
+  if (trustProxy) trustProxy.checked = settings.trust_proxy_headers ?? false;
 
   // Data: automatic backup settings + backup list (General tab).
   const backupTrack = document.getElementById('s-backup-track');
@@ -1683,7 +1744,9 @@ export async function saveSettings(deps: SettingsDeps) {
     show_rate_hovers:      isOn('s-rate-hover-track', true),
     show_unread_mail:          isOn('s-unread-mail-track', true),
     show_unread_notifications: isOn('s-unread-notif-track', true),
+    show_tracker_rules:        isOn('s-tracker-rules-track', true),
     update_check_auto:     (document.getElementById('s-update-auto') as HTMLInputElement | null)?.checked ?? false,
+    trust_proxy_headers:   (document.getElementById('s-trust-proxy') as HTMLInputElement | null)?.checked ?? false,
     duration_format:       (document.querySelector<HTMLInputElement>('input[name="s-duration-format"]:checked')?.value ?? 'ym'),
     api_only_mode:         isOn('s-api-only-track', false),
     theme:                 _selectedThemeId === 'default' ? '' : _selectedThemeId,

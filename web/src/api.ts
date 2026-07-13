@@ -3,7 +3,7 @@
 import type {
   AlertRule, ApiTokenInfo, AppSettings, AuthStatus, BackupsResponse, DefsPayload, DefsReloadResult, DryRunResult, HistoryPoint,
   HistorySeriesResponse,
-  LogsResponse, NotificationConfig, NotifyDestination, PathwayPathsResponse,
+  LogsResponse, NotificationConfig, NotifyDestination, PathwayFromResponse, PathwayPathsResponse,
   PathwayTargetsResponse, ProwlarrIndexer,
   ScrapeStatusMap, StatsMap, TestStatusMap, ThemeInfo, Tracker, TrackerGroupMap,
   TrackerPayload, TrackerStatsResponse, TrackerTestResult, UpdateStatus,
@@ -52,9 +52,10 @@ export const authDisable = (password: string) =>
   call<AuthResult>('/api/auth/disable', { method: 'POST', body: JSON.stringify({ password }) });
 
 /** Recovery: wipe the account + all config/data so a locked-out or
- *  forgotten-password user can get back in (only works when not logged in). */
-export const authReset = () =>
-  call<AuthResult>('/api/auth/reset', { method: 'POST' });
+ *  forgotten-password user can get back in (only works when not logged in).
+ *  Requires the recovery code printed to the server console/log at startup. */
+export const authReset = (reset_code: string) =>
+  call<AuthResult>('/api/auth/reset', { method: 'POST', body: JSON.stringify({ reset_code }) });
 
 // ── Logs (rolling logger) ───────────────────────────────────────────────────
 export const fetchLogs = (limit = 500) =>
@@ -133,6 +134,9 @@ export const fetchHistory = (hours = 48) =>
   call<HistoryPoint[]>(`/api/history?hours=${hours}`);
 
 /** History-view data feed. Omitted trackers/fields = all recorded. */
+export const fetchPathwaysFrom = (trackerId: string) =>
+  call<PathwayFromResponse>(`/api/pathways/from?tracker=${encodeURIComponent(trackerId)}`);
+
 export const fetchHistorySeries = (opts: { trackers?: string[]; fields?: string[]; range?: string; granularity?: string }) => {
   const qs = new URLSearchParams();
   if (opts.trackers?.length) qs.set('trackers', opts.trackers.join(','));

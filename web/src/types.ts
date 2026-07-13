@@ -45,6 +45,9 @@ export interface Tracker {
   required_fields?: string[];
   /** Tracker's account-wide required ratio (0/absent = unknown). */
   min_ratio?: number;
+  /** Tracker's minimum per-torrent seed time in days (0/absent = unknown).
+   *  Display-only reference from the def — no calculations. */
+  min_seed_days?: number;
   /** Def staff-approval status: approved | informal | pending | unknown.
    *  Manual trackers report "unknown"; the UI warns unless "approved". */
   def_approval?: string;
@@ -216,7 +219,11 @@ export interface AppSettings {
   qui_refresh_seconds: number;      // qui bar refresh cadence; floor 1 (default 10)
   show_unread_mail?: boolean | null;          // null = true — unread envelope icons
   show_unread_notifications?: boolean | null; // null = true — unread bell icons
+  show_tracker_rules?: boolean | null;        // null = true — compact rules line on grid cards
   update_check_auto?: boolean;                 // opt-in daily update check (default false)
+  trust_proxy_headers?: boolean;               // honor X-Forwarded-* behind a reverse proxy (default false)
+  pathway_favorites?: string[];                // pathway targets pinned to the top of the picker
+  pathway_not_interested?: string[];           // pathway targets pushed to the bottom, excluded from reqs-met
   qui_url: string;
   qui_api_key: string;
   qui_enabled_instances: number[];
@@ -460,6 +467,7 @@ export interface PathwayTarget {
   def_key?: string;   // matched Yata def ("" / absent = none)
   is_mine: boolean;   // user already has this tracker
   inbound: number;    // active routes into it (0 = unreachable by invite)
+  reqs_met?: boolean; // all requirements met on ≥1 direct route (community data, no guarantee)
 }
 
 export interface PathwayTargetsResponse {
@@ -520,6 +528,13 @@ export interface PathwayPath {
   steps: PathwayStep[];
   total_eta_days: number;   // sum of step ETAs (a floor when has_unknown)
   has_unknown: boolean;     // render total with a "+" suffix
+}
+
+/** GET /api/pathways/from — active direct routes leaving one tracker,
+ *  evaluated against live stats (Tracker Detail's "pathways from here"). */
+export interface PathwayFromResponse {
+  source: PathwaySource;
+  routes: PathwayStep[] | null;
 }
 
 /** Offered when the user has no path to the target. */

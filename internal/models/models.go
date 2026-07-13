@@ -94,6 +94,9 @@ type TrackerView struct {
 	// MinRatio is the tracker's account-wide required ratio (0 = unknown).
 	// The UI colors the ratio red only below this when set.
 	MinRatio float64 `json:"min_ratio,omitempty"`
+	// MinSeedDays is the tracker's minimum per-torrent seed time in days
+	// (0 = unknown). Display-only reference from the def — no calculations.
+	MinSeedDays int `json:"min_seed_days,omitempty"`
 	// DefApproval is the def's staff-approval status (approved | informal |
 	// pending | unknown). Manual trackers (no def) report "unknown" — the UI
 	// warns for anything but "approved". Who/when details are never exposed.
@@ -141,6 +144,24 @@ type Settings struct {
 	// toggles: many users care about mail but not notifications. nil = true.
 	ShowUnreadMail          *bool `json:"show_unread_mail"`
 	ShowUnreadNotifications *bool `json:"show_unread_notifications"`
+	// ShowTrackerRules toggles the compact rules line at the bottom of grid
+	// cards (min ratio / min seed time from the def — display-only). nil =
+	// true. The Detail view's Rules section always shows.
+	ShowTrackerRules *bool `json:"show_tracker_rules"`
+	// PathwayFavorites / PathwayNotInterested are pathway-target lists (by
+	// dataset tracker name). Favourites sort first in the Pathways picker;
+	// not-interested entries sort last and are excluded from the
+	// requirements-met filter. Stored server-side so they survive browsers
+	// and ride along in config export/import.
+	PathwayFavorites     []string `json:"pathway_favorites,omitempty"`
+	PathwayNotInterested []string `json:"pathway_not_interested,omitempty"`
+
+	// TrustProxyHeaders makes Yata honor X-Forwarded-For (login rate
+	// limiting — otherwise every proxied client shares the proxy's lockout
+	// bucket) and X-Forwarded-Proto (Secure session cookie behind TLS-
+	// terminating proxies). Enable ONLY behind a reverse proxy you control:
+	// directly exposed, these headers are client-spoofable.
+	TrustProxyHeaders bool `json:"trust_proxy_headers"`
 	// UpdateCheckAuto opts in to a DAILY check of versions.json on the repo
 	// (contacts raw.githubusercontent.com). Default OFF — privacy stance: the
 	// app contacts nothing the user didn't ask for. Manual checks always work.

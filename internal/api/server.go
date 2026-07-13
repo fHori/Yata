@@ -31,12 +31,17 @@ type Deps struct {
 	Alerts  *notify.Engine
 	Paths   *pathways.Data // nil = pathways feature hidden
 	BaseDir string         // directory containing static/ and templates/
+	// ResetCode gates /api/auth/reset (the destructive recovery wipe). It is
+	// generated fresh each start and printed to the console + log, so a reset
+	// proves console/filesystem access. Empty disables reset entirely.
+	ResetCode string
 }
 
 // NewRouter builds the full application router.
 func NewRouter(d *Deps) http.Handler {
 	r := chi.NewRouter()
 	r.Use(middleware.Recoverer)
+	r.Use(securityHeaders)
 	// No CORS headers: the SPA is served from the same origin as the API, so
 	// it never makes a cross-origin request. Emitting "Access-Control-Allow-
 	// Origin: *" would let any website the user visits read an unauthenticated
@@ -50,6 +55,10 @@ func NewRouter(d *Deps) http.Handler {
 		if d.Log != nil {
 			api.Use(requestLogger(d.Log))
 		}
+		// Reject state-changing requests browsers mark as cross-site — simple
+		// POSTs skip CORS preflight, so this is the only thing stopping a
+		// malicious web page from blindly POSTing at a reachable instance.
+		api.Use(blockCrossSite(d))
 		// Public — reachable without a session.
 		api.Get("/version", func(w http.ResponseWriter, _ *http.Request) {
 			jsonOK(w, map[string]string{"version": version.Version})

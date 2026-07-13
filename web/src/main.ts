@@ -141,11 +141,20 @@ async function submitLogin(e: Event) {
 }
 (window as any).submitLogin = submitLogin;
 
-/** Locked-out / forgotten-password recovery — wipes the account + all data. */
+/** Locked-out / forgotten-password recovery — wipes the account + all data.
+ *  Requires the recovery code from the server console/log, so network access
+ *  alone can never trigger the wipe. */
 async function resetLogin() {
   if (!confirm('Reset login and ERASE ALL DATA?\n\nThis deletes your account, trackers, stats, settings and alerts so you can get back in. Your tracker accounts themselves are NOT affected. This cannot be undone.')) return;
-  const { ok } = await api.authReset();
-  if (ok) location.reload();
+  const code = prompt('Enter the recovery code from the server console or log file.\n\nIt is printed at every start, e.g.:\n  auth: recovery code 3F2A-9C41 — …');
+  if (!code?.trim()) return;
+  const { ok, status } = await api.authReset(code.trim());
+  if (ok) { location.reload(); return; }
+  alert(status === 403
+    ? 'Wrong recovery code — check the server console or log file (a new code is printed at every start).'
+    : status === 429
+      ? 'Too many attempts — temporarily locked out. Wait a few minutes and try again.'
+      : 'Reset failed — please try again.');
 }
 (window as any).resetLogin = resetLogin;
 
@@ -415,8 +424,18 @@ async function refreshSingle(id: string) {
   renderTable();
   updateSummary();
   renderAggCards(state.trackers, state.statsCache, state.historyData, state.appSettings);
+  // An open Tracker Detail page re-renders with the fresh stats (no-op otherwise).
+  void import('./views/detail').then(m => m.redrawDetail());
 }
 (window as any).refreshSingle = refreshSingle;
+
+// ── Tracker Detail (drill-down page) ──────────────────────────────────────
+(window as any).openTrackerDetail = (id: string) => {
+  void import('./views/detail').then(m => m.openTrackerDetail(id));
+};
+(window as any).closeTrackerDetail = () => {
+  void import('./views/detail').then(m => m.closeTrackerDetail());
+};
 
 // ── History ───────────────────────────────────────────────────────────────
 async function loadHistory() {
@@ -473,6 +492,7 @@ initTargetsPopover({
   groupDefs: () => state.groupDefs,
   loadTrackers,
   toast,
+  afterApply: () => { void import('./views/detail').then(m => m.redrawDetail()); },
 });
 (window as any).openTargetsPopover = openTargetsPopover;
 
@@ -514,6 +534,9 @@ function toggleRow(id: string) {
 function applyView(v: ViewMode, rerender: boolean) {
   // A persisted 'history' view with the flag off is unreachable — normalize.
   if (v === 'history' && !FEATURES.history) v = 'grid';
+  // Any view switch exits the tracker-detail drill-down.
+  const detailDiv = document.getElementById('view-detail');
+  if (detailDiv) { detailDiv.style.display = 'none'; detailDiv.innerHTML = ''; }
   const gridDiv  = document.getElementById('view-grid');
   const tableDiv = document.getElementById('view-table');
   const pwDiv    = document.getElementById('view-pathways');
@@ -886,6 +909,7 @@ modalsReady.then(m => {
   (window as any).backupNow             = () => m.backupNow();
   (window as any).checkForUpdates       = () => { void m.checkForUpdates(); };
   (window as any).toggleAutoUpdate      = () => { void m.toggleAutoUpdate(); };
+  (window as any).toggleTrustProxy      = () => { void m.toggleTrustProxy(); };
 });
 
 // ── Trackers tab wiring (trackersTab.ts, exposed on window) ───────────────

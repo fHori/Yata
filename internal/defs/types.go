@@ -246,6 +246,11 @@ type TrackerRules struct {
 	// demotion / ban per the tracker's rules). The UI colors the ratio stat
 	// red ONLY below this value when set (otherwise generic thresholds).
 	MinRatio float64 `json:"min_ratio,omitempty"`
+	// MinSeedDays is the tracker's minimum seed time per torrent, in days
+	// (e.g. seedpool 10, InfinityHD 3). DISPLAY-ONLY reference — Yata does
+	// no per-torrent tracking or calculations with it, and the fine print
+	// (partial-download thresholds, exemptions, …) stays on the tracker.
+	MinSeedDays int `json:"min_seed_days,omitempty"`
 }
 
 // ExtendedStatsSpec declares a supplementary UNIT3D stats endpoint. Field names

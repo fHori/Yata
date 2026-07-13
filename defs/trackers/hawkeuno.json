@@ -35,7 +35,11 @@
   },
   "scrape": {
     "disable_scraping": true
-    },
+    }, 
+    "rules": {
+    "min_ratio": 0,
+    "min_seed_days": 0
+  },
   "groups": [
     {
       "name": "Silent Sisters",

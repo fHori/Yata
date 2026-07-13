@@ -8,12 +8,10 @@ import type { ChartEvent, ChartMilestone, ChartRefLine, ChartSeries } from '../c
 import {
   deltaStats, fmtPointTime, fmtUnitValue, HISTORY_METRICS, HISTORY_RANGES,
   isSummableUnit, metricLabel, milestonesFor, portfolioSeries, recentRatePerDay,
-  smoothSeries, toRateSeries, valueAt,
+  smoothSeries, targetRefLinesFor, toRateSeries, valueAt,
 } from '../utils/series';
 import type { HistoryRangeKey, SeriesUnit } from '../utils/series';
 import { esc, fmtTrackerName } from '../utils/format';
-import { findGroupDef, groupRequirementsToTargets } from '../utils/group';
-import { parseSize, parseSeedTime } from '../utils/parse';
 import type { HistorySeriesResponse, Tracker } from '../types';
 import { appSettings, groupDefs, statsCache } from '../state';
 
@@ -153,6 +151,15 @@ function isActive(): boolean {
 /** Re-derive the chart from already-fetched data — used after tracker groups
  *  finish loading so target reference lines (which read the group defs) appear
  *  without needing a user interaction. No-op until the view has data. */
+/** External pre-filter — the Tracker Detail page's chart click-through sets
+ *  the metric + tracker before switching to this view. */
+export function presetHistory(metric: string, trackerIds: string[]): void {
+  if (HISTORY_METRICS.some(m => m.key === metric)) ui.metric = metric;
+  ui.trackers = trackerIds;
+  ui.mode = 'value';
+  saveUIState();
+}
+
 export function redrawHistory(): void {
   if (isActive() && lastResp) drawChart();
 }
@@ -420,63 +427,16 @@ function rateFor(s: ChartSeries): number {
   return recentRatePerDay(s.points) ?? 0;
 }
 
-/** Which targets-map keys speak about a given history metric. */
-const TARGET_KEYS_FOR_METRIC: Record<string, string[]> = {
-  uploads_approved: ['total_uploads'],
-  avg_seed_time: ['avg_seed'],
-};
-
 /** The selected tracker's target(s) for the viewed metric as reference lines —
- *  single-tracker value mode only (user request 2026-07-11). Resolved from the
- *  SAME sources the dashboard TARGETS bars use, so History and the cards agree:
- *   1. the stored targets map (base requirements — manual targets, OR a chosen
- *      group's requirements, which the edit modal materialises into this map),
- *   2. the target group's `min_counts` (live from the def — e.g. HUNO's
- *      seed-time brackets, never stored in the targets map),
- *   3. the target group's `any_of` alternatives (live from the def).
- *  Group targets are the important case, so base requirements are read from
- *  `tracker.targets` directly and NEVER re-derived (an earlier version wrongly
- *  overwrote them, dropping group targets whose def lookup didn't line up). */
+ *  single-tracker value mode only (user request 2026-07-11). Resolution lives
+ *  in utils/series.ts (targetRefLinesFor), shared with the Tracker Detail
+ *  mini-charts so every surface agrees with the dashboard TARGETS bars. */
 function targetRefLines(): ChartRefLine[] {
   if (!targetsActive()) return [];
   const sel = selectedIds();
   const t = allTrackers.find(tr => tr.id === sel[0]);
   if (!t) return [];
-  const unit = metricUnit();
-  const keys = TARGET_KEYS_FOR_METRIC[ui.metric] ?? [ui.metric];
-
-  const parseTarget = (raw: string): number | null => {
-    if (unit === 'GiB') return parseSize(raw);
-    if (unit === 'seconds') return parseSeedTime(raw);
-    const n = parseFloat(raw);
-    return isNaN(n) ? null : n;
-  };
-  const values: number[] = [];
-  const addFromMap = (map: Record<string, string>) => {
-    for (const key of keys) {
-      const raw = map[key];
-      if (!raw) continue;
-      const v = parseTarget(raw);
-      if (v != null && v > 0) values.push(v);
-    }
-  };
-
-  // 1. Base requirements (manual or materialised-group) — the dashboard's
-  //    primary source. Never overwrite it.
-  addFromMap(t.targets ?? {});
-
-  // 2 & 3. Live extras from the target group's def.
-  const g = t.target_group && t.def_key ? findGroupDef(groupDefs, t.def_key, t.target_group) : undefined;
-  if (g) {
-    for (const mc of g.requirements.min_counts ?? []) {
-      if (mc.count > 0 && keys.includes(mc.field)) values.push(mc.count);
-    }
-    for (const alt of g.requirements.any_of ?? []) addFromMap(groupRequirementsToTargets(alt));
-  }
-
-  // De-dupe overlapping thresholds; draw lowest→highest.
-  return [...new Set(values)].sort((a, b) => a - b)
-    .map(v => ({ value: v, label: `Target ${fmtUnitValue(unit, v)}` }));
+  return targetRefLinesFor(t, ui.metric, groupDefs);
 }
 
 /** The window actually drawn: the requested range clamped to the oldest
@@ -538,6 +498,7 @@ function drawChart() {
     refLines: targetRefLines(),
     events: chartEvents(win),
     milestones: chartMilestones(),
+    integerTicks: metricUnit() === 'count' && ui.mode === 'value',
     onHover: t => { hoverT = t; renderReadout(); },
     onPin: p => { pins = p; drawChart(); },
   });

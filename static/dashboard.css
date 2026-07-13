@@ -804,12 +804,18 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator{filter:invert(.
 .targets-edit-btn{padding:2px 5px!important;font-size:10px;flex-shrink:0;color:var(--text3)}
 .targets-edit-btn:hover{color:var(--text)}
 .targets-popover{
-  position:fixed;z-index:400;width:240px;
+  position:fixed;z-index:400;width:300px;
   background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-sm);
   box-shadow:0 12px 36px rgba(0,0,0,.55);padding:12px;
 }
 .targets-popover-title{font-size:12px;font-weight:700;letter-spacing:-.1px;margin-bottom:8px}
-.targets-popover-actions{display:flex;gap:8px;justify-content:flex-end}
+.targets-popover-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:10px}
+.targets-popover-rows{max-height:230px;overflow-y:auto;margin-bottom:8px}
+.targets-popover-rows:empty{margin-bottom:0}
+.targets-popover-rows .target-edit-row{gap:6px;margin-bottom:6px}
+.targets-popover-rows .target-edit-label{flex:0 0 92px;font-size:11px}
+.targets-popover-add{display:flex;gap:6px;align-items:center}
+.targets-popover-add .form-input{flex:1;min-width:0}
 
 /* ── any_of OR-requirements (targets sections) ──────────────────────────── */
 .anyof-wrap{display:flex;flex-direction:column;gap:8px;margin-top:2px;padding:8px 10px;border:1px dashed var(--border2);border-radius:var(--radius-sm)}
@@ -1031,6 +1037,105 @@ input[type="date"].form-input::-webkit-calendar-picker-indicator{filter:invert(.
   color:var(--text3);padding:8px 9px 3px;border-top:1px solid var(--border);margin-top:4px;
 }
 .pw-combo-empty{font-size:12px;color:var(--text3);font-style:italic;padding:8px 9px}
+/* ── Tracker Detail (drill-down page) ─────────────────────────────────── */
+.tracker-name-link{cursor:pointer}
+.tracker-name-link:hover{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
+.detail-header{
+  display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;
+}
+.detail-favicon{width:22px;height:22px;flex-shrink:0;border-radius:4px}
+.detail-title-wrap{min-width:0;flex:1}
+.detail-title{
+  font-size:19px;font-weight:700;color:var(--text);
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+.detail-sub{
+  display:flex;gap:12px;align-items:center;flex-wrap:wrap;
+  font-size:11.5px;color:var(--text3);margin-top:3px;
+}
+.detail-actions{display:flex;gap:6px;align-items:center}
+.detail-controls{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin-bottom:12px;flex-wrap:wrap;
+}
+.detail-controls-right{display:flex;align-items:center;gap:8px}
+/* Built-in chart hover tooltip (mini-charts) */
+.hc-tip{
+  position:absolute;pointer-events:none;z-index:5;
+  background:var(--surface2);border:1px solid var(--border2);border-radius:6px;
+  padding:4px 7px;font-size:10.5px;color:var(--text);white-space:nowrap;
+  box-shadow:0 4px 14px rgba(0,0,0,.4);
+}
+.hc-tip-date{font-size:9.5px;color:var(--text3);margin-bottom:2px}
+.hc-tip-row{display:flex;align-items:center;gap:5px;line-height:1.5}
+.hc-tip-row b{font-weight:700}
+.hc-tip-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.detail-charts{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:12px;margin-bottom:16px;
+}
+.detail-chart-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:10px 12px 6px;
+}
+.detail-chart-head{
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:12px;font-weight:600;color:var(--text2);margin-bottom:4px;
+}
+.detail-chart-open{
+  background:none;border:none;cursor:pointer;color:var(--text3);
+  font-size:11px;padding:2px 5px;border-radius:4px;
+}
+.detail-chart-open:hover{color:var(--accent);background:var(--surface2)}
+.detail-chart{min-height:60px}
+.detail-cols{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:16px;align-items:start;
+}
+.detail-col{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:14px 16px;
+}
+.detail-empty{font-size:11.5px;color:var(--text3);font-style:italic}
+.detail-menu-hint{font-size:10px;color:var(--text3);padding:6px 4px 2px;font-style:italic}
+.detail-route{margin-bottom:9px;font-size:12.5px;color:var(--text)}
+.detail-route-to{font-weight:600;margin-right:8px}
+.detail-route-fav{color:var(--amber);font-size:11px;margin-right:8px}
+.detail-route-reqs{font-size:10.5px;color:var(--text3);margin-top:2px}
+.detail-events{display:flex;flex-direction:column;gap:7px}
+.detail-event{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--text)}
+.detail-event-when{margin-left:auto;font-size:10.5px;color:var(--text3)}
+
+.card-rules{
+  display:flex;align-items:center;gap:6px;margin-top:8px;
+  font-size:10.5px;color:var(--text3);
+}
+.card-rules i{font-size:10px;opacity:.7}
+.pw-combo-chips{
+  display:flex;gap:5px;padding:2px 5px 7px;border-bottom:1px solid var(--border);
+  margin-bottom:4px;position:sticky;top:-4px;background:var(--surface2);z-index:1;
+}
+.pw-chip-filter{
+  font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:999px;cursor:pointer;
+  background:var(--surface3);border:1px solid var(--border2);color:var(--text2);
+}
+.pw-chip-filter:hover{color:var(--text)}
+.pw-chip-filter.on{background:var(--accent-bg-sm);border-color:var(--accent);color:var(--accent)}
+.pw-met-dot{
+  font-size:10px;font-weight:700;color:var(--green);white-space:nowrap;
+  background:color-mix(in srgb,var(--green) 12%,transparent);
+  border-radius:999px;padding:1px 7px;
+}
+.pw-item-actions{margin-left:auto;display:flex;gap:2px;align-items:center}
+.pw-act{
+  background:none;border:none;cursor:pointer;color:var(--text3);font-size:13px;
+  padding:1px 4px;border-radius:4px;line-height:1;opacity:.55;
+}
+.pw-combo-item:hover .pw-act{opacity:1}
+.pw-act:hover{color:var(--text);background:var(--surface2)}
+.pw-act-fav.on{color:var(--amber);opacity:1}
+.pw-act-hide i{font-size:11px}
+.pw-item-muted .pw-combo-name{color:var(--text3)}
 .pw-def-badge{
   font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
   padding:1px 5px;border-radius:3px;

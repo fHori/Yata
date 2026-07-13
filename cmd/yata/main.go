@@ -92,15 +92,21 @@ func main() {
 
 	statsEngine := stats.New(db)
 	deps := &api.Deps{
-		Cfg:     cfg,
-		DB:      db,
-		Reg:     reg,
-		Fetch:   fetch.NewClient(reg, "test_data.json"),
-		Stats:   statsEngine,
-		Log:     logger,
-		Alerts:  notify.New(cfg, logger),
-		BaseDir: *baseDir,
+		Cfg:       cfg,
+		DB:        db,
+		Reg:       reg,
+		Fetch:     fetch.NewClient(reg, "test_data.json"),
+		Stats:     statsEngine,
+		Log:       logger,
+		Alerts:    notify.New(cfg, logger),
+		BaseDir:   *baseDir,
+		ResetCode: api.NewResetCode(),
 	}
+	// The recovery code gates the login screen's destructive "reset login +
+	// wipe data" — printing it here (console + log file) means a reset proves
+	// access to the machine, not just to the port. New code every start.
+	log.Printf("auth: recovery code %s — needed for the login screen's reset (wipes all data)", deps.ResetCode)
+	logger.Infof("auth: recovery code %s — needed for the login screen's reset (wipes all data)", deps.ResetCode)
 
 	// Seed the manual stats layer from config (user-entered join dates) so
 	// account-age works on first load, even before any fetch.

@@ -194,21 +194,21 @@ Any trackers not approved should only be used in API only mode until approval ha
 If you are a tracker not on this list please reach out.
 If you are a tracker on this list and wish to approve or ask to opt out entirely, please reach out. 
 
-| Tracker | Platform | Approved by tracker | Notes |
-|---|---|---|---|
-| Aither | Unit3D | No | Awaiting approval - New Upload groups note yet added, Monthly Uploads not retrevable |
-| Anthelion | Gazelle | No |  |
-| Huno | Unit3D | No | API Only - Not on this tracker can't seek approval |
-| InfinityHD | Unit3D | Yes | 60min scrape limit |
-| LST | Unit3D | No |  |
-| Luminarr | Unit3D | No |  |
-| MyAnonamouse | Custom | Yes | API ONLY |
-| Oldtoons | Unit3D | Yes | API ONLY - Added all required stats to API (THANK YOU!) |
-| OnlyEncodes+ | Unit3D | Yes | Once per day scrape limit  |
-| RetroFlix | Custom | No | Scrape only - No useful API stats |
-| Seedpool | Unit3D | Yes | 180min scrape limit |
-| YUSCENE | Unit3D | Pending |  |
-| Zenith | Unit3D | Yes | Will switch to API only when extended stats added |
+| Tracker | Platform | Approved by tracker | Limit | Notes |
+|---|---|---|---|---|
+| Aither | Unit3D | Yes | 180min | New Upload groups note yet added, Monthly Uploads not retrevable |
+| Anthelion | Gazelle | Pending | API Only |  |
+| Huno | Unit3D | No | API Only | Not on this tracker can't seek approval |
+| InfinityHD | Unit3D | Yes | 60min |  |
+| LST | Unit3D | No | - | Awaiting response |
+| Luminarr | Unit3D | Yes | 120min |  |
+| MyAnonamouse | Custom | Yes | API Only | |
+| Oldtoons | Unit3D | Yes | API Only | Added all required stats to API (THANK YOU!) |
+| OnlyEncodes+ | Unit3D | Yes | Once per day |  |
+| RetroFlix | Custom | Pending | API Only | Currently No useful API stats - working with team |
+| Seedpool | Unit3D | Yes | 180min |  |
+| YUSCENE | Unit3D | Pending | - | Awaiting reponse |
+| Zenith | Unit3D | Yes | 120min | Will switch to API only when extended stats added |
 
   — plus a credential-free demo tracker. Definitions include the full group ladders (colors, icons, promotion requirements incl. either/or paths, perks) where the tracker publishes them.
 

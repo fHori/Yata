@@ -179,7 +179,12 @@
   "rules": {
     // Ratio below which the account is at risk (warnings/demotion/ban).
     // When set, the UI colors the ratio red ONLY below this value.
-    "min_ratio": 0.4
+    "min_ratio": 0.4,
+    // Minimum per-torrent seed time in whole days (e.g. seedpool 10,
+    // InfinityHD 3). DISPLAY-ONLY reference shown in the card/detail Rules
+    // section — no calculations; fine print (partial-download thresholds,
+    // exemptions, …) stays on the tracker's rules page.
+    "min_seed_days": 10
   },
 
   // [OPTIONAL] Site-wide requirements to USE the invite system when they are

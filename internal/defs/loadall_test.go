@@ -19,8 +19,24 @@ func TestShippedDefsLoadClean(t *testing.T) {
 	if !ok {
 		t.Fatal("hawke.uno def not found")
 	}
-	if td.Type != "custom" || td.API == nil || td.API.Path != "/api/profile" {
+	// The def's base type may change (custom ↔ unit3d); what matters is that
+	// the custom API override is loaded and wired.
+	if td.API == nil || td.API.Path != "/api/profile" || td.API.AuthMethod != "api_key_header" {
 		t.Fatalf("unexpected HUNO api block: %+v", td.API)
+	}
+	// HUNO is typed unit3d (it IS a UNIT3D tracker) but its api block must
+	// still win the fetch dispatch — the standard /api/user path would lose
+	// the seed divisions, hunos→bonus and member_since→join_date mappings.
+	if kind := r.APIKind("https://hawke.uno", ""); kind != "custom" {
+		t.Fatalf("HUNO APIKind = %q, want custom (def api block must override the unit3d type)", kind)
+	}
+	// Same rule, def already typed custom (MAM) — and a plain unit3d def
+	// without an api block still resolves to unit3d.
+	if kind := r.APIKind("https://www.myanonamouse.net", ""); kind != "custom" {
+		t.Errorf("MAM APIKind = %q, want custom", kind)
+	}
+	if kind := r.APIKind("https://seedpool.org", ""); kind != "unit3d" {
+		t.Errorf("seedpool APIKind = %q, want unit3d", kind)
 	}
 	if td.API.FieldMap["data.seed_divisions.vanguard"] != "vanguard_seeds" {
 		t.Error("seed division field_map missing")

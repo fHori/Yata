@@ -9,6 +9,114 @@ version heading — those notes become the GitHub Release body automatically.
 
 ## [Unreleased]
 
+### Added
+- **Tracker Detail page** — click any tracker's name (on a card, in the
+  Detail table, or via the edit screen's new *Details* button) for a single
+  page with everything Yata knows about it: identity header (group, member
+  age, last update, refresh/profile/edit shortcuts), **mini-charts** picked
+  from the tracker's set targets (falling back to ratio, seed size, upload,
+  download, buffer and avg seed time — swap in any of the eleven recorded
+  metrics from the Charts menu, up to ten, remembered per tracker) with
+  target lines drawn in and a click-through into the full History view,
+  every reported stat, targets progress, the account **rules**, **invite
+  routes leaving this tracker** (with "reqs met" markers, same engine as
+  Pathways — your Pathways favourites keep their ★ and sort first, and "not
+  interested" targets are hidden), and a **group-change timeline** of
+  recorded promotions ▲ and demotions ▼.
+  **Active-event banner and unread flags.** A tracker's current event (freeleech/announcement) appears as the
+  same amber banner with live countdown you get in the grid/table, and unread
+  mail/notification icons sit in the header — each following its existing
+  Settings → Display toggle.
+- **Chart projection on the Tracker Detail page.** A *Projection* toggle
+  extends every mini-chart's line at its recent rate (dashed), so you can see
+  where a stat is heading. When a projected line rises to meet a target it's
+  currently below, the tail turns **green** — a quick read on whether your
+  current trajectory gets you there.
+- **Tracker rules at a glance — min ratio + min seed time.** Definitions can
+  now record the tracker's minimum per-torrent seed time in days (display-only
+  reference — the fine print stays on the tracker's rules page). The Detail
+  view gains a **Rules** section showing Min Ratio and Min Seed Time, and grid
+  cards get a compact one-liner at the bottom ("Ratio ≥ 1 · Seed ≥ 10 days"),
+  toggleable via Settings → Display → *Tracker rules on cards*. Seedpool
+  (10 days) and InfinityHD (3 days) defs updated as the first examples.
+- **Pathways picker: requirements-met markers, favourites, and "not
+  interested".** The target list now shows a green **✓ reqs met** chip on
+  every tracker whose listed requirements you already meet on a direct route
+  (live stats vs the community data — as ever, meeting requirements never
+  guarantees an invite). Filter chips at the top of the list switch between
+  **All / Requirements met / ★ Favourites**. Star a target to pin it to the
+  top of the list; mark one **not interested** (the eye-slash) to push it to
+  the bottom — out of the way and excluded from the requirements-met filter
+  (meeting a music or French tracker's bar doesn't mean you want in). Both
+  lists are stored in your Yata settings, so they follow you across browsers
+  and ride along in config export/import.
+
+### Changed
+- **Chart axis scaling reworked (Tracker Detail + History).** Flat lines with
+  no target now sit centred with zero as a baseline instead of pinned to the
+  top or bottom, so a steady stat reads at its real magnitude. When a target
+  is on screen, the axis grounds at zero so the line's height is its true
+  fraction of the target (9.8 of 15 TiB reads as two-thirds up, not flat on
+  the floor), with a little headroom above the higher of value/target.
+  Duration charts (avg seed time) now use whole day/month/year ticks that
+  follow your duration setting and match the target label ("0 / 4M / 8M / 1Y"
+  instead of "0m / 115.7d / …"), and charts fit more date labels along the
+  bottom.
+
+### Fixed
+- **Editing targets from the Tracker Detail page now updates it live.**
+  Changing a tracker's target group (or manual targets) via the Detail page's
+  Targets pencil refreshes the page in place — the targets progress, the
+  rules, and the mini-charts' target reference lines all update immediately,
+  instead of looking unchanged until you left and re-entered the page.
+- **The dashboard Targets pencil's "manual" mode no longer inherits the
+  group's numbers.** Switching a tracker from a group to "— manual —" used to
+  silently keep the group's requirement values as if they were your own
+  targets. Manual mode now opens a small inline editor seeded from your *last
+  manual targets* for that tracker (or empty if there were none) — never the
+  group you're leaving — with add/remove so you can set exactly the targets
+  you want without opening the full edit screen.
+- **Chart y-axis scaling no longer over-zooms or invents fractional counts**
+  (History + Tracker Detail). A series sitting just under its target used to
+  get a scale spanning only that sliver — 14 of 15 uploads drew along the
+  bottom of the chart as if barely started, with impossible ticks like
+  "14.5" uploads. Whole-number metrics now get whole-number ticks (per-day
+  rate mode stays fractional — 0.5 uploads/day is real), and a narrow band
+  far above zero is widened so the line sits in context instead of hugging
+  the floor.
+- **A def's custom API block now wins the fetch dispatch regardless of the
+  def's base type.** HUNO is typed `unit3d` (it IS a UNIT3D tracker) but its
+  stats come from a bespoke `/api/profile` endpoint — previously the type
+  alone chose the fetcher, so a unit3d-typed def with a custom `api` block
+  silently ignored it and called the standard `/api/user`. The type keeps
+  driving display and credential/scrape conventions; the `api` block decides
+  how stats are fetched.
+- **Max Scrapes Per Day now warns like Min Scrape Interval does.** Entering a
+  daily cap above the tracker operator's maximum (e.g. 20 on a max-1/day
+  tracker) flags the field red with the allowed maximum and blocks saving,
+  instead of silently accepting a number the operator cap would override.
+
+### Security
+- **Cross-site requests can no longer change anything.** A malicious web page
+  you happen to visit could previously fire blind POSTs at a reachable Yata
+  (worst case: the recovery reset, wiping all data; on an instance with no
+  login, any settings change). State-changing API requests that the browser
+  marks as coming from another site are now rejected. Normal use, API tokens,
+  and scripts/curl are unaffected.
+- **The recovery reset now requires a recovery code.** The login screen's
+  "reset login + wipe data" escape hatch needs the code Yata prints to its
+  console and log at every start — so a reset proves access to the machine,
+  not just to the port. Wrong codes count toward the login lockout.
+- **Standard security headers** on all responses (`X-Content-Type-Options:
+  nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: no-referrer`).
+- **New Settings → General → Network option for reverse proxies**: "trust
+  X-Forwarded-* headers" (default off). When enabled, login rate-limiting
+  sees each real client address instead of lumping everyone behind the proxy
+  into one lockout bucket, and the session cookie is marked Secure when the
+  proxy terminates HTTPS.
+- Login rate-limiter entries are now evicted once stale (minor unbounded
+  memory growth under a slow trickle of failed attempts).
+
 ## [Beta-20260712]
 
 ### Added
