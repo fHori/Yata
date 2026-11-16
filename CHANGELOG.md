@@ -26,6 +26,9 @@ All notable changes to Yata, newest first. Versions are date-based builds:
 - **Build toolchain refreshed.** The image builds the frontend on Node 24 LTS
   (Node 20 is end-of-life) and runs on Alpine 3.24; vite and puppeteer-core
   are updated to releases that clear all open `npm audit` advisories.
+- **Tests now run on arm64 too.** CI runs the Go build, vet and tests on a
+  native arm64 runner alongside Linux and Windows, so the arm64 release
+  binaries and image are tested, not just cross-compiled.
 
 ### Fixed
 

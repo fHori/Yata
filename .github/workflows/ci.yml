@@ -35,10 +35,16 @@ jobs:
     # This does NOT affect what gets released. Release binaries for every
     # platform are cross-compiled from a single Linux runner by
     # scripts/package.sh; this matrix only decides where the TESTS run.
+    #
+    # ubuntu-24.04-arm runs the tests natively on arm64, which the release
+    # zips (linux/arm64, darwin/arm64) and the arm64 image ship but nothing
+    # else exercises: cross-compiling proves it builds, not that it passes.
+    # The arm runner is free for public repositories only; in a private repo
+    # this job would wait in the queue for a paid runner.
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, ubuntu-24.04-arm, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
